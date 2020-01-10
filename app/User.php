@@ -15,9 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'phone', 'password', 'type', 'phone_verified_at'
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -34,6 +32,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'phone_verified_at' => 'datetime',
+        'acc_verified_at' => 'datetime',
     ];
 }
