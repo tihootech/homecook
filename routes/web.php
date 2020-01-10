@@ -1,8 +1,6 @@
 <?php
 
 // default laravel
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'LandingController@index');
 Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');

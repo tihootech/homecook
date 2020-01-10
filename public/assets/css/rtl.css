@@ -1,0 +1,31 @@
+@font-face {
+	font-family: 'Yekan';
+	src: url('../fonts/Yekan.woff');
+}
+@font-face {
+	font-family: 'Dinar';
+	src: url('../fonts/Dinar.ttf');
+}
+
+body {
+	font-family: 'Yekan', 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+	text-align: right;
+}
+
+.row {
+	direction: rtl;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Dinar', 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+
+.ftco-intro .wrap .icon {
+	text-align: center;
+}
