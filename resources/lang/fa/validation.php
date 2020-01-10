@@ -143,6 +143,7 @@ return [
         'state'=> 'استان',
         'city'=> 'شهر',
         'hood'=> 'محله',
+        'current_password'=> 'رمزعبور فعلی',
     ],
 
 ];

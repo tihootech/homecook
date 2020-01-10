@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cook;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (master()) {
+            $fresh_cooks = Cook::whereFresh(1)->get();
+            return view('home', compact('fresh_cooks'));
+        }else {
+            // code...
+            return view('home');
+        }
     }
 }

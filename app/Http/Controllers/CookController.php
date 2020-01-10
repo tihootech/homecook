@@ -9,15 +9,10 @@ use Illuminate\Http\Request;
 class CookController extends Controller
 {
 
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
+    public function __construct()
+	{
+		$this->middleware('master')->except(['store']);
+	}
 
     public function store(Request $request)
     {
@@ -36,23 +31,26 @@ class CookController extends Controller
         return redirect()->route('landing.message')->withMessage('درخواست شما برای عضویت در سامانه ما با موفقیت ثبت شد.');
     }
 
-    public function show(Cook $cook)
+    public function accept()
     {
-        //
+        return back()->withMessage('این قسمت بعد از راه اندازی پنل پیامکی ایجاد میشود.');
     }
 
-    public function edit(Cook $cook)
+    public function modify()
     {
-        //
-    }
-
-    public function update(Request $request, Cook $cook)
-    {
-        //
+        return back()->withMessage('این قسمت بعد از راه اندازی پنل پیامکی ایجاد میشود.');
     }
 
     public function destroy(Cook $cook)
     {
-        //
+        $cook->delete();
+        return back()->withMessage('تغییرات با موفقیت انجام شد.');
     }
+
+    public function fresh_requests()
+    {
+        $fresh_requests = Cook::whereFresh(1)->get();
+        return view('dashboard.cooks.fresh_requests', compact('fresh_requests'));
+    }
+
 }
