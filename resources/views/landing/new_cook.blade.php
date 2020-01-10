@@ -33,6 +33,7 @@
 					<form action="{{route('cook.store')}}" method="post" class="billing-form ftco-bg-dark p-3 p-md-5">
 						@csrf
 						<h3 class="mb-4 billing-heading"> فرم همکاری </h3>
+						<hr>
 						<div class="row align-items-end">
 							<div class="col-md-6">
 								<div class="form-group">

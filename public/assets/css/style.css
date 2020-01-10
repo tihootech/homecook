@@ -6193,6 +6193,7 @@ button.close {
 }
 
 .popover {
+	direction: rtl;
     position: absolute;
     top: 0;
     left: 0;
@@ -11070,7 +11071,11 @@ h5,
 
 .billing-heading {
     font-size: 24px;
-    text-transform: uppercase;
+	text-align: center;
+}
+
+.billing-heading + hr {
+	border-color: rgba(255,255,255,0.1);
 }
 
 .billing-form .form-group {

@@ -78,7 +78,10 @@
                     </li> --}}
                 </ul>
                 <div class="topbar-cart">
-                    <a href="#" class="nav-link">
+					<a href="{{route('home')}}" data-toggle="popover" data-content="ناحیه کاربری" data-trigger="hover" data-placement="bottom">
+						<span class="material-icons">person</span>
+					</a>
+                    <a href="#" class="nav-link" data-toggle="popover" data-content="1 آیتم در سبد خرید شماست" data-trigger="hover" data-placement="bottom">
                         <span class="material-icons">shopping_cart</span>
                         <span class="bag d-flex justify-content-center align-items-center"><small>1</small></span>
                     </a>
