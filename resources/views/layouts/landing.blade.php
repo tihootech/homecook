@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/jquery.timepicker.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/css/icomoon.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css?v=1.1')}}">
 </head>
 
 <body>
@@ -200,7 +200,7 @@
     <script src="{{asset('assets/js/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('assets/js/jquery.timepicker.min.js')}}"></script>
     <script src="{{asset('assets/js/scrollax.min.js')}}"></script>
-    <script src="{{asset('assets/js/main.js?v=1.1')}}"></script>
+    <script src="{{asset('assets/js/main.js?v=1.2')}}"></script>
 
 </body>
 
