@@ -51,6 +51,7 @@
 		$('.home-slider').owlCarousel({
 	    loop:true,
 	    autoplay: true,
+        touchDrag: false,
 	    margin:0,
 	    animateOut: 'fadeOut',
 	    animateIn: 'fadeIn',
@@ -75,6 +76,7 @@
 		});
 		$('.carousel-work').owlCarousel({
 			autoplay: true,
+            touchDrag: false,
 			center: true,
 			loop: true,
 			items:1,
