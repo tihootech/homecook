@@ -4,9 +4,13 @@
         <img class="app-sidebar__user-avatar" src="{{asset('general/img/logo.png')}}" alt="خونه پز">
         <div>
             <p class="app-sidebar__user-name">{{auth()->user()->name}}</p>
-            <p class="app-sidebar__user-designation" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="@lang('ACCESS_LEVEL')">
+            <p class="app-sidebar__user-designation" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="سطح دسترسی">
                 دسترسی :
-                @lang(strtoupper(auth()->user()->type))
+                @if (user('type') == 'cook')
+                    همکار
+                @else
+                    {{strtoupper(user('type'))}}
+                @endif
             </p>
         </div>
     </div>

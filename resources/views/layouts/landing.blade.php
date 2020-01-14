@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/jquery.timepicker.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/css/icomoon.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css?v=1.1')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css?v=1.2')}}">
 </head>
 
 <body>
@@ -37,32 +37,32 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item @if(rn() == 'index') active @endif">
 						<a href="{{url('/')}}" class="nav-link">
 							<i class="material-icons">home</i> صفحه اصلی
 						</a>
 					</li>
-                    <li class="nav-item">
+                    <li class="nav-item @if(rn() == 'x') active @endif">
 						<a href="#" class="nav-link">
 							<i class="material-icons">fastfood</i> سفارش غذا
 						</a>
 					</li>
-                    <li class="nav-item">
+					<li class="nav-item @if(rn() == 'x') active @endif">
 						<a href="#" class="nav-link">
-							<i class="material-icons">menu_book</i> مطالب منتشر شده
+							<i class="material-icons">store</i> فروشگاه
 						</a>
 					</li>
-                    <li class="nav-item">
+                    <li class="nav-item @if(rn() == 'x') active @endif">
+						<a href="#" class="nav-link">
+							<i class="material-icons">menu_book</i> وبلاگ
+						</a>
+					</li>
+                    <li class="nav-item @if(rn() == 'x') active @endif">
 						<a href="#" class="nav-link">
 							<i class="material-icons">person_pin</i> در باره ما
 						</a>
 					</li>
-                    <li class="nav-item">
-						<a href="#" class="nav-link">
-							<i class="material-icons">phone_in_talk</i> تماس با ما
-						</a>
-					</li>
-                    <li class="nav-item">
+                    <li class="nav-item @if(rn() == 'new_cook') active @endif">
 						<a href="{{route('new_cook')}}" class="nav-link">
 							<i class="material-icons">how_to_reg</i> همکاری
 						</a>

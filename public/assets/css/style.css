@@ -11156,6 +11156,10 @@ h5,
     height: inherit !important;
 }
 
+.billing-form button[type=submit] {
+    padding: 15px 30px;
+}
+
 .cart-detail {
     width: 100%;
     display: block;

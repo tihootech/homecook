@@ -1,7 +1,7 @@
 <?php
 
 // default laravel
-Route::get('/', 'LandingController@index');
+Route::get('/', 'LandingController@index')->name('index');
 Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -16,10 +16,12 @@ Route::put('user/{user}', 'AccController@master_update')->name('user.master_upda
 // general
 Route::get('landing/message', 'LandingController@message')->name('landing.message');
 
-// همکاری
+// cooks
 Route::get('همکاری', 'LandingController@new_cook')->name('new_cook');
 Route::get('cook/fresh', 'CookController@fresh_requests')->name('cook.fresh_requests');
 Route::post('cook/accept/{cook}', 'CookController@accept')->name('cook.accept');
 Route::post('cook/modify/{cook}', 'CookController@modify')->name('cook.modify');
-Route::delete('cook/{cook}', 'CookController@destroy')->name('cook.destroy');
-Route::post('cook', 'CookController@store')->name('cook.store');
+Route::resource('cook', 'CookController');
+
+// text messages
+Route::get('text-messages', 'TextMessageController@index')->name('text_messages');

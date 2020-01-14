@@ -125,3 +125,13 @@ function parray($array)
         return "[]";
     }
 }
+
+function rial($value)
+{
+    return $value ? number_format($value).' ریال' : 'صفر';
+}
+
+function toman($value)
+{
+    return $value ? number_format($value).' تومان' : 'صفر';
+}

@@ -162,14 +162,14 @@ sup {
 }
 
 a {
-  color: #1D150B;
+  color: #C49B63;;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
 
 a:hover {
-  color: #C49B63;
+  color: #1D150B;
   text-decoration: none;
 }
 
@@ -13925,7 +13925,7 @@ be a descendant of the grid when it is being dragged.
 
 .treeview.is-expanded [data-toggle='treeview'] {
   border-left-color: #C49B63;
-  background: #0d1214;
+  background: #000;
 }
 
 .treeview.is-expanded .treeview-menu {
@@ -13944,7 +13944,6 @@ be a descendant of the grid when it is being dragged.
   -webkit-transition: max-height 0.3s ease;
   -o-transition: max-height 0.3s ease;
   transition: max-height 0.3s ease;
-  background: #2a383e;
 }
 
 .treeview-item {
@@ -13960,13 +13959,14 @@ be a descendant of the grid when it is being dragged.
 }
 
 .treeview-item.active, .treeview-item:hover, .treeview-item:focus {
-  background: #0d1214;
+  background: #000;
   text-decoration: none;
   color: #fff;
 }
 
 .treeview-item .icon {
   margin-left: 10px;
+  font-size: 16px;
 }
 
 .treeview-indicator {
@@ -14019,13 +14019,13 @@ be a descendant of the grid when it is being dragged.
     margin-right: -3px;
     line-height: 1;
     opacity: 0;
-    background: #0d1214;
+    background: #000;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
   }
   .sidebar-mini.sidenav-toggled .treeview:hover .app-menu__item {
     overflow: visible;
-    background: #0d1214;
+    background: #000;
     border-right-color: #C49B63;
     color: #fff;
   }
@@ -15336,4 +15336,17 @@ input[type=number]::-webkit-inner-spin-button:after {
 
 .custom-control-label > span {
 	padding-right: 25px;
+}
+
+table .material-icons {
+    font-size: 16px;
+    position: relative;
+    top: 2px;
+}
+
+.btn .material-icons {
+    font-size: 16px;
+    margin-left: 3px;
+    position: relative;
+    top: 4px;
 }
