@@ -30,20 +30,8 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $data = self::validation();
-        if($request->ajax()){
-            if (master()) {
-                $data['confirmed'] = 1;
-            }
-            Comment::create($data);
-            return view('ajaxes.comment_ok');
-        }elseif(master()) {
-            $data['confirmed'] = $request->confirmed;
-            $data['author_id'] = null; // for fake comments
-            Comment::create($data);
-            return redirect()->route('comment.index')->withMessage(__('CHANGES_MADE_SUCCESSFULLY'));
-        }else {
-            abort(404);
-        }
+        Comment::create($data);
+        return back()->withMessage('کامنت شما با موفقیت ایجاد شد. منتظر تایید ناظر باشید.');
     }
 
     public function edit(Comment $comment)
@@ -54,7 +42,7 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         $data = $request->validate([
-            'content' => 'required',
+            'body' => 'required',
             'confirmed' => 'required|boolean',
         ]);
         $comment->update($data);
@@ -85,16 +73,16 @@ class CommentController extends Controller
     public function validation()
     {
         $data = request()->validate([
-            'content'=>'required',
+            'body'=>'required',
             'owner_id'=>'required',
-            'owner_type'=> Rule::in(['comment', 'blog', 'course']),
+            'owner_type'=> Rule::in(['blog']),
         ]);
         $data['author_id'] = auth()->id();
         $data['owner_type'] = class_name($data['owner_type']);
 
         $found = $data['owner_type']::find($data['owner_id']);
         if (!$found) {
-            abort(403);
+            abort(404);
         }
 
         return $data;

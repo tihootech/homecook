@@ -182,7 +182,7 @@ function nf($value)
     return $value ? number_format($value) : 'صفر';
 }
 
-function best_blogs()
+function best_blogs($count=3)
 {
-    return \App\Blog::orderBy('seens', 'DESC')->get();
+    return \App\Blog::orderBy('seens', 'DESC')->take($count)->get();
 }

@@ -22,7 +22,6 @@ class LandingController extends Controller
     {
         // init vars
         $count = Blog::count();
-        $order = request('order');
 
         // prepare query
         $blogs = Blog::query();
@@ -32,16 +31,9 @@ class LandingController extends Controller
                 $query->orWhere('title', 'like', "%$phrase%")->orWhere('subtitle', 'like', "%$phrase%")->orWhere('tags', 'like', "%$phrase%");
             });
         }
-        if ($order == 'seens') {
-            $blogs = $blogs->orderBy('seens', 'DESC');
-        }elseif($order == 'likes') {
-            $blogs = $blogs->withCount('likes')->orderBy('likes_count', 'DESC');
-        }else {
-            $blogs = $blogs->latest();
-            $order = null;
-        }
+
         $blogs = $blogs->paginate(9);
-        return view('landing.blogs', compact('blogs', 'count', 'order'));
+        return view('landing.blogs', compact('blogs', 'count'));
     }
 
     public function show_blog($title)

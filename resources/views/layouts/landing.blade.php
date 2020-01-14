@@ -32,10 +32,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" dir="rtl">
         <div class="container">
             <a class="navbar-brand" href="#">خونه<small>پز</small></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-            <div class="collapse navbar-collapse" id="ftco-nav">
+            <div class="collapse navbar-collapse order-sm-1 order-12" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item @if(rn() == 'index') active @endif">
 						<a href="{{url('/')}}" class="nav-link">
@@ -77,15 +74,18 @@
                         </div>
                     </li> --}}
                 </ul>
-                <div class="topbar-cart">
-					<a href="{{route('home')}}" data-toggle="popover" data-content="ناحیه کاربری" data-trigger="hover" data-placement="bottom">
-						<span class="material-icons">person</span>
-					</a>
-                    <a href="#" class="nav-link" data-toggle="popover" data-content="1 آیتم در سبد خرید شماست" data-trigger="hover" data-placement="bottom">
-                        <span class="material-icons">shopping_cart</span>
-                        <span class="bag d-flex justify-content-center align-items-center"><small>1</small></span>
-                    </a>
-                </div>
+            </div>
+			<div class="topbar order-sm-12 order-1">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	                <span class="material-icons">menu</span>
+	            </button>
+				<a href="{{route('home')}}" data-toggle="popover" data-content="ناحیه کاربری" data-trigger="hover" data-placement="bottom">
+					<span class="material-icons">person</span>
+				</a>
+				<a href="#" class="nav-link" data-toggle="popover" data-content="1 آیتم در سبد خرید شماست" data-trigger="hover" data-placement="bottom">
+					<span class="material-icons">shopping_cart</span>
+					<span class="bag d-flex justify-content-center align-items-center"><small>1</small></span>
+				</a>
             </div>
         </div>
     </nav>
@@ -119,19 +119,8 @@
                 <div class="col-lg-4 col-md-6 mb-5 mb-md-5">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">آخرین مطالب</h2>
-                        @foreach (best_blogs() as $blog)
-							<div class="block-21 mb-4 d-flex">
-	                            <a class="blog-img ml-4" style="background-image: url('{{asset($blog->image)}}')"></a>
-	                            <div class="text">
-	                                <h3 class="heading">
-										<a href="{{$blog->public_link()}}"> {{$blog->title}} </a>
-									</h3>
-	                                <div class="meta">
-	                                    <div><a href="#"><span class="material-icons">date_range</span> {{human_date($blog->created_at)}} </a></div>
-	                                    <div><a href="#"><span class="material-icons">visibility</span> {{nf($blog->seens)}} </a></div>
-	                                </div>
-	                            </div>
-	                        </div>
+                        @foreach (best_blogs(2) as $blog)
+							@include('includes.blog_item')
                         @endforeach
                     </div>
                 </div>
