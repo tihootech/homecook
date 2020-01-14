@@ -34,4 +34,14 @@ class User extends Authenticatable
     protected $casts = [
         'acc_verified_at' => 'datetime',
     ];
+
+
+    public function persian_type()
+    {
+        switch ($this->type) {
+            case 'cook': return 'همکار'; break;
+            case 'customer': return 'مشتری'; break;
+            default: return strtoupper($this->type); break;
+        }
+    }
 }

@@ -19,6 +19,8 @@ Route::get('landing/message', 'LandingController@message')->name('landing.messag
 // cooks
 Route::get('همکاری', 'LandingController@new_cook')->name('new_cook');
 Route::get('cook/fresh', 'CookController@fresh_requests')->name('cook.fresh_requests');
+Route::get('cook/edit/{uid}', 'CookController@cook_edit')->name('cook.cook_edit');
+Route::put('cook/update/{uid}', 'CookController@cook_update')->name('cook.cook_update');
 Route::post('cook/accept/{cook}', 'CookController@accept')->name('cook.accept');
 Route::post('cook/modify/{cook}', 'CookController@modify')->name('cook.modify');
 Route::resource('cook', 'CookController');

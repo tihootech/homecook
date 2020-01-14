@@ -1,10 +1,10 @@
-<form action="{{isset($cook) && $cook->id ? route('cook.update', $cook->id) : route('cook.store')}}" method="post" class="billing-form ftco-bg-dark p-3 p-md-5">
+<form action="{{isset($cook) && $cook->id ? (master() ? route('cook.update', $cook->id) : route('cook.cook_update', $cook->uid) ) : route('cook.store')}}" method="post" class="billing-form ftco-bg-dark p-3 p-md-5">
 	@csrf
 	@if (isset($cook) && $cook->id)
 		@method('PUT')
 	@endif
-	@if($is_master)
-		<input type="hidden" name="master" value="1">
+	@if($in_panel)
+		<input type="hidden" name="in_panel" value="1">
 	@else
 		<h3 class="mb-4 billing-heading"> فرم همکاری </h3>
 		<hr>
@@ -58,6 +58,20 @@
 				<input type="text" name="address" id="address" class="form-control" value="{{$cook->address ?? old('address')}}">
 			</div>
 		</div>
+		@if ($in_panel && master())
+			<div class="col-md-12 text-center">
+				<div class="form-group">
+					<div class="custom-control custom-checkbox">
+						<input type="hidden" name="active" value="0">
+						<input type="checkbox" class="custom-control-input" id="active" name="active" value="1"
+							@if(isset($cook) && $cook->active) checked @endif>
+						<label class="custom-control-label" for="active">
+							<span class="mr-2"> فعال </span>
+						</label>
+					</div>
+				</div>
+			</div>
+		@endif
 		<div class="col-md-2 mx-auto">
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary btn-block"> تایید </button>

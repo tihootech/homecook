@@ -5,6 +5,53 @@ function user($p=null)
     return auth()->user() ? ( $p ? auth()->user()->$p : auth()->user() ) : null;
 }
 
+function current_cook()
+{
+    if (cook()) {
+        return \App\Cook::where('user_id', auth()->id())->first();
+    }else {
+        return '';
+    }
+}
+
+function master()
+{
+    $user = user();
+    return $user && $user->type == 'master';
+}
+
+function cook()
+{
+    $user = user();
+    return $user && $user->type == 'cook';
+}
+
+function active_cook()
+{
+    $user = user();
+    $cook = current_cook();
+    return $user && $user->type == 'cook' && $cook && $cook->active;
+}
+
+function customer()
+{
+    $user = user();
+    return $user && $user->type == 'customer';
+}
+
+function check($object, $type)
+{
+    if (master()) {
+        return;
+    }elseif($type == user('type')) {
+        if ($object->user_id != user('id')) {
+            abort(403);
+        }
+    }else {
+        abort(403);
+    }
+}
+
 function rn()
 {
     return request()->route()->getName();
@@ -18,12 +65,6 @@ function short($string, $n=100)
 {
     $string = strip_tags($string);
     return strlen($string) > $n ? mb_substr($string, 0, $n).'...' : $string;
-}
-
-function master()
-{
-    $user = user();
-    return $user && $user->type == 'master';
 }
 
 function upload($new_file, $old_file=null)

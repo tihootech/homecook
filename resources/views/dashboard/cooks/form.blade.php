@@ -12,7 +12,7 @@
                     توجه داشته باشید که اگر از این قسمت برای تعریف همکار استفاده کنید، دیگر نیازی به تایید درخواست نخواهد داشت و پیامک فعالسازی حساب کاربری برای شخص مورد نظر به صورت اتوماتیک ارسال خواهد شد.
                 </p>
             @endunless
-            @include('includes.new_cook_form', ['is_master'=>true])
+            @include('includes.new_cook_form', ['in_panel'=>true])
         </div>
     </div>
 

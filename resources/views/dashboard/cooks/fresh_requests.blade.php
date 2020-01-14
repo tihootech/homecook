@@ -23,7 +23,13 @@
         @foreach ($fresh_requests as $cook)
 
     		<div class="tile">
-
+                @if ($cook->modify_reason)
+                    <div class="mb-2">
+                        <b class="text-info"> <i class="fa fa-asterisk ml-1"></i> اصلاح مجدد : </b>
+                        <span> {{$cook->modify_reason}} </span>
+                    </div>
+                    <hr>
+                @endif
     			<div class="row mb-3">
     				<div class="col-md-3 my-2">
     					<div class="card">

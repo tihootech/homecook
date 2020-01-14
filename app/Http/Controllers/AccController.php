@@ -11,28 +11,27 @@ class AccController extends Controller
 {
 	public function __construct()
 	{
-		// all users can edit and update their own credentials
 		$this->middleware('auth');
-		$this->middleware('master')->except(['edit', 'update']);
+		// $this->middleware('master')->except(['edit', 'update']);
 	}
 
-	public function list(Request $request)
-	{
-		$users = User::where('type', '!=', 'master');
-		if ($type = $request->type) {
-			$users = $users->where('type', $type);
-		}
-		if ($phrase = $request->search) {
-			$users = $users->where('name', 'like', "%$phrase%")->orWhere('email', 'like', "%$phrase%");
-		}
-		$users = $users->paginate(20);
-		return view('dashboard.acc.list', compact('users'));
-	}
+	// public function list(Request $request)
+	// {
+	// 	$users = User::where('type', '!=', 'master');
+	// 	if ($type = $request->type) {
+	// 		$users = $users->where('type', $type);
+	// 	}
+	// 	if ($phrase = $request->search) {
+	// 		$users = $users->where('name', 'like', "%$phrase%")->orWhere('email', 'like', "%$phrase%");
+	// 	}
+	// 	$users = $users->paginate(20);
+	// 	return view('dashboard.acc.list', compact('users'));
+	// }
 
-	public function show(User $user)
-	{
-		return view('dashboard.acc.show', compact('user'));
-	}
+	// public function show(User $user)
+	// {
+	// 	return view('dashboard.acc.show', compact('user'));
+	// }
 
     public function edit()
     {
@@ -71,24 +70,24 @@ class AccController extends Controller
 		}
 	}
 
-	public function master_update(User $user, Request $request)
-	{
-		$user->type = $request->type;
-		if ($request->new_password) {
-			$user->password = bcrypt($request->new_password);
-		}
-		$user->save();
-		return back()->withMessage(__('CHANGES_MADE_SUCCESSFULLY'));
-	}
+	// public function master_update(User $user, Request $request)
+	// {
+	// 	$user->type = $request->type;
+	// 	if ($request->new_password) {
+	// 		$user->password = bcrypt($request->new_password);
+	// 	}
+	// 	$user->save();
+	// 	return back()->withMessage(__('CHANGES_MADE_SUCCESSFULLY'));
+	// }
 
-	public function destroy(User $user)
-	{
-		if ($user->type == 'master') {
-			return back()->withError(__('CANT_DELETE_MASTER'));
-		}else {
-			$user->delete();
-			return back()->withMessage(__('CHANGES_MADE_SUCCESSFULLY'));
-		}
-	}
+	// public function destroy(User $user)
+	// {
+	// 	if ($user->type == 'master') {
+	// 		return back()->withError(__('CANT_DELETE_MASTER'));
+	// 	}else {
+	// 		$user->delete();
+	// 		return back()->withMessage(__('CHANGES_MADE_SUCCESSFULLY'));
+	// 	}
+	// }
 
 }

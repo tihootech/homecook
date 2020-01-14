@@ -26,5 +26,14 @@ class AppServiceProvider extends ServiceProvider
         \Blade::if('master', function () {
             return master();
         });
+        \Blade::if('cook', function () {
+            return cook();
+        });
+        \Blade::if('active_cook', function () {
+            return active_cook();
+        });
+        \Blade::if('customer', function () {
+            return customer();
+        });
     }
 }

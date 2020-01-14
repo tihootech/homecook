@@ -31,7 +31,7 @@
 				<div class="col-xl-10 ftco-animate">
 
 					@include('includes.errors')
-					@include('includes.new_cook_form', ['is_master'=>false])
+					@include('includes.new_cook_form', ['in_panel'=>false])
 
 				</div>
 			</div>

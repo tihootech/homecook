@@ -12,7 +12,7 @@ class CookController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth')->except(['store']);
-		$this->middleware('master')->except(['store']);
+		$this->middleware('master')->except(['store', 'cook_edit', 'cook_update']);
 	}
 
     public function index(Request $request)
@@ -52,7 +52,7 @@ class CookController extends Controller
         $data = self::validation();
         $data['uid'] = rs(8);
         $cook = Cook::create($data);
-        if ($request->master && master()) {
+        if ($request->in_panel && master()) {
             self::accept_process($cook);
             return back()->withMessage('همکار جدید در سیستم تعریف شد، و به حساب کاربری وی نیز فعال شد.');
         }else {
@@ -65,11 +65,28 @@ class CookController extends Controller
         return view('dashboard.cooks.form', compact('cook'));
     }
 
+    public function cook_edit($uid)
+    {
+        $cook = Cook::where('uid', $uid)->firstOrFail();
+        check($cook, 'cook');
+        return view('dashboard.cooks.form', compact('cook'));
+    }
+
     public function update(Cook $cook, Request $request)
     {
         $data = self::validation($cook->id);
         $cook->update($data);
         return redirect()->route('cook.index')->withMessage(__('SUCCESS'));
+    }
+
+    public function cook_update($uid, Request $request)
+    {
+        $cook = Cook::where('uid', $uid)->firstOrFail();
+        check($cook, 'cook');
+        $data = self::validation($cook->id);
+        $data['fresh'] = 1;
+        $cook->update($data);
+        return redirect()->route('home')->withMessage(__('SUCCESS'));
     }
 
     public function accept(Cook $cook)
@@ -83,13 +100,15 @@ class CookController extends Controller
         // update cook instance
         $cook->modify($request->reason);
 
-        // create user account for the cook and catch auto generated password
-        $password = $cook->create_user_acount();
+        if (!$cook->user) {
+            // create user account for the cook and catch auto generated password
+            $password = $cook->create_user_acount();
 
-        // send a text message and notifythe cook
-        TextMessageController::store('cookmodify', $cook->mobile, [
-            $cook->mobile, $password
-        ]);
+            // send a text message and notifythe cook
+            TextMessageController::store('cookmodify', $cook->mobile, [
+                $cook->mobile, $password
+            ]);
+        }
 
         // redirection
         return back()->withMessage('درخواست اصلاح برای کاربر مورد نظر با موفقیت ارسال شد.');
@@ -98,6 +117,9 @@ class CookController extends Controller
     public function destroy(Cook $cook)
     {
         $cook->delete();
+        if ($cook->user) {
+            $cook->user->delete();
+        }
         return back()->withMessage('تغییرات با موفقیت انجام شد.');
     }
 
@@ -112,18 +134,24 @@ class CookController extends Controller
         // update cook instance and accept it
         $cook->accept();
 
-        // create user account for the cook and catch auto generated password
-        $password = $cook->create_user_acount();
+        if (!$cook->user) {
+            // create user account for the cook and catch auto generated password
+            $password = $cook->create_user_acount();
 
-        // send a text message and notifythe cook
-        TextMessageController::store('cookaccept', $cook->mobile, [
-            $cook->mobile, $password
-        ]);
+            // send a text message and notifythe cook
+            TextMessageController::store('cookaccept', $cook->mobile, [
+                $cook->mobile, $password
+            ]);
+        }else {
+            TextMessageController::store('cookmodifyaccept', $cook->mobile, [
+                $cook->mobile
+            ]);
+        }
     }
 
     public static function validation($id=0)
     {
-        return request()->validate([
+        $data = request()->validate([
             'first_name' => 'required|string|max:190',
             'last_name' => 'required|string|max:190',
             'telephone' => 'nullable|digits:11',
@@ -133,5 +161,9 @@ class CookController extends Controller
             'hood' => 'required|string|max:190',
             'address' => 'required',
         ]);
+        if (master()) {
+            $data['active'] = request('active') ?? false;
+        }
+        return $data;
     }
 }

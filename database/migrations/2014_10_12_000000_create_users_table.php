@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->timestamp('acc_verified_at')->nullable();
             $table->string('password');
-            $table->string('type')->default('user');
+            $table->string('type')->default('customer');
             $table->rememberToken();
             $table->timestamps();
         });

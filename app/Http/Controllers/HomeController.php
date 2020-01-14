@@ -27,8 +27,10 @@ class HomeController extends Controller
         if (master()) {
             $fresh_cooks = Cook::whereFresh(1)->get();
             return view('home', compact('fresh_cooks'));
+        }elseif (cook()) {
+            $cook = current_cook();
+            return view('home', compact('cook'));
         }else {
-            // code...
             return view('home');
         }
     }

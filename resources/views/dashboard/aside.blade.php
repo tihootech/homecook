@@ -5,11 +5,12 @@
         <div>
             <p class="app-sidebar__user-name">{{auth()->user()->name}}</p>
             <p class="app-sidebar__user-designation" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="سطح دسترسی">
-                دسترسی :
-                @if (user('type') == 'cook')
-                    همکار
-                @else
-                    {{strtoupper(user('type'))}}
+                دسترسی : {{user()->persian_type()}}
+                @if (!master())
+                    <br>
+                    @if (cook() && current_cook())
+                        {{current_cook()->full_name()}}
+                    @endif
                 @endif
             </p>
         </div>

@@ -13,6 +13,7 @@ class TextMessage extends Model
         switch ($this->template) {
             case 'cookaccept': return 'تایید عضویت همکار'; break;
             case 'cookmodify': return 'درخواست اصلاح عضویت همکار'; break;
+            case 'cookmodifyaccept': return 'تایید درخواست اصلاح عضویت همکار'; break;
             default: return $this->template; break;
         }
     }
