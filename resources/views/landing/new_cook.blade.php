@@ -2,8 +2,6 @@
 
 @section('meta')
 	<title> خونه پز - همکاری با ما </title>
-	<meta name="keywords" content="خونه پز, رزرو غذا کرمانشاه, غذای خانگی, سفارش غذا">
-	<meta name="description" content="خونه پز - سرویس سفارش غذای خانگی">
 @endsection
 
 

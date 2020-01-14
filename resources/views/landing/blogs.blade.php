@@ -1,7 +1,7 @@
 @extends('layouts.landing')
 
 @section('meta')
-	<title> خونه پز - همکاری با ما </title>
+	<title> خونه پز - وبلاگ </title>
 @endsection
 
 
@@ -15,7 +15,7 @@
 				<div class="row slider-text justify-content-center align-items-center">
 
 					<div class="col-md-7 col-sm-12 text-center ftco-animate">
-						<h1 class="mb-3 mt-5 bread"> با تشکر از همکاری شما </h1>
+						<h1 class="mb-3 mt-5 bread"> وبلاگ </h1>
 					</div>
 
 				</div>
@@ -25,9 +25,21 @@
 
 	<section class="ftco-section" dir="rtl">
 		<div class="container">
-			<p class="h3"> {{$message}} </p>
-			<hr class="gray-border">
-			<a href="{{url('/')}}" class="btn btn-primary btn-outline-primary px-4 py-3"> رفتن به صفحه اصلی وبسایت </a>
+			<div class="row d-flex">
+				@if ($blogs->count())
+					@foreach ($blogs as $blog)
+						@include('includes.blog_col')
+					@endforeach
+				@else
+					<div class="alert alert-warning mx-auto">
+						<i class="material-icons icon">warning</i>
+						موردی یافت نشد.
+					</div>
+				@endif
+			</div>
+			{{$blogs->links()}}
 		</div>
 	</section>
+
+
 @endsection

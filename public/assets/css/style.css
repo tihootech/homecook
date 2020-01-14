@@ -5190,56 +5190,43 @@ input[type="button"].btn-block {
     position: relative;
     display: block;
     padding: 0.5rem 0.75rem;
-    margin-left: -1px;
-    line-height: 1.25;
-    color: #78d5ef;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
+    color: #C49B63;
+    border: 1px solid #C49B63;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	line-height: 20px;
 }
 
 .page-link:hover {
     z-index: 2;
-    color: #34c0e7;
+    color: #C49B63;
     text-decoration: none;
-    background-color: #e9ecef;
-    border-color: #dee2e6;
 }
 
 .page-link:focus {
     z-index: 2;
     outline: 0;
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.25);
-    box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.25);
 }
 
 .page-link:not(:disabled):not(.disabled) {
     cursor: pointer;
 }
 
-.page-item:first-child .page-link {
-    margin-left: 0;
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-}
-
-.page-item:last-child .page-link {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+.page-item {
+	margin: 0 2px;
 }
 
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #78d5ef;
-    border-color: #78d5ef;
+    background-color: #C49B63;
+    border-color: #C49B63;
 }
 
 .page-item.disabled .page-link {
-    color: #6c757d;
     pointer-events: none;
     cursor: auto;
-    background-color: #fff;
-    border-color: #dee2e6;
 }
 
 .pagination-lg .page-link {
@@ -12119,6 +12106,7 @@ footer a:hover {
 }
 
 .blog-entry {
+	width: 100%;
     overflow: hidden;
 }
 
@@ -12332,25 +12320,25 @@ footer a:hover {
     color: gray;
 }
 
-.custom-pagination {
+.pagination {
     width: 100%;
     text-align: center;
     display: inline-block;
 }
 
-.custom-pagination li {
+.pagination li {
     display: inline-block;
 }
 
-.custom-pagination .prev a,
-.custom-pagination .next a {
+.pagination .prev a,
+.pagination .next a {
     font-size: 20px !important;
     line-height: 38px !important;
 }
 
-.custom-pagination li a,
-.custom-pagination .prev a,
-.custom-pagination .next a {
+.pagination li a,
+.pagination .prev a,
+.pagination .next a {
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -12360,9 +12348,9 @@ footer a:hover {
     font-size: 16px;
 }
 
-.custom-pagination li.active a,
-.custom-pagination .prev.active a,
-.custom-pagination .next.active a {
+.pagination li.active a,
+.pagination .prev.active a,
+.pagination .next.active a {
     display: block;
     width: 40px;
     height: 40px;
@@ -12375,20 +12363,20 @@ footer a:hover {
     color: #fff;
 }
 
-.custom-pagination li.active a:hover,
-.custom-pagination li.active a:focus,
-.custom-pagination .prev.active a:hover,
-.custom-pagination .prev.active a:focus,
-.custom-pagination .next.active a:hover,
-.custom-pagination .next.active a:focus {
+.pagination li.active a:hover,
+.pagination li.active a:focus,
+.pagination .prev.active a:hover,
+.pagination .prev.active a:focus,
+.pagination .next.active a:hover,
+.pagination .next.active a:focus {
     color: #fff;
 }
 
-.custom-pagination .prev {
+.pagination .prev {
     float: left;
 }
 
-.custom-pagination .next {
+.pagination .next {
     float: right;
 }
 
@@ -12698,4 +12686,10 @@ footer a:hover {
 .owl-carousel .owl-stage, .owl-carousel.owl-drag .owl-item{
     -ms-touch-action: auto;
         touch-action: auto;
+}
+
+.material-icons.icon {
+	position: relative;
+	top: 4px;
+	margin-left: 3px;
 }

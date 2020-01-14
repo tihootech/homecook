@@ -169,10 +169,20 @@ function parray($array)
 
 function rial($value)
 {
-    return $value ? number_format($value).' ریال' : 'صفر';
+    return nf($value).' ریال';
 }
 
 function toman($value)
 {
-    return $value ? number_format($value).' تومان' : 'صفر';
+    return nf($value).' تومان';
+}
+
+function nf($value)
+{
+    return $value ? number_format($value) : 'صفر';
+}
+
+function best_blogs()
+{
+    return \App\Blog::orderBy('seens', 'DESC')->get();
 }

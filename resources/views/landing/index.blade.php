@@ -655,79 +655,19 @@
     			</div>
     		</div>
     		<div class="row d-flex">
-    			<div class="col-md-4 d-flex ftco-animate">
-    				<div class="blog-entry align-self-stretch">
-    					<a href="#" class="block-20" style="background-image: url('{{asset('assets/images/image_1.jpg')}}');">
-    					</a>
-    					<div class="text py-4 d-block">
-    						<div class="meta">
-    							<div>
-    								<a href="#">
-    									<span class="material-icons">date_range</span>
-    									25 آذر 1398
-    								</a>
-    							</div>
-    							<div>
-    								<a href="#" class="meta-chat">
-    									<span class="material-icons">visibility</span> 148
-    								</a>
-    							</div>
-    						</div>
-    						<h3 class="heading mt-2"><a href="#">تاثیرات خوردن نوشابه بعد از غذا</a></h3>
-    						<p> کاراکتر های ابتدایی مربوط به توضیحات این مطلب... </p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-4 d-flex ftco-animate">
-    				<div class="blog-entry align-self-stretch">
-    					<a href="#" class="block-20" style="background-image: url('{{asset('assets/images/image_2.jpg')}}');">
-    					</a>
-    					<div class="text py-4 d-block">
-    						<div class="meta">
-    							<div>
-    								<a href="#">
-    									<span class="material-icons">date_range</span>
-    									25 آذر 1398
-    								</a>
-    							</div>
-    							<div>
-    								<a href="#" class="meta-chat">
-    									<span class="material-icons">visibility</span> 148
-    								</a>
-    							</div>
-    						</div>
-    						<h3 class="heading mt-2"><a href="#"> فواید سبزیجات </a></h3>
-    						<p> کاراکتر های ابتدایی مربوط به توضیحات این مطلب... </p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-4 d-flex ftco-animate">
-    				<div class="blog-entry align-self-stretch">
-    					<a href="#" class="block-20" style="background-image: url('{{asset('assets/images/image_3.jpg')}}');">
-    					</a>
-    					<div class="text py-4 d-block">
-    						<div class="meta">
-    							<div>
-    								<a href="#">
-    									<span class="material-icons">date_range</span>
-    									25 آذر 1398
-    								</a>
-    							</div>
-    							<div>
-    								<a href="#" class="meta-chat">
-    									<span class="material-icons">visibility</span> 148
-    								</a>
-    							</div>
-    						</div>
-    						<h3 class="heading mt-2"><a href="#"> تاثیرات منفی فیت فود </a></h3>
-    						<p> کاراکتر های ابتدایی مربوط به توضیحات این مطلب... </p>
-    					</div>
-    				</div>
-    			</div>
+    			@if ($blogs->count())
+                    @foreach ($blogs as $blog)
+                        @include('includes.blog_col')
+                    @endforeach
+                @else
+                    <div class="alert alert-danger mx-auto">
+                        <p class="m-0"> <i class="material-icons icon">error</i> هنوز هیچ بلاگی در سیستم ثبت نشده. </p>
+                    </div>
+                @endif
     		</div>
     		<hr class="hr-primary">
     		<div class="text-center">
-    			<a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">
+    			<a href="{{route('blogs')}}" class="btn btn-primary btn-outline-primary px-4 py-3">
     				مشاهده همه مطالب
     			</a>
     		</div>

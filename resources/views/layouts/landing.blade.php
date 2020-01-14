@@ -52,8 +52,8 @@
 							<i class="material-icons">store</i> فروشگاه
 						</a>
 					</li>
-                    <li class="nav-item @if(rn() == 'x') active @endif">
-						<a href="#" class="nav-link">
+                    <li class="nav-item @if(rn() == 'blogs') active @endif">
+						<a href="{{route('blogs')}}" class="nav-link">
 							<i class="material-icons">menu_book</i> وبلاگ
 						</a>
 					</li>
@@ -119,26 +119,20 @@
                 <div class="col-lg-4 col-md-6 mb-5 mb-md-5">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">آخرین مطالب</h2>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img ml-4" style="background-image: url('{{asset('assets/images/image_1.jpg')}}');"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#"> تاثیرات خوردن نوشابه بعد از غذا </a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="material-icons">date_range</span> 28 آبان، 1398</a></div>
-                                    <div><a href="#"><span class="material-icons">visibility</span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-21 mb-4 d-flex">
-                            <a class="blog-img ml-4" style="background-image: url('{{asset('assets/images/image_2.jpg')}}');"></a>
-                            <div class="text">
-                                <h3 class="heading"><a href="#"> فواید سبزیجات </a></h3>
-                                <div class="meta">
-                                    <div><a href="#"><span class="material-icons">date_range</span> 28 آبان، 1398</a></div>
-                                    <div><a href="#"><span class="material-icons">visibility</span> 19</a></div>
-                                </div>
-                            </div>
-                        </div>
+                        @foreach (best_blogs() as $blog)
+							<div class="block-21 mb-4 d-flex">
+	                            <a class="blog-img ml-4" style="background-image: url('{{asset($blog->image)}}')"></a>
+	                            <div class="text">
+	                                <h3 class="heading">
+										<a href="{{$blog->public_link()}}"> {{$blog->title}} </a>
+									</h3>
+	                                <div class="meta">
+	                                    <div><a href="#"><span class="material-icons">date_range</span> {{human_date($blog->created_at)}} </a></div>
+	                                    <div><a href="#"><span class="material-icons">visibility</span> {{nf($blog->seens)}} </a></div>
+	                                </div>
+	                            </div>
+	                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-5 mb-md-5">

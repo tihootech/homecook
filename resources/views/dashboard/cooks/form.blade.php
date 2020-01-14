@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('title')
-    تعریف همکار جدید
+    @if($blog->id) ویرایش همکار {{$blog->title}} @else تعریف همکار جدید @endif
 @endsection
 @section('content')
 
