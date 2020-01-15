@@ -20,17 +20,12 @@ class Comment extends Model
 
     public function replies()
     {
-        return $this->morphMany(Comment::class, 'owner')->withCount('likes')->whereConfirmed(1)->orderBy('likes_count', 'desc');
-    }
-
-    public function likes()
-    {
-        return $this->morphMany(Like::class, 'owner');
+        return $this->morphMany(Comment::class, 'owner')->whereConfirmed(1);
     }
 
     public function author_name()
     {
-        return $this->author ? $this->author->name : null;
+        return $this->author ? $this->author->full_name() : null;
     }
 
     public function public_link()

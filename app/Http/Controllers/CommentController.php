@@ -18,13 +18,7 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::orderBy('confirmed')->latest()->get();
-        return view('dashboard.comment.index', compact('comments'));
-    }
-
-    public function create()
-    {
-        $comment = new Comment;
-        return view('dashboard.comment.form', compact('comment'));
+        return view('dashboard.comments.index', compact('comments'));
     }
 
     public function store(Request $request)
@@ -36,7 +30,7 @@ class CommentController extends Controller
 
     public function edit(Comment $comment)
     {
-        return view('dashboard.comment.form', compact('comment'));
+        return view('dashboard.comments.form', compact('comment'));
     }
 
     public function update(Request $request, Comment $comment)
@@ -46,14 +40,14 @@ class CommentController extends Controller
             'confirmed' => 'required|boolean',
         ]);
         $comment->update($data);
-        return redirect()->route('comment.index')->withMessage(__('CHANGES_MADE_SUCCESSFULLY'));
+        return redirect()->route('comment.index')->withMessage(__('SUCCESS'));
     }
 
     public function confirm(Comment $comment)
     {
         $comment->confirmed = !$comment->confirmed;
         $comment->save();
-        return back()->withMessage(__('COMMENT_CONFIRMED'));
+        return back()->withMessage(__('کامنت مورد نظر تایید شد'));
     }
 
     public function confirm_all()
@@ -61,13 +55,13 @@ class CommentController extends Controller
         Comment::whereConfirmed(0)->update([
             'confirmed' => 1
         ]);
-        return back()->withMessage(__('ALL_COMMENTS_CONFIRMED'));
+        return back()->withMessage(__('همه کامنت ها تایید شدند'));
     }
 
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return redirect()->route('comment.index')->withMessage(__('CHANGES_MADE_SUCCESSFULLY'));
+        return redirect()->route('comment.index')->withMessage(__('SUCCESS'));
     }
 
     public function validation()

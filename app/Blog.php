@@ -10,7 +10,7 @@ class Blog extends Model
 
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'owner')->withCount('likes')->whereConfirmed(1)->orderBy('likes_count', 'desc');
+        return $this->morphMany(Comment::class, 'owner')->whereConfirmed(1);
     }
 
     public function public_link()

@@ -44,4 +44,19 @@ class User extends Authenticatable
             default: return strtoupper($this->type); break;
         }
     }
+
+    public function full_name()
+    {
+        $class = class_name($this->type);
+        if (class_exists($class)) {
+            $object = $class::where('user_id', $this->id)->first();
+            if ($object) {
+                return $object->full_name() ?? '';
+            }else {
+                return '';
+            }
+        }else {
+            return '';
+        }
+    }
 }

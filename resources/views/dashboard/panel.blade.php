@@ -47,6 +47,13 @@
 </li>
 
 <li>
+	<a class="app-menu__item @if( rn() == 'comment.index' ) active @endif" href="{{route("comment.index")}}">
+		<i class="ml-2 material-icons">comment</i>
+		<span class="app-menu__label"> مدیریت کامنت ها </span>
+	</a>
+</li>
+
+<li>
 	<a class="app-menu__item @if( rn() == 'text_messages' ) active @endif" href="{{route("text_messages")}}">
 		<i class="ml-2 material-icons">email</i>
 		<span class="app-menu__label"> پیامک ها </span>

@@ -116,6 +116,11 @@ function class_name($string)
     return "App\\$class";
 }
 
+function remove_class_name($string)
+{
+    return str_replace('app\\', '', strtolower($string));;
+}
+
 function prepare_multiple($inputs)
 {
     $result = [];

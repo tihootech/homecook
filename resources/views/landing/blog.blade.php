@@ -55,16 +55,34 @@
 
 
 					<div class="pt-5 mt-5">
-						<h3 class="mb-5">{{2+2}} کامنت</h3>
+
+						@if ($blog->comments->count())
+							<h3 class="mb-5">{{$blog->comments->count()}} کامنت</h3>
+						@endif
+
 						<ul class="comment-list">
 
-							@for ($i = 0; $i < 2; $i++)
+							@foreach ($blog->comments as $comment)
 								<li class="comment">
 
 									<div class="comment-body">
-										<h3>Main</h3>
-										<div class="meta">June 27, 2018 at 2:21pm</div>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+										<h3>
+											@if ($comment->author)
+			                                    @if ($comment->author->type == 'master')
+			                                        <em> ادمین وبسایت </em>
+			                                    @else
+			                                        {{$comment->author_name()}}
+			                                    @endif
+			                                @else
+			                                    <em> کاربر مهمان </em>
+			                                @endif
+										</h3>
+										<div class="meta">
+											{{human_date($comment->created_at)}}
+											ساعت
+											{{$comment->created_at->format('H:i')}}
+										</div>
+										<p>{{$comment->body}}</p>
 										{{-- <p><a href="#" class="reply">Reply</a></p> --}}
 									</div>
 
@@ -86,12 +104,17 @@
 									@endif
 
 								</li>
-							@endfor
+
+							@endforeach
 						</ul>
 						<!-- END comment-list -->
 
 						<div class="comment-form-wrap pt-5">
-							<h3 class="mb-5"> شما هم کامنت بگذارید </h3>
+							@if ($blog->comments->count())
+								<h3 class="mb-5"> شما هم کامنت بگذارید </h3>
+							@else
+								<h3 class="mb-5"> اولین نفری باشید که کامنت میگذارد </h3>
+							@endif
 							<form action="{{route('comment.store')}}" method="post">
 								@csrf
 								<input type="hidden" name="owner_id" value="{{$blog->id}}">
