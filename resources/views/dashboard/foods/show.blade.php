@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('title')
-    {{$cook->full_name()}}
+    {{$food->title}}
 @endsection
 @section('content')
 

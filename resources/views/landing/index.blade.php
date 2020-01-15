@@ -211,26 +211,15 @@
     			</div>
     			<div class="col-md-6">
     				<div class="row">
-    					<div class="col-md-6">
-    						<div class="menu-entry">
-    							<a href="#" class="img" style="background-image: url('{{asset('assets/images/menu-1.jpg')}}');"></a>
-    						</div>
-    					</div>
-    					<div class="col-md-6">
-    						<div class="menu-entry mt-lg-4">
-    							<a href="#" class="img" style="background-image: url('{{asset('assets/images/menu-2.jpg')}}');"></a>
-    						</div>
-    					</div>
-    					<div class="col-md-6">
-    						<div class="menu-entry">
-    							<a href="#" class="img" style="background-image: url('{{asset('assets/images/menu-3.jpg')}}');"></a>
-    						</div>
-    					</div>
-    					<div class="col-md-6">
-    						<div class="menu-entry mt-lg-4">
-    							<a href="#" class="img" style="background-image: url('{{asset('assets/images/menu-4.jpg')}}');"></a>
-    						</div>
-    					</div>
+    					@foreach ($foods as $food)
+                            <div class="col-md-6">
+        						<div class="menu-entry">
+        							<a href="{{$food->public_link()}}" class="img"
+                                        style="background-image: url('{{asset($food->image)}}');">
+                                    </a>
+        						</div>
+        					</div>
+                        @endforeach
     				</div>
     			</div>
     		</div>

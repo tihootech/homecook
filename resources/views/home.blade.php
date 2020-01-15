@@ -5,13 +5,30 @@
 @section('content')
 
     @master
-        @if ($fresh_cooks->count())
+        @if ($pending_comments->count() || $fresh_cooks->count())
             <div class="tile">
-                شما
-                <b class="text-primary mx-1">{{$fresh_cooks->count() == 1 ? 'یک' : $fresh_cooks->count()}}</b>
-                درخواست جدید برای همکاری دارید.
-                <hr>
-                <a href="{{route('cook.fresh_requests')}}" class="btn btn-primary"> مدیریت درخواست ها </a>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        @if ($fresh_cooks->count())
+                            <div class="col-md-4">
+                                شما
+                                <b class="text-primary mx-1">{{$fresh_cooks->count() == 1 ? 'یک' : $fresh_cooks->count()}}</b>
+                                درخواست جدید برای همکاری دارید.
+                                <hr>
+                                <a href="{{route('cook.fresh_requests')}}" class="btn btn-primary"> مدیریت درخواست ها </a>
+                            </div>
+                        @endif
+                        @if ($pending_comments->count())
+                            <div class="col-md-4">
+                                شما
+                                <b class="text-primary mx-1">{{$pending_comments->count() == 1 ? 'یک' : $pending_comments->count()}}</b>
+                                کامنت معلق دارید.
+                                <hr>
+                                <a href="{{route('comment.index')}}" class="btn btn-primary"> مدیریت کامنت ها </a>
+                            </div>
+                        @endif
+                    </div>
+                </div>
             </div>
         @endif
         <div class="tile">

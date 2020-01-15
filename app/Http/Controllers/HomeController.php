@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cook;
+use App\Comment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,7 +27,8 @@ class HomeController extends Controller
     {
         if (master()) {
             $fresh_cooks = Cook::whereFresh(1)->get();
-            return view('home', compact('fresh_cooks'));
+            $pending_comments = Comment::whereConfirmed(0)->get();
+            return view('home', compact('fresh_cooks', 'pending_comments'));
         }elseif (cook()) {
             $cook = current_cook();
             return view('home', compact('cook'));

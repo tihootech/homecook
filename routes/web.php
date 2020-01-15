@@ -28,6 +28,11 @@ Route::resource('cook', 'CookController');
 // text messages
 Route::get('text-messages', 'TextMessageController@index')->name('text_messages');
 
+// foods
+Route::resource('food', 'FoodController');
+Route::get('سفارش-غذا', 'LandingController@order_food')->name('order_food');
+Route::get('غذا/{title}', 'LandingController@order_food')->name('show_food');
+
 
 // comment
 Route::put('comment/{comment}/confirm', 'CommentController@confirm')->name('comment.confirm');

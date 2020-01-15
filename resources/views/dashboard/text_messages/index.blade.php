@@ -5,7 +5,6 @@
 @section('content')
 
 	<div class="tile text-center">
-		<a href="{{route('cook.create')}}" class="btn btn-primary m-2"> <i class="material-icons">add</i> تعریف همکار جدید </a>
 		<a href="#search-box" data-toggle="collapse" class="btn btn-primary m-2"> <i class="material-icons">search</i> جستجو </a>
 		<div class="collapse @if(request()->getQueryString()) show @endif" id="search-box">
 			<hr>

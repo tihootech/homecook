@@ -52,6 +52,19 @@ function check($object, $type)
     }
 }
 
+function cook_check($object)
+{
+    if (master()) {
+        return;
+    }elseif(user('type') == 'cook') {
+        if ($object->cook_id != current_cook()->id) {
+            abort(403);
+        }
+    }else {
+        abort(403);
+    }
+}
+
 function rn()
 {
     return request()->route()->getName();
@@ -185,6 +198,11 @@ function toman($value)
 function nf($value)
 {
     return $value ? number_format($value) : 'صفر';
+}
+
+function dp($price, $discount)
+{
+    return $price - round( ($price*$discount) / 100 );
 }
 
 function best_blogs($count=3)
