@@ -39,7 +39,7 @@
 							<i class="material-icons">home</i> صفحه اصلی
 						</a>
 					</li>
-                    <li class="nav-item @if(rn() == 'x') active @endif">
+                    <li class="nav-item @if(rn() == 'order_food') active @endif">
 						<a href="#" class="nav-link">
 							<i class="material-icons">fastfood</i> سفارش غذا
 						</a>

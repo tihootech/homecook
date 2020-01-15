@@ -5,26 +5,56 @@
 @section('content')
 
     @master
-        @if ($pending_comments->count() || $fresh_cooks->count())
+        @if ($pending_comments->count() || $fresh_cooks->count() || $pending_foods->count())
             <div class="tile">
                 <div class="container">
                     <div class="row justify-content-center">
-                        @if ($fresh_cooks->count())
+                        @if ($count = $fresh_cooks->count())
                             <div class="col-md-4">
+                                <span class="text-info ml-1">
+                                    @if ($count > 9)
+                                        <i class="material-icons">filter_9_plus</i>
+                                    @else
+                                        <i class="material-icons icon">filter_{{$count}}</i>
+                                    @endif
+                                </span>
                                 شما
-                                <b class="text-primary mx-1">{{$fresh_cooks->count() == 1 ? 'یک' : $fresh_cooks->count()}}</b>
+                                <b class="text-primary mx-1">{{$count == 1 ? 'یک' : $count}}</b>
                                 درخواست جدید برای همکاری دارید.
                                 <hr>
                                 <a href="{{route('cook.fresh_requests')}}" class="btn btn-primary"> مدیریت درخواست ها </a>
                             </div>
                         @endif
-                        @if ($pending_comments->count())
+                        @if ($count = $pending_comments->count())
                             <div class="col-md-4">
+                                <span class="text-info ml-1">
+                                    @if ($count > 9)
+                                        <i class="material-icons">filter_9_plus</i>
+                                    @else
+                                        <i class="material-icons icon">filter_{{$count}}</i>
+                                    @endif
+                                </span>
                                 شما
-                                <b class="text-primary mx-1">{{$pending_comments->count() == 1 ? 'یک' : $pending_comments->count()}}</b>
+                                <b class="text-primary mx-1">{{$count == 1 ? 'یک' : $count}}</b>
                                 کامنت معلق دارید.
                                 <hr>
                                 <a href="{{route('comment.index')}}" class="btn btn-primary"> مدیریت کامنت ها </a>
+                            </div>
+                        @endif
+                        @if ($count = $pending_foods->count())
+                            <div class="col-md-4">
+                                <span class="text-info ml-1">
+                                    @if ($count > 9)
+                                        <i class="material-icons">filter_9_plus</i>
+                                    @else
+                                        <i class="material-icons icon">filter_{{$count}}</i>
+                                    @endif
+                                </span>
+                                شما
+                                <b class="text-primary mx-1">{{$count == 1 ? 'یک' : $count}}</b>
+                                غذا جهت بررسی دارید
+                                <hr>
+                                <a href="{{route('food.index')}}?confirmed=0" class="btn btn-primary"> مدیریت غذا ها </a>
                             </div>
                         @endif
                     </div>

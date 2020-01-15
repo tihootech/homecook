@@ -206,7 +206,7 @@
     						متن مربوط به توضیحات سفارش غذا نیز، بعدا در این قسمت و وارد میشود.
     						متن مربوط به توضیحات سفارش غذا نیز، بعدا در این قسمت و وارد میشود.
     					</p>
-    					<p><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">مشاهده منوی کامل</a></p>
+    					<p><a href="{{route('order_food')}}" class="btn btn-primary btn-outline-primary px-4 py-3">مشاهده منوی کامل</a></p>
     				</div>
     			</div>
     			<div class="col-md-6">

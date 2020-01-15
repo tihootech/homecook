@@ -8,8 +8,16 @@
 		@cook
             <a href="{{route('food.create')}}" class="btn btn-primary m-2"> <i class="material-icons">add</i> غذای جدید </a>
         @endcook
+        @master
+            <form class="d-inline" action="{{route('food.confirm_all')}}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-primary m-2">
+                    <i class="material-icons">done_all</i> تایید همه
+                </button>
+            </form>
+        @endmaster
 		<a href="#search-box" data-toggle="collapse" class="btn btn-primary m-2"> <i class="material-icons">search</i> جستجو </a>
-		<div class="collapse @if(request()->getQueryString()) show @endif" id="search-box">
+		<div class="collapse @if(request()->getQueryString() && request('confirmed') === null) show @endif" id="search-box">
 			<hr>
 			<div class="container">
 				<form class="row text-right justify-content-center" method="GET">
@@ -69,7 +77,7 @@
 							<th> مواد اولیه </th>
 							<th> تاییدشده </th>
 							<th> تصویر </th>
-							<th colspan="3"> عملیات </th>
+							<th colspan="4"> عملیات </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -101,6 +109,15 @@
                                     >
                                         <i class="material-icons mt-2">photo</i>
                                     </a>
+                                </td>
+                                <td data-toggle="popover" data-trigger="hover" data-placement="top" data-content="{{$food->confirmed ? 'عدم تایید' : 'تایید'}}">
+                                    <form class="d-inline" action="{{route('food.confirm', $food->id)}}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit" class="btn btn-link {{$food->confirmed ? 'text-danger' : 'text-primary'}}">
+                                            <i class="material-icons">{{$food->confirmed ? 'close' : 'check'}}</i>
+                                        </button>
+                                    </form>
                                 </td>
                                 <td data-toggle="popover" data-trigger="hover" data-placement="top" data-content="جزییات">
                                     <a href="{{route('food.show', $food->id)}}" class="btn btn-link text-primary">

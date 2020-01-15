@@ -24,7 +24,7 @@
 	<ul class="treeview-menu">
 		<li>
 			<a class="treeview-item @if(rn() == $routes[0]) active @endif" href="{{route($routes[0])}}">
-				<i class="icon material-icons">add_to_photos</i> درخواست های جدید
+				<i class="icon material-icons">dynamic_feed</i> درخواست های جدید
 			</a>
 		</li>
 		<li>

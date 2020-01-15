@@ -15350,3 +15350,10 @@ table .material-icons {
     position: relative;
     top: 4px;
 }
+
+.material-icons.icon {
+    font-size: 20px;
+    margin-left: 3px;
+    position: relative;
+    top: 4px;
+}

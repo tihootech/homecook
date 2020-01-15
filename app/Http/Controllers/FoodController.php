@@ -75,6 +75,21 @@ class FoodController extends Controller
         return redirect()->route('food.index')->withMessage(__('SUCCESS'));
     }
 
+    public function confirm(Food $food)
+    {
+        $food->confirmed = !$food->confirmed;
+        $food->save();
+        return back()->withMessage('غذا مورد نظر تایید شد');
+    }
+
+    public function confirm_all()
+    {
+        Food::whereConfirmed(0)->update([
+            'confirmed' => 1
+        ]);
+        return back()->withMessage('همه غذا ها تایید شدند');
+    }
+
     public function destroy(Food $food)
     {
         cook_check($food);
@@ -109,7 +124,7 @@ class FoodController extends Controller
         if (strpos($data['title'], '-') !== false) {
             $data['title'] = str_replace('-', '_', $data['title']);
         }
-        
+
         return $data;
     }
 }

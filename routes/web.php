@@ -32,7 +32,8 @@ Route::get('text-messages', 'TextMessageController@index')->name('text_messages'
 Route::resource('food', 'FoodController');
 Route::get('سفارش-غذا', 'LandingController@order_food')->name('order_food');
 Route::get('غذا/{title}', 'LandingController@order_food')->name('show_food');
-
+Route::post('food/confirm_all', 'FoodController@confirm_all')->name('food.confirm_all');
+Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm');
 
 // comment
 Route::put('comment/{comment}/confirm', 'CommentController@confirm')->name('comment.confirm');
