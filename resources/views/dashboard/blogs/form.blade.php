@@ -37,7 +37,7 @@
 
             <div class="col-md-12 form-group">
 				<label for="tags"> تگ ها - با Enter از هم جدا کنید </label>
-				<textarea name="tags" id="tags" rows="4" class="form-control">{{old('tags') ?? $blog->tags}}</textarea>
+				<textarea name="tags" id="tags" rows="4" class="form-control">{{old('tags') ?? $blog->tags_textarea()}}</textarea>
 			</div>
 
             <div class="col-md-12 form-group">

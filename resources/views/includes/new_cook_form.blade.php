@@ -13,13 +13,13 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				<label for="first-name"> * نام </label>
-				<input type="text" name="first_name" id="first-name" class="form-control" value="{{$cook->first_name ?? old('first_name')}}">
+				<input type="text" name="first_name" id="first-name" class="form-control" value="{{$cook->first_name ?? old('first_name')}}" required>
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
 				<label for="last-name"> * نام خانوادگی </label>
-				<input type="text" name="last_name" id="last-name" class="form-control" value="{{$cook->last_name ?? old('last_name')}}">
+				<input type="text" name="last_name" id="last-name" class="form-control" value="{{$cook->last_name ?? old('last_name')}}" required>
 			</div>
 		</div>
 		<div class="col-md-6">
@@ -31,31 +31,31 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				<label for="mobile"> * تلفن همراه </label>
-				<input type="text" name="mobile" id="mobile" class="form-control" value="{{$cook->mobile ?? old('mobile')}}">
+				<input type="text" name="mobile" id="mobile" class="form-control" value="{{$cook->mobile ?? old('mobile')}}" required>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="form-group">
 				<label for="state"> * استان </label>
-				<input type="text" name="state" id="state" class="form-control" value="{{$cook->state ?? old('state')}}">
+				<input type="text" name="state" id="state" class="form-control" value="{{$cook->state ?? old('state')}}" required>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="form-group">
 				<label for="city"> * شهر </label>
-				<input type="text" name="city" id="city" class="form-control" value="{{$cook->city ?? old('city')}}">
+				<input type="text" name="city" id="city" class="form-control" value="{{$cook->city ?? old('city')}}" required>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="form-group">
 				<label for="hood"> * محله </label>
-				<input type="text" name="hood" id="hood" class="form-control" value="{{$cook->hood ?? old('hood')}}">
+				<input type="text" name="hood" id="hood" class="form-control" value="{{$cook->hood ?? old('hood')}}" required>
 			</div>
 		</div>
 		<div class="col-md-12">
 			<div class="form-group">
 				<label for="address"> * آدرس </label>
-				<input type="text" name="address" id="address" class="form-control" value="{{$cook->address ?? old('address')}}">
+				<input type="text" name="address" id="address" class="form-control" value="{{$cook->address ?? old('address')}}" required>
 			</div>
 		</div>
 		@if ($in_panel && master())

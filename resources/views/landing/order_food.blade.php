@@ -27,13 +27,13 @@
 	<section class="ftco-section" dir="rtl">
 		<div class="container">
 
-			@if ($food_count && request()->getQueryString())
+			{{-- @if ($food_count && request()->getQueryString())
 				<div class="alert alert-info">
 					<i class="material-icons icon">info</i>
 					{{$food_count}}
 					غذا با این مشخصات یافت شد.
 				</div>
-			@endif
+			@endif --}}
 
 			<div class="billing-form ftco-bg-dark p-3 p-md-5 mb-3 mb-md-5">
 
@@ -43,12 +43,24 @@
 					</div>
 					<div class="col-md-8 text-center text-md-left my-2">
 						<div class="tagcloud">
-							<a href="{{route('order_food', 1)}}" @if($order == 1) class="active" @endif> بهترین </a>
-							<a href="{{route('order_food', 2)}}" @if($order == 2) class="active" @endif> گرانترین </a>
-							<a href="{{route('order_food', 3)}}" @if($order == 3) class="active" @endif> ارزانترین </a>
-							<a href="{{route('order_food', 4)}}" @if($order == 4) class="active" @endif> پرفروش ترین </a>
-							<a href="{{route('order_food', 5)}}" @if($order == 5) class="active" @endif> جدیدترین </a>
-							<a href="{{route('order_food', 6)}}" @if($order == 6) class="active" @endif> بیشترین تخفیف </a>
+							<a href="{{route('order_food', 1)}}" @if($order == 1) class="active" @endif>
+								بهترین
+							</a>
+							<a href="{{route('order_food', 2)}}" @if($order == 2) class="active" @endif>
+								گرانترین
+							</a>
+							<a href="{{route('order_food', 3)}}" @if($order == 3) class="active" @endif>
+								ارزانترین
+							</a>
+							<a href="{{route('order_food', 4)}}" @if($order == 4) class="active" @endif>
+								پرفروش ترین
+							</a>
+							<a href="{{route('order_food', 5)}}" @if($order == 5) class="active" @endif>
+								جدیدترین
+							</a>
+							<a href="{{route('order_food', 6)}}" @if($order == 6) class="active" @endif>
+								بیشترین تخفیف
+							</a>
 						</div>
 					</div>
 				</div>
@@ -83,7 +95,8 @@
 					</div>
 				@endif
 			</div>
-			{{-- {{$foods->links()}} --}}
+
+			{{$foods->links()}}
 		</div>
 	</section>
 @endsection

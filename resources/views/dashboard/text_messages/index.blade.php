@@ -55,7 +55,12 @@
 						@foreach ($text_messages as $index => $sms)
 							<tr>
 								<th> {{$index+1}} </th>
-								<td> {{$sms->persian_type()}} </td>
+								<td>
+                                    <span data-toggle="popover" data-trigger="hover" data-placement="top" data-html="true"
+                                        data-content='@include('includes.sms_ul')'>
+                                        {{$sms->persian_type()}}
+                                    </span>
+                                </td>
 								<td> {{$sms->receptor ?? '-'}} </td>
                                 <td> @include('dashboard.partials.yesno', ['boolean' => $sms->sent]) </td>
 								<td> {{$sms->sender ?? '-'}} </td>

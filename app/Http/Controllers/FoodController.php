@@ -25,7 +25,7 @@ class FoodController extends Controller
             if ($request->cooks && count($request->cooks)) {
                 $foods = $foods->whereIn('cook_id', $request->cooks);
             }
-            if ($request->confirmed) {
+            if ($request->confirmed !== null) {
                 $foods = $foods->whereConfirmed($request->confirmed);
             }
         }else {
@@ -118,6 +118,8 @@ class FoodController extends Controller
 
         if (master()) {
             $data['confirmed'] = request('confirmed') ?? false;
+        }else {
+            $data['confirmed'] = 0;
         }
 
         // replace - with _

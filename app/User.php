@@ -45,6 +45,11 @@ class User extends Authenticatable
         }
     }
 
+    public function owner()
+    {
+        return $this->hasOne(class_name($this->type), 'user_id');
+    }
+
     public function full_name()
     {
         $class = class_name($this->type);

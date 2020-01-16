@@ -68,7 +68,7 @@ class LandingController extends Controller
             $foods = $foods->where('discount', '<>', '0')->orderBy('discount', 'DESC');
         }
 
-        $foods = $foods->paginate(12);
+        $foods = $foods->paginate(9);
 
         return view('landing.order_food', compact('foods', 'food_count', 'order'));
     }

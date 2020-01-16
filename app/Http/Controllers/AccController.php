@@ -12,7 +12,7 @@ class AccController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
-		// $this->middleware('master')->except(['edit', 'update']);
+		$this->middleware('master')->except(['edit', 'update']);
 	}
 
 	// public function list(Request $request)
@@ -28,10 +28,10 @@ class AccController extends Controller
 	// 	return view('dashboard.acc.list', compact('users'));
 	// }
 
-	// public function show(User $user)
-	// {
-	// 	return view('dashboard.acc.show', compact('user'));
-	// }
+	public function show(User $user)
+	{
+		return view('dashboard.acc.show', compact('user'));
+	}
 
     public function edit()
     {

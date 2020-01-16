@@ -110,15 +110,17 @@
                                         <i class="material-icons mt-2">photo</i>
                                     </a>
                                 </td>
-                                <td data-toggle="popover" data-trigger="hover" data-placement="top" data-content="{{$food->confirmed ? 'عدم تایید' : 'تایید'}}">
-                                    <form class="d-inline" action="{{route('food.confirm', $food->id)}}" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-link {{$food->confirmed ? 'text-danger' : 'text-primary'}}">
-                                            <i class="material-icons">{{$food->confirmed ? 'close' : 'check'}}</i>
-                                        </button>
-                                    </form>
-                                </td>
+                                @master
+                                    <td data-toggle="popover" data-trigger="hover" data-placement="top" data-content="{{$food->confirmed ? 'عدم تایید' : 'تایید'}}">
+                                        <form class="d-inline" action="{{route('food.confirm', $food->id)}}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-link {{$food->confirmed ? 'text-danger' : 'text-primary'}}">
+                                                <i class="material-icons">{{$food->confirmed ? 'close' : 'check'}}</i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                @endmaster
                                 <td data-toggle="popover" data-trigger="hover" data-placement="top" data-content="جزییات">
                                     <a href="{{route('food.show', $food->id)}}" class="btn btn-link text-primary">
                                         <i class="material-icons">list</i>

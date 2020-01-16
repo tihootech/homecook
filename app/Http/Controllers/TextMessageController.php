@@ -13,6 +13,12 @@ class TextMessageController extends Controller
 {
     const FORMAT = "%s = %s <br/>";
 
+    public function __construct()
+    {
+        $this->middleware('auth')->only('index');
+        $this->middleware('master')->only('index');
+    }
+
     public function index(Request $request)
     {
         $text_messages = TextMessage::query();
