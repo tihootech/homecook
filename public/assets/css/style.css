@@ -12112,8 +12112,23 @@ footer a:hover {
 
 .blog-entry {
 	width: 100%;
+	position: relative;
     overflow: hidden;
 }
+
+.blog-entry .off {
+	text-decoration: line-through;
+}
+
+.blog-entry .off-badge {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 6px 12px;
+	display: inline-block;
+	text-align: center;
+}
+
 
 @media (min-width: 768px) {
     .blog-entry {
@@ -12417,7 +12432,7 @@ footer a:hover {
     font-size: 11px;
 }
 
-.tagcloud a:hover {
+.tagcloud a:hover, .tagcloud a.active {
     border: 1px solid #b3b3b3;
 }
 

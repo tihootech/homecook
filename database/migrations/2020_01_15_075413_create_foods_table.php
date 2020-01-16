@@ -23,6 +23,7 @@ class CreateFoodsTable extends Migration
             $table->text('material')->nullable();
             $table->string('image');
             $table->boolean('confirmed')->default(0);
+            $table->unsignedBigInteger('seens')->default(0);
             $table->timestamps();
         });
     }

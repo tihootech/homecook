@@ -21,9 +21,56 @@ class LandingController extends Controller
         return view('landing.new_cook');
     }
 
-    public function order_food()
+    public function show_cook($name, $uid)
     {
-        return view('landing.order_food');
+        $cook = Cook::whereUid($uid)->firstOrFail();
+        return view('landing.show_cook', compact('cook'));
+    }
+
+    public function show_food($title, $uid)
+    {
+        $food = Food::whereUid($uid)->firstOrFail();
+        $food->increment('seens');
+        return view('landing.show_food', compact('food'));
+    }
+
+    public function order_food($order = 1, Request $request)
+    {
+        $foods = Food::select( '*',
+             \DB::raw('(price - ROUND((price * discount) / 100, 2 )) AS f_cost'),
+             \DB::raw('RAND()*5 AS f_rate'),
+             \DB::raw('RAND()*100 AS f_sells')
+        );
+
+        $foods = $foods->whereConfirmed(1);
+        if ($phrase = $request->t) {
+            $foods = $foods->where('title', 'like', "%$phrase%");
+        }
+        $food_count = $foods->count();
+
+        if ($order == 1) {
+            // best
+            $foods = $foods->orderBy('f_rate', 'DESC');
+        }elseif ($order == 2) {
+            // most expensive
+            $foods = $foods->orderBy('f_cost', 'DESC');
+        }elseif ($order == 3) {
+            // cheapest
+            $foods = $foods->orderBy('f_cost', 'ASC');
+        }elseif ($order == 4) {
+            // best selling
+            $foods = $foods->orderBy('f_sells', 'DESC');
+        }elseif ($order == 5) {
+            // latest
+            $foods = $foods->latest();
+        }elseif ($order == 6) {
+            // most discount
+            $foods = $foods->where('discount', '<>', '0')->orderBy('discount', 'DESC');
+        }
+
+        $foods = $foods->paginate(12);
+
+        return view('landing.order_food', compact('foods', 'food_count', 'order'));
     }
 
     public function blogs(Request $request)

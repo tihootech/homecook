@@ -18,6 +18,7 @@ Route::get('landing/message', 'LandingController@message')->name('landing.messag
 
 // cooks
 Route::get('همکاری', 'LandingController@new_cook')->name('new_cook');
+Route::get('آشپز/{name}/{uid}', 'LandingController@show_cook')->name('show_cook');
 Route::get('cook/fresh', 'CookController@fresh_requests')->name('cook.fresh_requests');
 Route::get('cook/edit/{uid}', 'CookController@cook_edit')->name('cook.cook_edit');
 Route::put('cook/update/{uid}', 'CookController@cook_update')->name('cook.cook_update');
@@ -30,8 +31,8 @@ Route::get('text-messages', 'TextMessageController@index')->name('text_messages'
 
 // foods
 Route::resource('food', 'FoodController');
-Route::get('سفارش-غذا', 'LandingController@order_food')->name('order_food');
-Route::get('غذا/{title}', 'LandingController@order_food')->name('show_food');
+Route::get('سفارش-غذا/{order?}', 'LandingController@order_food')->name('order_food');
+Route::get('غذا/{title}/{uid}', 'LandingController@show_food')->name('show_food');
 Route::post('food/confirm_all', 'FoodController@confirm_all')->name('food.confirm_all');
 Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm');
 

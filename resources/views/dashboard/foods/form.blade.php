@@ -41,7 +41,7 @@
             		<div class="col-md-3">
             			<div class="form-group">
             				<label for="image"> @if($food->id) تغییر @endif تصویر </label>
-            				<input type="file" name="image" id="image" class="form-control" required>
+            				<input type="file" name="image" id="image" class="form-control" @unless($food->id) required @endunless>
             			</div>
             		</div>
 

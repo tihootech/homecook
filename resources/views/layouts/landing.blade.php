@@ -40,7 +40,7 @@
 						</a>
 					</li>
                     <li class="nav-item @if(rn() == 'order_food') active @endif">
-						<a href="#" class="nav-link">
+						<a href="{{route('order_food')}}" class="nav-link">
 							<i class="material-icons">fastfood</i> سفارش غذا
 						</a>
 					</li>

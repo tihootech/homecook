@@ -46,6 +46,11 @@ class Cook extends Model
         return $password;
     }
 
+    public function public_link()
+    {
+        return route('show_cook', [urf($this->full_name()), $this->uid]);
+    }
+
     public function full_name()
     {
         return $this->first_name .' '. $this->last_name;

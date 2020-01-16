@@ -96,7 +96,7 @@
 								<td> {{$food->title}} </td>
 								<td> {{toman($food->price)}} </td>
 								<td> {{nf($food->discount)}} </td>
-                                <td> {{toman($food->cost())}} </td>
+                                <td> {{toman($food->cost)}} </td>
                                 <td>
                                     <a href="javascript:void" data-toggle="popover" data-placement="top" data-content="{{$food->material}}">
                                         {{short($food->material,25)}}
