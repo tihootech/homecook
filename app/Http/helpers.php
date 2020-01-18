@@ -5,6 +5,12 @@ function user($p=null)
     return auth()->user() ? ( $p ? auth()->user()->$p : auth()->user() ) : null;
 }
 
+function settings($p=null)
+{
+    $settings = \App\Setting::first();
+    return $settings ? ( $p ? $settings->$p : $settings ) : null;
+}
+
 function current_cook()
 {
     if (cook()) {
@@ -202,7 +208,12 @@ function nf($value)
 
 function dp($price, $discount)
 {
-    return $price - round( ($price*$discount) / 100 );
+    return $price - percent($price, $discount);
+}
+
+function percent($price, $percent)
+{
+    return round( ($price*$percent) / 100 );
 }
 
 function best_blogs($count=3)

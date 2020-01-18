@@ -42,6 +42,6 @@ Route::post('comment/confirm_all', 'CommentController@confirm_all')->name('confi
 Route::resource('comment', 'CommentController')->except(['show', 'create']);
 
 // blogs
-Route::get('وبلاگ', 'LandingController@blogs')->name('blogs');
 Route::resource('blog', 'BlogController')->except('show');
+Route::get('وبلاگ', 'LandingController@blogs')->name('blogs');
 Route::get('{title}', 'LandingController@show_blog')->name('show_blog');

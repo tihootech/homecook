@@ -5,14 +5,8 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Cook extends Model
+class Cook extends AccountOwner
 {
-    protected $guarded = ['id'];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function accept()
     {
@@ -51,8 +45,4 @@ class Cook extends Model
         return route('show_cook', [urf($this->full_name()), $this->uid]);
     }
 
-    public function full_name()
-    {
-        return $this->first_name .' '. $this->last_name;
-    }
 }

@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasOne(class_name($this->type), 'user_id');
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function full_name()
     {
         $class = class_name($this->type);

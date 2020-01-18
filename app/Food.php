@@ -30,11 +30,6 @@ class Food extends Model
 		return $this->belongsTo(Cook::class);
 	}
 
-	public function cost()
-	{
-		return $this->discount ? dp($this->price, $this->discount) : $this->price;
-	}
-
     public function public_link()
     {
         return route('show_food', [urf($this->title), $this->uid]);
