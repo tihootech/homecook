@@ -16,7 +16,6 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('peyk_share')->default(5000);
-            $table->unsignedInteger('cook_share')->default(100);
             $table->unsignedSmallInteger('tax')->default(9);
             $table->unsignedSmallInteger('added_price')->default(5);
             $table->timestamps();

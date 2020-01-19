@@ -34,4 +34,9 @@ class Food extends Model
     {
         return route('show_food', [urf($this->title), $this->uid]);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

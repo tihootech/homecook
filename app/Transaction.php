@@ -8,9 +8,14 @@ class Transaction extends Model
 {
     protected $guarded = ['id'];
 
-	public function items()
+	public function food()
 	{
-		return $this->hasMany(TransactionItem::class);
+		return $this->belongsTo(Food::class);
+	}
+
+	public function cook()
+	{
+		return $this->belongsTo(Cook::class);
 	}
 
 	public function customer()
@@ -18,9 +23,19 @@ class Transaction extends Model
 		return $this->belongsTo(Customer::class);
 	}
 
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
+
 	public function peyk()
 	{
 		return $this->belongsTo(Peyk::class);
+	}
+
+	public function address()
+	{
+		return $this->belongsTo(Address::class);
 	}
 
 }
