@@ -14,6 +14,7 @@ class TextMessage extends Model
             case 'cookaccept': return 'تایید عضویت همکار'; break;
             case 'cookmodify': return 'درخواست اصلاح عضویت همکار'; break;
             case 'cookmodifyaccept': return 'تایید درخواست اصلاح عضویت همکار'; break;
+            case 'code': return 'کد تایید'; break;
             default: return $this->template; break;
         }
     }

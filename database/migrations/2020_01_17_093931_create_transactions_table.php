@@ -17,24 +17,15 @@ class CreateTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('uid');
 
-            $table->unsignedInteger('food_id');
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('peyk_id')->nullable();
             $table->unsignedInteger('customer_id')->nullable();
-            $table->unsignedInteger('cook_id')->nullable();
             $table->unsignedInteger('address_id')->nullable();
 
-            $table->unsignedBigInteger('first_price');
-            $table->unsignedBigInteger('tax');
-            $table->unsignedBigInteger('added_price');
-            $table->unsignedBigInteger('payable');
-            $table->unsignedSmallInteger('count');
-            $table->unsignedBigInteger('total_amount');
-
+            $table->unsignedBigInteger('total')->nullable();
             $table->unsignedBigInteger('peyk_share')->nullable();
             $table->unsignedBigInteger('cook_share')->nullable();
             $table->unsignedBigInteger('master_share')->nullable();
-
 
             $table->boolean('open')->default(1);
             $table->boolean('ponied')->default(0);

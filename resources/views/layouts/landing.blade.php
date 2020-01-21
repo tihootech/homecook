@@ -31,7 +31,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" dir="rtl">
         <div class="container">
-            <a class="navbar-brand" href="#">خونه<small>پز</small></a>
+            <a class="navbar-brand" href="{{url('/')}}">خونه<small>پز</small></a>
             <div class="collapse navbar-collapse order-sm-1 order-12" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item @if(rn() == 'index') active @endif">
@@ -82,9 +82,17 @@
 				<a href="{{route('home')}}" data-toggle="popover" data-content="ناحیه کاربری" data-trigger="hover" data-placement="bottom">
 					<span class="material-icons">person</span>
 				</a>
-				<a href="#" class="nav-link" data-toggle="popover" data-content="1 آیتم در سبد خرید شماست" data-trigger="hover" data-placement="bottom">
+				<a href="{{route('cart.checkout')}}" class="nav-link" data-toggle="popover" data-trigger="hover" data-placement="bottom"
+					data-content="برای مشاهده سبد خرید کلیک کنید." rel="nofollow">
 					<span class="material-icons">shopping_cart</span>
-					<span class="bag d-flex justify-content-center align-items-center"><small>1</small></span>
+					@php
+						$cart = current_cart()
+					@endphp
+					@if ($cart_count = count($cart))
+						<span class="bag d-flex justify-content-center align-items-center">
+							<small id="cart-count">{{$cart_count}}</small>
+						</span>
+					@endif
 				</a>
             </div>
         </div>
@@ -184,6 +192,7 @@
     <script src="{{asset('assets/js/jquery.timepicker.min.js')}}"></script>
     <script src="{{asset('assets/js/scrollax.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js?v=1.2')}}"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
 
 </body>
 

@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'master' => \App\Http\Middleware\CheckMaster::class,
         'active_cook_or_master' => \App\Http\Middleware\ActiveCookOrMaster::class,
+        'only_customer' => \App\Http\Middleware\OnlyCustomer::class,
     ];
 
     /**

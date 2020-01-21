@@ -8,6 +8,34 @@ class Transaction extends Model
 {
     protected $guarded = ['id'];
 
+    public function calc_total()
+    {
+        return TransactionItem::where('transaction_id', $this->id)->sum('total_payable');
+    }
+
+    public function calc_cook_share()
+    {
+        return TransactionItem::where('transaction_id', $this->id)->sum(\DB::raw('cook_cut * count'));
+    }
+
+    public function calc_master_share()
+    {
+        return TransactionItem::where('transaction_id', $this->id)->sum(\DB::raw('added_price * count'));
+    }
+
+    public static function make()
+    {
+        $transaction = new self;
+        $transaction->uid = rs();
+        $transaction->save();
+        return $transaction;
+    }
+
+    public function items()
+    {
+        return $this->hasMany(TransactionItem::class);
+    }
+
 	public function food()
 	{
 		return $this->belongsTo(Food::class);

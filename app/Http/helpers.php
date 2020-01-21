@@ -15,8 +15,14 @@ function current_cook()
 {
     if (cook()) {
         return \App\Cook::where('user_id', auth()->id())->first();
-    }else {
-        return '';
+    }
+}
+
+function current_customer($p=null)
+{
+    if (customer()) {
+        $customer = \App\Customer::where('user_id', auth()->id())->first();
+        return $customer ? ( $p ? $customer->$p : $customer ) : null;
     }
 }
 
@@ -219,4 +225,25 @@ function percent($price, $percent)
 function best_blogs($count=3)
 {
     return \App\Blog::orderBy('seens', 'DESC')->take($count)->get();
+}
+
+function current_cart($force=false)
+{
+    $transaction_uid = session('tuid');
+    $transaction = \App\Transaction::whereUid($transaction_uid)->first();
+    if (!$transaction_uid || !$transaction) {
+
+        $cart = [];
+        if ($force) {
+            $transaction = \App\Transaction::make();
+            $tuid = $transaction->uid;
+            session(compact('cart', 'tuid'));
+        }
+
+    }else {
+
+        $cart = session('cart');
+
+    }
+    return $cart;
 }

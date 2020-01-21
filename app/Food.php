@@ -7,8 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Food extends Model
 {
     protected $guarded = ['id'];
-    protected $appends = ['cost', 'rate', 'sells'];
+    protected $appends = ['cost', 'rate', 'sells', 'persian_type'];
 
+    public function getPersianTypeAttribute()
+    {
+        if ($this->type == 'food') {
+            return 'پیش سفارش';
+        }elseif ($this->type == 'product') {
+            return 'محصول خانگی';
+        }else {
+            return $this->type;
+        }
+    }
 
     public function getRateAttribute()
     {
@@ -22,7 +32,7 @@ class Food extends Model
 
     public function getSellsAttribute()
     {
-        return  rand(0, 100);
+        return  Transaction::where('food_id', $this->id)->wherePonied(1)->sum('count');
     }
 
 	public function cook()

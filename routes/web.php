@@ -13,6 +13,19 @@ Route::get('user/{user}', 'AccController@show')->name('user.show');
 Route::delete('user/{user}', 'AccController@destroy')->name('user.destroy');
 Route::put('user/{user}', 'AccController@master_update')->name('user.master_update');
 
+// cart
+Route::post('cart/add', 'CartController@add')->name('cart.add');
+Route::post('cart/register', 'CartController@register')->name('cart.register');
+Route::post('cart/login', 'CartController@login')->name('cart.login');
+Route::get('checkout', 'CartController@checkout')->name('cart.checkout');
+Route::get('cart/code/{uid}', 'CartController@code')->name('cart.code');
+Route::get('cart/address/{uid}', 'CartController@address')->name('cart.address');
+Route::get('cart/review/{tuid}', 'CartController@review')->name('cart.review');
+Route::post('cart/activate/{uid}', 'CartController@activate')->name('cart.activate');
+Route::post('cart/finalize', 'CartController@finalize')->name('cart.finalize');
+Route::post('cart/finish', 'CartController@finish')->name('cart.finish');
+Route::post('cart/destroy/{uid}', 'CartController@destroy')->name('cart.destroy');
+
 // general
 Route::get('landing/message', 'LandingController@message')->name('landing.message');
 
