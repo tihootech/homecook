@@ -57,25 +57,17 @@ class TextMessageController extends Controller
     }
 
     // $receptor is a string, the number
-    public static function lookup($receptor, $tokens, $template, $force=false)
+    public static function lookup($receptor, $tokens, $template)
     {
 
-        $token = $tokens[0] ?? '';
+        $token = $tokens[0] ?? '.';
         $token2 = $tokens[1] ?? '';
         $token3 = $tokens[2] ?? '';
         $token10 = $tokens[3] ?? '';
         $token20 = $tokens[4] ?? '';
 
-        try{
-            $result = Kavenegar::VerifyLookup($receptor, $token, $token2, $token3, $template, null, $token10, $token20 );
-            self::format($result);
-        }
-        catch(ApiException $e){
-            echo $e->errorMessage();
-        }
-        catch(HttpException $e){
-            echo $e->errorMessage();
-        }
+        $result = Kavenegar::VerifyLookup($receptor, $token, $token2, $token3, $template, null, $token10, $token20 );
+        return $result[0];
 
     }
 

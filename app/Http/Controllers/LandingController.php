@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Blog;
 use App\Food;
 use App\Cook;
+use App\TransactionItem;
+use App\User;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -13,7 +15,13 @@ class LandingController extends Controller
     {
         $blogs = Blog::latest()->take(3)->get();
         $foods = Food::inRandomOrder()->take(4)->get();
-    	return view('landing.index', compact('blogs', 'foods'));
+        $counts = [
+            'cooks' => Cook::count(),
+            'foods' => Food::count(),
+            'orders' => TransactionItem::sum('count'),
+            'users' => User::count(),
+        ];
+    	return view('landing.index', compact('blogs', 'foods', 'counts'));
     }
 
     public function new_cook()

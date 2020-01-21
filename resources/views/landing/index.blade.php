@@ -236,7 +236,7 @@
     						<div class="block-18 text-center">
     							<div class="text">
     								<div class="icon"> <span class="material-icons">people</span> </div>
-    								<strong class="number" data-number="100">0</strong>
+    								<strong class="number" data-number="{{$counts['cooks']}}">0</strong>
     								<span>آشپز مختلف</span>
     							</div>
     						</div>
@@ -245,7 +245,7 @@
     						<div class="block-18 text-center">
     							<div class="text">
     								<div class="icon"> <span class="material-icons">fastfood</span> </div>
-    								<strong class="number" data-number="85">0</strong>
+    								<strong class="number" data-number="{{$counts['foods']}}">0</strong>
     								<span>غذای گوناگون</span>
     							</div>
     						</div>
@@ -254,7 +254,7 @@
     						<div class="block-18 text-center">
     							<div class="text">
     								<div class="icon"> <span class="material-icons">room_service</span> </div>
-    								<strong class="number" data-number="10567">0</strong>
+    								<strong class="number" data-number="{{$counts['orders']}}">0</strong>
     								<span>سفارش غذا</span>
     							</div>
     						</div>
@@ -263,7 +263,7 @@
     						<div class="block-18 text-center">
     							<div class="text">
     								<div class="icon"> <span class="material-icons">emoji_emotions</span> </div>
-    								<strong class="number" data-number="900">0</strong>
+    								<strong class="number" data-number="{{$counts['users']}}">0</strong>
     								<span>کاربر فعال</span>
     							</div>
     						</div>

@@ -20,7 +20,7 @@ class CreateTextMessagesTable extends Migration
             $table->string('sender')->nullable();
             $table->string('cost')->nullable();
             $table->string('status')->nullable();
-            $table->string('body')->nullable();
+            $table->text('body')->nullable();
             $table->text('tokens'); // &&& seperated
             $table->boolean('sent')->default(0);
             $table->timestamps();
