@@ -291,70 +291,19 @@
     			</div>
     		</div>
     		<div class="row">
-    			<div class="col-md-3">
-    				<div class="menu-entry">
-    					<a href="#" class="img" style="background-image: url('{{asset('assets/images/product-1.jpg')}}');"></a>
-    					<div class="text text-center pt-4">
-    						<h3><a href="#">مربای انجیر</a></h3>
-    						<p>توضیحاتی مختصر راجع به این محصول خانگی</p>
-    						<p class="price"><span>23,000 تومان</span></p>
-    						<p>
-    							<a href="#" class="btn btn-primary btn-outline-primary">
-    								اضافه کردن به سبد خرید
-    							</a>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-3">
-    				<div class="menu-entry">
-    					<a href="#" class="img" style="background-image: url('{{asset('assets/images/product-2.jpg')}}');"></a>
-    					<div class="text text-center pt-4">
-    						<h3><a href="#">عسل طبیعی</a></h3>
-    						<p>توضیحاتی مختصر راجع به این محصول خانگی</p>
-    						<p class="price"><span>76,000 تومان</span></p>
-    						<p>
-    							<a href="#" class="btn btn-primary btn-outline-primary">
-    								اضافه کردن به سبد خرید
-    							</a>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-3">
-    				<div class="menu-entry">
-    					<a href="#" class="img" style="background-image: url('{{asset('assets/images/product-3.jpg')}}');"></a>
-    					<div class="text text-center pt-4">
-    						<h3><a href="#">شیرینی خانگی</a></h3>
-    						<p>توضیحاتی مختصر راجع به این محصول خانگی</p>
-    						<p class="price"><span>14,000 تومان</span></p>
-    						<p>
-    							<a href="#" class="btn btn-primary btn-outline-primary">
-    								اضافه کردن به سبد خرید
-    							</a>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-3">
-    				<div class="menu-entry">
-    					<a href="#" class="img" style="background-image: url('{{asset('assets/images/product-4.jpg')}}');"></a>
-    					<div class="text text-center pt-4">
-    						<h3><a href="#">انواع ترشی</a></h3>
-    						<p>توضیحاتی مختصر راجع به این محصول خانگی</p>
-    						<p class="price"><span>18,000 تومان</span></p>
-    						<p>
-    							<a href="#" class="btn btn-primary btn-outline-primary">
-    								اضافه کردن به سبد خرید
-    							</a>
-    						</p>
-    					</div>
-    				</div>
-    			</div>
+    			@if ($products->count())
+                    @foreach ($products as $food)
+                        @include('includes.food_col')
+                    @endforeach
+                @else
+                    <div class="alert alert-danger mx-auto">
+                        <p class="m-0"> <i class="material-icons icon">error</i> هنوز هیچ محصولی در سیستم ثبت نشده. </p>
+                    </div>
+                @endif
     		</div>
     		<hr class="hr-primary">
     		<div class="text-center">
-    			<a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">
+    			<a href="{{route('order_product')}}" class="btn btn-primary btn-outline-primary px-4 py-3">
     				مشاهده همه محصولات خانگی
     			</a>
     		</div>

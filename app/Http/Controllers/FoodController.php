@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Food;
 use App\Cook;
+use App\Cat;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -51,10 +52,11 @@ class FoodController extends Controller
         $request->validate([
             't' => ['required', Rule::in(['food','product'])]
         ]);
+        $food = new Food;
         $type = $request->t;
         $word = $type == 'food' ? 'غذا' : 'محصول خانگی';
-        $food = new Food;
-        return view('dashboard.foods.form', compact('food', 'type', 'word'));
+        $cats = Cat::whereType($type)->get();
+        return view('dashboard.foods.form', compact('food', 'type', 'word', 'cats'));
     }
 
     public function store(Request $request)
@@ -74,10 +76,11 @@ class FoodController extends Controller
 
     public function edit(Food $food)
     {
+        cook_check($food);
         $type = $food->type;
         $word = $type == 'food' ? 'غذا' : 'محصول خانگی';
-        cook_check($food);
-        return view('dashboard.foods.form', compact('food', 'type', 'word'));
+        $cats = Cat::whereType($type)->get();
+        return view('dashboard.foods.form', compact('food', 'type', 'word', 'cats'));
     }
 
     public function update(Request $request, Food $food)
@@ -115,6 +118,7 @@ class FoodController extends Controller
     {
         $data = request()->validate([
             'title' => 'required|string|max:190',
+            'cat_id' => 'nullable|exists:cats,id',
             'price' => 'required|integer',
             'discount' => 'nullable|integer|min:0|max:99',
             'material' => 'required',
@@ -131,6 +135,10 @@ class FoodController extends Controller
                 'max:3000',
             ]
         ]);
+
+        if ($data['cat_id'] === null) {
+            $data['cat_id'] = 0;
+        }
 
         if ( isset($data['image']) && $data['image'] ) {
             $data['image'] = upload($data['image'], $food->image);

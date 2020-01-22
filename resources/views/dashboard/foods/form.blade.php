@@ -13,9 +13,9 @@
             		@method('PUT')
             	@endif
                 <input type="hidden" name="type" value="{{$type}}">
-            	<div class="row align-items-end">
+            	<div class="row justify-content-center">
 
-            		<div class="col-md-4">
+            		<div class="col-md-6">
             			<div class="form-group">
             				<label for="title"> عنوان {{$word}} </label>
             				<input type="text" name="title" id="title" class="form-control" value="{{$food->title ?? old('title')}}" required>
@@ -24,12 +24,26 @@
 
             		<div class="col-md-3">
             			<div class="form-group">
+            				<label for="cat"> دسته بندی </label>
+                            <select class="form-control" name="cat_id">
+                                <option value=""> بدون دسته بندی </option>
+                                @foreach ($cats as $cat)
+                                    <option value="{{$cat->id}}">{{$cat->title}}</option>
+                                @endforeach
+                            </select>
+            			</div>
+            		</div>
+
+                    <div class="w-100"></div>
+
+            		<div class="col-md-3">
+            			<div class="form-group">
             				<label for="price"> قیمت {{$word}} </label>
             				<input type="number" name="price" id="price" class="form-control" value="{{$food->price ?? old('price')}}" required>
             			</div>
             		</div>
 
-            		<div class="col-md-2">
+            		<div class="col-md-3">
             			<div class="form-group">
             				<label for="discount"> درصد تخفیف </label>
             				<input type="number" name="discount" id="discount" class="form-control" value="{{$food->discount ?? old('discount') ?? 0}}">

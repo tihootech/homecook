@@ -44,8 +44,8 @@
 							<i class="material-icons">fastfood</i> سفارش غذا
 						</a>
 					</li>
-					<li class="nav-item @if(rn() == 'x') active @endif">
-						<a href="#" class="nav-link">
+					<li class="nav-item @if(rn() == 'order_product') active @endif">
+						<a href="{{route('order_product')}}" class="nav-link">
 							<i class="material-icons">store</i> فروشگاه
 						</a>
 					</li>
@@ -137,9 +137,9 @@
                         <h2 class="ftco-heading-2"> لینک ها </h2>
                         <ul class="list-unstyled p-0">
                             <li><a href="{{route('new_cook')}}" class="py-2 d-block"> همکاری با ما </a></li>
-                            <li><a href="#" class="py-2 d-block"> در باره ما  </a></li>
-                            <li><a href="#" class="py-2 d-block"> مطالب وبسایت </a></li>
-                            <li><a href="#" class="py-2 d-block"> محصولات خانگی </a></li>
+                            <li><a href="{{route('blogs')}}" class="py-2 d-block"> مطالب وبسایت </a></li>
+                            <li><a href="{{route('order_food')}}" class="py-2 d-block"> سفارش غذا </a></li>
+                            <li><a href="{{route('order_product')}}" class="py-2 d-block"> محصولات خانگی </a></li>
                         </ul>
                     </div>
                 </div>

@@ -12,6 +12,13 @@
 
 @master
 
+<li>
+	<a class="app-menu__item @if( rn() == 'cat.index' ) active @endif" href="{{route("cat.index")}}">
+		<i class="ml-2 material-icons">category</i>
+		<span class="app-menu__label"> دسته بندی ها </span>
+	</a>
+</li>
+
 @php
 	$routes = ['cook.fresh_requests', 'cook.index'];
 @endphp

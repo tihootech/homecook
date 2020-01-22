@@ -43,6 +43,11 @@ class Food extends Model
 		return $this->belongsTo(Cook::class);
 	}
 
+	public function cat()
+	{
+		return $this->belongsTo(Cat::class);
+	}
+
     public function public_link()
     {
         return route('show_food', [urf($this->title), $this->uid]);

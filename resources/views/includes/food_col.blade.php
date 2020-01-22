@@ -11,12 +11,12 @@
 		<div class="text py-4 d-block food-col">
 			<div class="meta d-flex">
 				<div>
-					<a href="{{$cook->public_link()}}">
+					<a href="{{$food->cook->public_link()}}">
 						<span class="material-icons">person</span>
-						{{$cook->full_name()}}
+						{{$food->cook->full_name()}}
 					</a>
 				</div>
-				@if ($rate = $food->f_rate)
+				@if ($rate = $food->f_rate ?? $food->rate)
 					<div class="mr-auto" data-toggle="popover" data-trigger="hover" data-placement="top"
 						data-content="{{rand(5,50)}} بررسی با میانگین {{round($rate, 2)}} امتیاز برای این غذا">
 						<a href="javascript:void" class="meta-chat">
@@ -37,7 +37,7 @@
 				</div>
 				@if ($food->discount)
 					<div class="text-primary">
-						{{toman($food->f_cost)}}
+						{{toman($food->f_cost ?? $food->cost)}}
 					</div>
 				@endif
 			</div>

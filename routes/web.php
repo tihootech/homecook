@@ -13,6 +13,9 @@ Route::get('user/{user}', 'AccController@show')->name('user.show');
 Route::delete('user/{user}', 'AccController@destroy')->name('user.destroy');
 Route::put('user/{user}', 'AccController@master_update')->name('user.master_update');
 
+// categories
+Route::resource('cat', 'CatController')->except(['create', 'show', 'edit']);
+
 // cart
 Route::post('cart/add', 'CartController@add')->name('cart.add');
 Route::post('cart/register', 'CartController@register')->name('cart.register');
@@ -42,9 +45,10 @@ Route::resource('cook', 'CookController');
 // text messages
 Route::get('text-messages', 'TextMessageController@index')->name('text_messages');
 
-// foods
+// foods & products
 Route::resource('food', 'FoodController');
-Route::get('سفارش-غذا/{order?}', 'LandingController@order_food')->name('order_food');
+Route::get('سفارش-غذا/{order?}', 'LandingController@order')->name('order_food');
+Route::get('محصولات-خانگی/{order?}', 'LandingController@order')->name('order_product');
 Route::get('غذا/{title}/{uid}', 'LandingController@show_food')->name('show_food');
 Route::post('food/confirm_all', 'FoodController@confirm_all')->name('food.confirm_all');
 Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm');

@@ -97,11 +97,11 @@
                                 <th> همکار </th>
                             @endmaster
 							<th> عنوان </th>
+							<th> دسته بندی </th>
 							<th> نوع </th>
 							<th> قیمت </th>
                             <th> تخفیف </th>
 							<th> قیمت با تخفیف </th>
-							<th> مواد اولیه </th>
 							<th> تاییدشده </th>
 							<th> تصویر </th>
 							<th colspan="4"> عملیات </th>
@@ -121,15 +121,23 @@
                                     </td>
                                 @endmaster
 								<td> {{$food->title}} </td>
+                                <td>
+                                    @if ($food->cat)
+                                        {{$food->cat->title}}
+                                    @else
+                                        <em> بدون دسته بندی </em>
+                                    @endif
+                                </td>
 								<td> {{$food->persian_type}} </td>
 								<td> {{toman($food->price)}} </td>
-								<td> {{nf($food->discount)}} </td>
-                                <td> {{toman($food->cost)}} </td>
-                                <td>
-                                    <a href="javascript:void" data-toggle="popover" data-placement="top" data-content="{{$food->material}}">
-                                        {{short($food->material,25)}}
-                                    </a>
+								<td class="calibri">
+                                    @if ($food->discount)
+                                        {{$food->discount}}%
+                                    @else
+                                        -
+                                    @endif
                                 </td>
+                                <td> {{toman($food->cost)}} </td>
                                 <td> @include('dashboard.partials.yesno', ['boolean' => $food->confirmed]) </td>
                                 <td align="center">
                                     <a href="javascript:void" data-toggle="popover" data-placement="right" data-html="true"

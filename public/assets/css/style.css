@@ -4032,7 +4032,7 @@ input[type="button"].btn-block {
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #78d5ef;
+    background-color: #c49b63;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {

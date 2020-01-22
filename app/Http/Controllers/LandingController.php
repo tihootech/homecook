@@ -7,6 +7,7 @@ use App\Food;
 use App\Cook;
 use App\TransactionItem;
 use App\User;
+use App\Cat;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -14,14 +15,15 @@ class LandingController extends Controller
     public function index()
     {
         $blogs = Blog::latest()->take(3)->get();
-        $foods = Food::inRandomOrder()->take(4)->get();
+        $foods = Food::inRandomOrder()->whereType('food')->take(4)->get();
+        $products = Food::inRandomOrder()->whereType('product')->take(3)->get();
         $counts = [
             'cooks' => Cook::count(),
             'foods' => Food::count(),
             'orders' => TransactionItem::sum('count'),
             'users' => User::count(),
         ];
-    	return view('landing.index', compact('blogs', 'foods', 'counts'));
+    	return view('landing.index', compact('blogs', 'foods', 'products', 'counts'));
     }
 
     public function new_cook()
@@ -42,17 +44,23 @@ class LandingController extends Controller
         return view('landing.show_food', compact('food'));
     }
 
-    public function order_food($order = 1, Request $request)
+    public function order($order = 1, Request $request)
     {
+
+        $type = rn() == 'order_food' ? 'food' : 'product';
+        $cats = Cat::whereType($type)->get();
         $foods = Food::select( '*',
              \DB::raw('(price - ROUND((price * discount) / 100, 2 )) AS f_cost'),
              \DB::raw('RAND()*5 AS f_rate'),
              \DB::raw('RAND()*100 AS f_sells')
         );
 
-        $foods = $foods->whereConfirmed(1);
-        if ($phrase = $request->t) {
-            $foods = $foods->where('title', 'like', "%$phrase%");
+        $foods = $foods->whereConfirmed(1)->whereType($type);
+        if ($request->t) {
+            $foods = $foods->where('title', 'like', "%$request->t%");
+        }
+        if ($request->c && is_array($request->c) && count($request->c)) {
+            $foods = $foods->whereIn('cat_id', $request->c);
         }
         $food_count = $foods->count();
 
@@ -78,7 +86,7 @@ class LandingController extends Controller
 
         $foods = $foods->paginate(9);
 
-        return view('landing.order_food', compact('foods', 'food_count', 'order'));
+        return view('landing.order', compact('foods', 'food_count', 'order', 'cats'));
     }
 
     public function blogs(Request $request)
