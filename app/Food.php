@@ -12,7 +12,7 @@ class Food extends Model
     public function getPersianTypeAttribute()
     {
         if ($this->type == 'food') {
-            return 'پیش سفارش';
+            return 'غذا';
         }elseif ($this->type == 'product') {
             return 'محصول خانگی';
         }else {

@@ -36,14 +36,25 @@ class FoodController extends Controller
             $foods = $foods->where('title', 'like', "%$phrase%");
         }
 
+        if ($type = $request->t) {
+            $foods = $foods->whereType($type);
+        }
+
         $foods = $foods->latest()->paginate(20);
-        return view('dashboard.foods.index', compact('foods', 'cooks'));
+        $pendings = Food::whereConfirmed(0)->count();
+
+        return view('dashboard.foods.index', compact('foods', 'cooks', 'type', 'pendings'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $request->validate([
+            't' => ['required', Rule::in(['food','product'])]
+        ]);
+        $type = $request->t;
+        $word = $type == 'food' ? 'غذا' : 'محصول خانگی';
         $food = new Food;
-        return view('dashboard.foods.form', compact('food'));
+        return view('dashboard.foods.form', compact('food', 'type', 'word'));
     }
 
     public function store(Request $request)
@@ -63,8 +74,10 @@ class FoodController extends Controller
 
     public function edit(Food $food)
     {
+        $type = $food->type;
+        $word = $type == 'food' ? 'غذا' : 'محصول خانگی';
         cook_check($food);
-        return view('dashboard.foods.form', compact('food'));
+        return view('dashboard.foods.form', compact('food', 'type', 'word'));
     }
 
     public function update(Request $request, Food $food)
@@ -105,6 +118,13 @@ class FoodController extends Controller
             'price' => 'required|integer',
             'discount' => 'nullable|integer|min:0|max:99',
             'material' => 'required',
+            'type' => [
+                'required',
+                Rule::requiredIf(!$food->id),
+                Rule::in([
+                    'food', 'product'
+                ])
+            ],
             'image' => [
                 Rule::requiredIf(!$food->id),
                 'image',

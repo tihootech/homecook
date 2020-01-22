@@ -4,7 +4,7 @@
 	<li>
 		<a class="app-menu__item @if( rn() == 'food.index' ) active @endif" href="{{route("food.index")}}">
 			<i class="ml-2 material-icons">fastfood</i>
-			<span class="app-menu__label"> مدیریت غذا ها </span>
+			<span class="app-menu__label"> غذاها و محصولات خانگی </span>
 		</a>
 	</li>
 @endif

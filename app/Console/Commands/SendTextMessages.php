@@ -53,7 +53,6 @@ class SendTextMessages extends Command
                     'sent' => 1,
                 ]);
             }
-
         }
     }
 }

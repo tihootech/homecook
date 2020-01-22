@@ -6,15 +6,18 @@
 
 	<div class="tile text-center">
 		@cook
-            <a href="{{route('food.create')}}" class="btn btn-primary m-2"> <i class="material-icons">add</i> غذای جدید </a>
+            <a href="{{route('food.create')}}?t=food" class="btn btn-primary m-2"> <i class="material-icons">add</i> غذای جدید </a>
+            <a href="{{route('food.create')}}?t=product" class="btn btn-primary m-2"> <i class="material-icons">add</i> محصول جدید </a>
         @endcook
         @master
-            <form class="d-inline" action="{{route('food.confirm_all')}}" method="post">
-                @csrf
-                <button type="submit" class="btn btn-primary m-2">
-                    <i class="material-icons">done_all</i> تایید همه
-                </button>
-            </form>
+            @if ($pendings)
+                <form class="d-inline" action="{{route('food.confirm_all')}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-primary m-2">
+                        <i class="material-icons">done_all</i> تایید همه
+                    </button>
+                </form>
+            @endif
         @endmaster
 		<a href="#search-box" data-toggle="collapse" class="btn btn-primary m-2"> <i class="material-icons">search</i> جستجو </a>
 		<div class="collapse @if(request()->getQueryString() && request('confirmed') === null) show @endif" id="search-box">
@@ -41,6 +44,29 @@
                             </div>
                         </div>
                     @endmaster
+                    <div class="w-100"></div>
+                    <div class="col-md-3 text-center">
+                        <div class="form-group">
+        					<div class="custom-control custom-radio">
+        						<input type="radio" class="custom-control-input" id="food" name="t" value="food"
+        							@if(request('t') == 'food') checked @endif>
+        						<label class="custom-control-label" for="food">
+        							<span class="mr-2"> نمایش غذا ها </span>
+        						</label>
+        					</div>
+        				</div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="form-group">
+        					<div class="custom-control custom-radio">
+        						<input type="radio" class="custom-control-input" id="product" name="t" value="product"
+        							@if(request('t') == 'product') checked @endif>
+        						<label class="custom-control-label" for="product">
+        							<span class="mr-2"> نمایش محصولات خانگی </span>
+        						</label>
+        					</div>
+        				</div>
+                    </div>
                     <div class="w-100"></div>
 					<div class="col-md-2 my-1">
 						<button type="submit" class="btn btn-primary btn-block">
@@ -71,6 +97,7 @@
                                 <th> همکار </th>
                             @endmaster
 							<th> عنوان </th>
+							<th> نوع </th>
 							<th> قیمت </th>
                             <th> تخفیف </th>
 							<th> قیمت با تخفیف </th>
@@ -94,6 +121,7 @@
                                     </td>
                                 @endmaster
 								<td> {{$food->title}} </td>
+								<td> {{$food->persian_type}} </td>
 								<td> {{toman($food->price)}} </td>
 								<td> {{nf($food->discount)}} </td>
                                 <td> {{toman($food->cost)}} </td>
