@@ -30,6 +30,7 @@ class CreateTransactionsTable extends Migration
             $table->boolean('open')->default(1);
             $table->boolean('ponied')->default(0);
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

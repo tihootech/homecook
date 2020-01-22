@@ -54,7 +54,7 @@ class CookController extends Controller
         $cook = Cook::create($data);
         if ($request->in_panel && master()) {
             self::accept_process($cook);
-            return back()->withMessage('همکار جدید در سیستم تعریف شد، و به حساب کاربری وی نیز فعال شد.');
+            return redirect()->route('cook.index')->withMessage('همکار جدید در سیستم تعریف شد، و به حساب کاربری وی نیز فعال شد.');
         }else {
             return redirect()->route('landing.message')->withMessage('درخواست شما برای عضویت در سامانه ما با موفقیت ثبت شد.');
         }

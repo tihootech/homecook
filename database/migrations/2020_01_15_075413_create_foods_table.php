@@ -15,6 +15,7 @@ class CreateFoodsTable extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('cat_id')->default(0);
             $table->string('uid');
             $table->unsignedInteger('cook_id');
             $table->string('title');
@@ -26,6 +27,7 @@ class CreateFoodsTable extends Migration
             $table->boolean('confirmed')->default(0);
             $table->unsignedBigInteger('seens')->default(0);
             $table->string('type')->default('food'); // food or product
+            $table->softDeletes();
             $table->timestamps();
         });
     }

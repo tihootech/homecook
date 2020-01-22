@@ -79,7 +79,7 @@
 							<th> شهر </th>
 							<th> محله </th>
 							<th> فعال </th>
-							<th colspan="2"> عملیات </th>
+							<th colspan="3"> عملیات </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -103,6 +103,15 @@
 										<i class="fa fa-list"></i>
 									</a>
 								</td>
+                                <td data-toggle="popover" data-trigger="hover" data-placement="top" data-content="حذف">
+                                    <form class="d-inline" action="{{route('cook.destroy', $cook->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="javascript:void" class="text-danger delete">
+    										<i class="fa fa-trash"></i>
+    									</a>
+                                    </form>
+                                </td>
 							</tr>
 				    	@endforeach
 					</tbody>

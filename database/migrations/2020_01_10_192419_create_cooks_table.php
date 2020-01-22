@@ -28,6 +28,7 @@ class CreateCooksTable extends Migration
             $table->text('modify_reason')->nullable();
             $table->boolean('active')->default(0);
             $table->boolean('fresh')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
