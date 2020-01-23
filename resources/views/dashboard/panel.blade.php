@@ -20,7 +20,7 @@
 </li>
 
 @php
-	$routes = ['cook.fresh_requests', 'cook.index'];
+	$routes = ['cook.fresh_requests', 'cook.index', 'cook.create'];
 @endphp
 <li class="treeview @if( in_array(rn(), $routes) ) is-expanded @endif">
 	<a class="app-menu__item" href="#" data-toggle="treeview">
@@ -31,12 +31,17 @@
 	<ul class="treeview-menu">
 		<li>
 			<a class="treeview-item @if(rn() == $routes[0]) active @endif" href="{{route($routes[0])}}">
-				<i class="icon material-icons">dynamic_feed</i> درخواست های جدید
+				<i class="icon material-icons ml-2">dynamic_feed</i> درخواست های جدید
 			</a>
 		</li>
 		<li>
 			<a class="treeview-item @if(rn() == $routes[1]) active @endif" href="{{route($routes[1])}}">
-				<i class="icon material-icons">list</i> لیست همکاران
+				<i class="icon material-icons ml-2">list</i> لیست همکاران
+			</a>
+		</li>
+		<li>
+			<a class="treeview-item @if(rn() == $routes[2]) active @endif" href="{{route($routes[2])}}">
+				<i class="icon material-icons ml-2">add</i> تعریف همکار
 			</a>
 		</li>
 	</ul>
@@ -54,12 +59,40 @@
 	<ul class="treeview-menu">
 		<li>
 			<a class="treeview-item @if(rn() == $routes[0]) active @endif" href="{{route($routes[0])}}">
-				<i class="icon material-icons">add</i> بلاگ جدید
+				<i class="icon material-icons ml-2">add</i> بلاگ جدید
 			</a>
 		</li>
 		<li>
 			<a class="treeview-item @if(rn() == $routes[1]) active @endif" href="{{route($routes[1])}}">
-				<i class="icon material-icons">list</i> لیست بلاگ ها
+				<i class="icon material-icons ml-2">list</i> لیست بلاگ ها
+			</a>
+		</li>
+	</ul>
+</li>
+
+@php
+	$routes = ['website.settings', 'website.general', 'website.slides'];
+@endphp
+<li class="treeview @if( in_array(rn(), $routes) ) is-expanded @endif">
+	<a class="app-menu__item" href="#" data-toggle="treeview">
+		<i class="ml-2 material-icons">build</i>
+		<span class="app-menu__label"> تنظیمات وبسایت </span>
+		<i class="treeview-indicator fa fa-angle-left"></i>
+	</a>
+	<ul class="treeview-menu">
+		<li>
+			<a class="treeview-item @if(rn() == $routes[0]) active @endif" href="{{route($routes[0])}}">
+				<i class="icon material-icons ml-2">attach_money</i> تنظیمات مالی
+			</a>
+		</li>
+		<li>
+			<a class="treeview-item @if(rn() == $routes[1]) active @endif" href="{{route($routes[1])}}">
+				<i class="icon material-icons ml-2">web</i> مدیریت وبسایت
+			</a>
+		</li>
+		<li>
+			<a class="treeview-item @if(rn() == $routes[2]) active @endif" href="{{route($routes[2])}}">
+				<i class="icon material-icons ml-2">photo</i> مدیریت اسلاید ها
 			</a>
 		</li>
 	</ul>

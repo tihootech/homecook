@@ -7,64 +7,8 @@
 @endsection
 
 @section('content')
-    <section class="home-slider owl-carousel">
-    	<div class="slider-item" style="background-image: url('{{asset('assets/images/bg_1.jpg')}}');">
-    		<div class="overlay"></div>
-    		<div class="container">
-    			<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
 
-    				<div class="col-md-8 col-sm-12 text-center ftco-animate">
-    					<span class="subheading">Welcome</span>
-    					<h1 class="mb-4"> سفارش غذا در کرمانشاه </h1>
-    					<p class="mb-4 mb-md-5"> اولین سامانه سفارش غذا در کرمانشاه </p>
-    					{{-- <div class="header-btns"> --}}
-    						{{-- <a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3"> همکاری </a> --}}
-    						{{-- <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3"> سفارش غذا </a> --}}
-    					{{-- </div> --}}
-    				</div>
-
-    			</div>
-    		</div>
-    	</div>
-
-    	<div class="slider-item" style="background-image: url('{{asset('assets/images/bg_2.jpg')}}');">
-    		<div class="overlay"></div>
-    		<div class="container">
-    			<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-    				<div class="col-md-8 col-sm-12 text-center ftco-animate">
-    					<span class="subheading">Welcome</span>
-    					<h1 class="mb-4"> عنوان شماره 2 </h1>
-    					<p class="mb-4 mb-md-5"> عنوان و توضیحات مناسب بعدا قرار داده میشود </p>
-    					{{-- <div class="header-btns"> --}}
-    						{{-- <a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3"> همکاری </a> --}}
-    						{{-- <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3"> سفارش غذا </a> --}}
-    					{{-- </div> --}}
-    				</div>
-
-    			</div>
-    		</div>
-    	</div>
-
-    	<div class="slider-item" style="background-image: url('{{asset('assets/images/bg_3.jpg')}}');">
-    		<div class="overlay"></div>
-    		<div class="container">
-    			<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-    				<div class="col-md-8 col-sm-12 text-center ftco-animate">
-    					<span class="subheading">Welcome</span>
-    					<h1 class="mb-4"> عنوان شماره 3 </h1>
-    					<p class="mb-4 mb-md-5"> عنوان و توضیحات مناسب بعدا قرار داده میشود </p>
-    					{{-- <div class="header-btns"> --}}
-    						{{-- <a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3"> همکاری </a> --}}
-    						{{-- <a href="#" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3"> سفارش غذا </a> --}}
-    					{{-- </div> --}}
-    				</div>
-
-    			</div>
-    		</div>
-    	</div>
-    </section>
+    @include('includes.landing_slides', ['home_page'=>true])
 
     <section class="ftco-intro">
     	<div class="container-wrap">
@@ -74,15 +18,15 @@
     					<div class="col-sm-5 d-flex ftco-animate">
     						<div class="icon"><span class="material-icons">phone</span></div>
     						<div class="text">
-    							<h3 dir="ltr"> <a href="tel:+988337271234"> +98 833 727 1234 </a> </h3>
+    							<h3 dir="ltr"> <a href="tel:{{$website->phone}}"> {{pretty_phone($website->phone)}} </a> </h3>
     							<p> شماره تماس پشتیبانی </p>
     						</div>
     					</div>
     					<div class="col-sm-7 d-flex ftco-animate">
     						<div class="icon"><span class="material-icons">my_location</span></div>
     						<div class="text">
-    							<h3> <a href="#"> آدرس دفتر مرکزی </a> </h3>
-    							<p> آدرس - دقیق - بعدا - اینجا - قرار - داده - میشود </p>
+    							<h3> <a href="javascript:void"> آدرس دفتر مرکزی </a> </h3>
+    							<p>{{$website->address}}</p>
     						</div>
     					</div>
     				</div>
@@ -107,7 +51,7 @@
     </section>
 
     <section class="ftco-about d-md-flex">
-    	<div class="one-half img" style="background-image: url('{{asset('assets/images/about.jpg')}}');"></div>
+    	<div class="one-half img" style="background-image: url('{{asset($website->about_image)}}');"></div>
     	<div class="one-half ftco-animate">
     		<div class="overlap">
     			<div class="heading-section ftco-animate ">
@@ -115,20 +59,7 @@
     				<h2 class="mb-4"> درباره ما </h2>
     			</div>
     			<div class="about-text">
-    				<p class="rtl-justify">
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    					متن توضیحات درباره ما بعدا در اسن قسمت قرار داده میشود.
-    				</p>
+    				<p class="rtl-justify">{{$website->about}}</p>
     				<a href="{{route('new_cook')}}" class="btn btn-primary btn-outline-primary px-4 py-3">
     					برای همکاری با ما کلیک کنید
     				</a>
@@ -140,54 +71,21 @@
     <section class="ftco-section ftco-services">
     	<div class="container">
     		<div class="row">
-    			<div class="col-md-4 ftco-animate">
-    				<div class="media d-block text-center block-6 services">
-    					<div class="icon d-flex justify-content-center align-items-center mb-5">
-    						<span class="material-icons">touch_app</span>
-    					</div>
-    					<div class="media-body">
-    						<h3 class="heading"> به راحتی سفارش دهید </h3>
-    						<p>
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-4 ftco-animate">
-    				<div class="media d-block text-center block-6 services">
-    					<div class="icon d-flex justify-content-center align-items-center mb-5">
-    						<span class="material-icons">motorcycle</span>
-    					</div>
-    					<div class="media-body">
-    						<h3 class="heading"> تحویل به موقع </h3>
-    						<p>
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    						</p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-md-4 ftco-animate">
-    				<div class="media d-block text-center block-6 services">
-    					<div class="icon d-flex justify-content-center align-items-center mb-5">
-    						<span class="material-icons">eco</span>
-    					</div>
-    					<div class="media-body">
-    						<h3 class="heading"> کیفیت مرغوب </h3>
-    						<p>
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    							توضیحات این مورد اینجا قرار گرفته میشود
-    						</p>
-    					</div>
-    				</div>
-    			</div>
+
+                @foreach ($website->columns() as $col)
+                    <div class="col-md-4 ftco-animate">
+        				<div class="media d-block text-center block-6 services">
+        					<div class="icon d-flex justify-content-center align-items-center mb-5">
+        						<span class="material-icons">{{$col[0]}}</span>
+        					</div>
+        					<div class="media-body">
+        						<h3 class="heading">{{$col[1]}}</h3>
+        						<p>{{$col[2]}}</p>
+        					</div>
+        				</div>
+        			</div>
+                @endforeach
+
     		</div>
     	</div>
     </section>
@@ -199,13 +97,7 @@
     				<div class="heading-section text-md-right ftco-animate">
     					<span class="subheading">Order</span>
     					<h2 class="mb-4"> سفارش غذا </h2>
-    					<p class="mb-4 rtl-justify">
-    						متن مربوط به توضیحات سفارش غذا نیز، بعدا در این قسمت و وارد میشود.
-    						متن مربوط به توضیحات سفارش غذا نیز، بعدا در این قسمت و وارد میشود.
-    						متن مربوط به توضیحات سفارش غذا نیز، بعدا در این قسمت و وارد میشود.
-    						متن مربوط به توضیحات سفارش غذا نیز، بعدا در این قسمت و وارد میشود.
-    						متن مربوط به توضیحات سفارش غذا نیز، بعدا در این قسمت و وارد میشود.
-    					</p>
+    					<p class="mb-4 rtl-justify">{{$website->order_food}}</p>
     					<p><a href="{{route('order_food')}}" class="btn btn-primary btn-outline-primary px-4 py-3">مشاهده منوی کامل</a></p>
     				</div>
     			</div>
@@ -226,7 +118,7 @@
     	</div>
     </section>
 
-    <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url('{{asset('assets/images/m1.jpg')}}');" data-stellar-background-ratio="0.5">
+    <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url('{{asset($website->statics_image)}}')" data-stellar-background-ratio="0.5">
     	<div class="overlay"></div>
     	<div class="container">
     		<div class="row justify-content-center">
@@ -280,14 +172,7 @@
     			<div class="col-md-7 heading-section ftco-animate text-center">
     				<span class="subheading">Shop</span>
     				<h2 class="mb-4">محصولات خانگی</h2>
-    				<p>
-    					توضیحاتی مختصر در باره محصولات خانگی
-    					توضیحاتی مختصر در باره محصولات خانگی
-    					توضیحاتی مختصر در باره محصولات خانگی
-    					توضیحاتی مختصر در باره محصولات خانگی
-    					توضیحاتی مختصر در باره محصولات خانگی
-    					توضیحاتی مختصر در باره محصولات خانگی
-    				</p>
+    				<p>{{$website->order_product}}</p>
     			</div>
     		</div>
     		<div class="row">
@@ -310,193 +195,7 @@
     	</div>
     </section>
 
-    {{-- <section class="ftco-gallery">
-    	<div class="container-wrap">
-    		<div class="row no-gutters">
-    			<div class="col-md-3 ftco-animate">
-    				<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url('{{asset('assets/images/gallery-1.jpg')}}');">
-    					<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-    				</a>
-    			</div>
-    			<div class="col-md-3 ftco-animate">
-    				<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url('{{asset('assets/images/gallery-2.jpg')}}');">
-    					<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-    				</a>
-    			</div>
-    			<div class="col-md-3 ftco-animate">
-    				<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url('{{asset('assets/images/gallery-3.jpg')}}');">
-    					<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-    				</a>
-    			</div>
-    			<div class="col-md-3 ftco-animate">
-    				<a href="gallery.html" class="gallery img d-flex align-items-center" style="background-image: url('{{asset('assets/images/gallery-4.jpg')}}');">
-    					<div class="icon mb-4 d-flex align-items-center justify-content-center">
-    						<span class="icon-search"></span>
-    					</div>
-    				</a>
-    			</div>
-    		</div>
-    	</div>
-    </section> --}}
-
-    {{-- <section class="ftco-menu">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5">
-    			<div class="col-md-7 heading-section text-center ftco-animate">
-    				<span class="subheading"> Order Food </span>
-    				<h2 class="mb-4"> سفارش غذا </h2>
-    				<p>
-    					توضیحاتی مختصر راجع به سفارش غذا
-    					توضیحاتی مختصر راجع به سفارش غذا
-    					توضیحاتی مختصر راجع به سفارش غذا
-    					توضیحاتی مختصر راجع به سفارش غذا
-    				</p>
-    			</div>
-    		</div>
-    		<div class="row d-md-flex">
-    			<div class="col-lg-12 ftco-animate p-md-5">
-    				<div class="row">
-    					<div class="col-md-12 nav-link-wrap mb-5">
-    						<div class="nav ftco-animate nav-pills justify-content-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-    							<a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Main Dish</a>
-
-    							<a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Drinks</a>
-
-    							<a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Desserts</a>
-    						</div>
-    					</div>
-    					<div class="col-md-12 d-flex align-items-center">
-
-    						<div class="tab-content ftco-animate" id="v-pills-tabContent">
-
-    							<div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-1-tab">
-    								<div class="row">
-    									<div class="col-md-4 text-center">
-    										<div class="menu-wrap">
-    											<a href="#" class="menu-img img mb-4" style="background-image: url('{{asset('assets/images/dish-1.jpg')}}');"></a>
-    											<div class="text">
-    												<h3><a href="#">Grilled Beef</a></h3>
-    												<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-    												<p class="price"><span>$2.90</span></p>
-    												<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-    											</div>
-    										</div>
-    									</div>
-    									<div class="col-md-4 text-center">
-    										<div class="menu-wrap">
-    											<a href="#" class="menu-img img mb-4" style="background-image: url('{{asset('assets/images/dish-2.jpg')}}');"></a>
-    											<div class="text">
-    												<h3><a href="#">Grilled Beef</a></h3>
-    												<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-    												<p class="price"><span>$2.90</span></p>
-    												<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-    											</div>
-    										</div>
-    									</div>
-    									<div class="col-md-4 text-center">
-    										<div class="menu-wrap">
-    											<a href="#" class="menu-img img mb-4" style="background-image: url('{{asset('assets/images/dish-3.jpg')}}');"></a>
-    											<div class="text">
-    												<h3><a href="#">Grilled Beef</a></h3>
-    												<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-    												<p class="price"><span>$2.90</span></p>
-    												<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-    							</div>
-
-    							<div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
-    								<div class="row">
-    									<div class="col-md-4 text-center">
-    										<div class="menu-wrap">
-    											<a href="#" class="menu-img img mb-4" style="background-image: url('{{asset('assets/images/drink-1.jpg')}}');"></a>
-    											<div class="text">
-    												<h3><a href="#">Lemonade Juice</a></h3>
-    												<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-    												<p class="price"><span>$2.90</span></p>
-    												<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-    											</div>
-    										</div>
-    									</div>
-    									<div class="col-md-4 text-center">
-    										<div class="menu-wrap">
-    											<a href="#" class="menu-img img mb-4" style="background-image: url('{{asset('assets/images/drink-2.jpg')}}');"></a>
-    											<div class="text">
-    												<h3><a href="#">Pineapple Juice</a></h3>
-    												<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-    												<p class="price"><span>$2.90</span></p>
-    												<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-    											</div>
-    										</div>
-    									</div>
-    									<div class="col-md-4 text-center">
-    										<div class="menu-wrap">
-    											<a href="#" class="menu-img img mb-4" style="background-image: url('{{asset('assets/images/drink-3.jpg')}}');"></a>
-    											<div class="text">
-    												<h3><a href="#">Soda Drinks</a></h3>
-    												<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-    												<p class="price"><span>$2.90</span></p>
-    												<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-    							</div>
-
-    							<div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
-    								<div class="row">
-    									<div class="col-md-4 text-center">
-    										<div class="menu-wrap">
-    											<a href="#" class="menu-img img mb-4" style="background-image: url('{{asset('assets/images/dessert-1.jpg')}}');"></a>
-    											<div class="text">
-    												<h3><a href="#">Hot Cake Honey</a></h3>
-    												<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-    												<p class="price"><span>$2.90</span></p>
-    												<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-    											</div>
-    										</div>
-    									</div>
-    									<div class="col-md-4 text-center">
-    										<div class="menu-wrap">
-    											<a href="#" class="menu-img img mb-4" style="background-image: url('{{asset('assets/images/dessert-2.jpg')}}');"></a>
-    											<div class="text">
-    												<h3><a href="#">Hot Cake Honey</a></h3>
-    												<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-    												<p class="price"><span>$2.90</span></p>
-    												<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-    											</div>
-    										</div>
-    									</div>
-    									<div class="col-md-4 text-center">
-    										<div class="menu-wrap">
-    											<a href="#" class="menu-img img mb-4" style="background-image: url('{{asset('assets/images/dessert-3.jpg')}}');"></a>
-    											<div class="text">
-    												<h3><a href="#">Hot Cake Honey</a></h3>
-    												<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
-    												<p class="price"><span>$2.90</span></p>
-    												<p><a href="#" class="btn btn-primary btn-outline-primary">Add to cart</a></p>
-    											</div>
-    										</div>
-    									</div>
-    								</div>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section> --}}
-
-    <section class="ftco-section img" id="ftco-testimony" style="background-image: url('{{asset('assets/images/testimony-bg.jpg')}}');" data-stellar-background-ratio="0.5">
+    <section class="ftco-section img" id="ftco-testimony" style="background-image: url('{{asset($website->testimonial_image)}}');" data-stellar-background-ratio="0.5">
     	<div class="overlay"></div>
     	<div class="container">
     		<div class="row justify-content-center mb-5">
@@ -587,9 +286,7 @@
     			<div class="col-md-7 heading-section ftco-animate text-center">
     				<span class="subheading">Blog</span>
     				<h2 class="mb-4"> مطالب منتشر شده </h2>
-    				<p>
-    					در این قسمت میتوانید آخرین مطالب منتشر شده توسط وبسایت ما را مطالعه کنید.
-    				</p>
+    				<p>{{$website->blogs}}</p>
     			</div>
     		</div>
     		<div class="row d-flex">

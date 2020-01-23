@@ -16,6 +16,17 @@ Route::put('user/{user}', 'AccController@master_update')->name('user.master_upda
 // categories
 Route::resource('cat', 'CatController')->except(['create', 'show', 'edit']);
 
+// settings and website management
+Route::get('website/manage', 'WebsiteController@general_management')->name('website.general');
+Route::get('website/settings', 'WebsiteController@settings')->name('website.settings');
+Route::get('website/slides', 'WebsiteController@slides')->name('website.slides');
+Route::put('website/settings', 'WebsiteController@update_settings')->name('settings.update');
+Route::put('website/manage', 'WebsiteController@update_website')->name('website.update');
+Route::put('website/slides/{slide}', 'WebsiteController@update_slides')->name('slides.update');
+Route::delete('website/slides/{slide}', 'WebsiteController@destroy_slides')->name('slides.destroy');
+Route::get('website/slides/{slide}', 'WebsiteController@edit_slides')->name('slides.edit');
+Route::post('website/slides', 'WebsiteController@store_slides')->name('slides.store');
+
 // cart
 Route::post('cart/add', 'CartController@add')->name('cart.add');
 Route::post('cart/register', 'CartController@register')->name('cart.register');
@@ -28,9 +39,6 @@ Route::post('cart/activate/{uid}', 'CartController@activate')->name('cart.activa
 Route::post('cart/finalize', 'CartController@finalize')->name('cart.finalize');
 Route::post('cart/finish', 'CartController@finish')->name('cart.finish');
 Route::post('cart/destroy/{uid}', 'CartController@destroy')->name('cart.destroy');
-
-// general
-Route::get('landing/message', 'LandingController@message')->name('landing.message');
 
 // cooks
 Route::get('همکاری', 'LandingController@new_cook')->name('new_cook');
@@ -52,6 +60,9 @@ Route::get('محصولات-خانگی/{order?}', 'LandingController@order')->nam
 Route::get('غذا/{title}/{uid}', 'LandingController@show_food')->name('show_food');
 Route::post('food/confirm_all', 'FoodController@confirm_all')->name('food.confirm_all');
 Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm');
+
+// other landing pages
+Route::get('landing/message', 'LandingController@message')->name('landing.message');
 
 // comment
 Route::put('comment/{comment}/confirm', 'CommentController@confirm')->name('comment.confirm');

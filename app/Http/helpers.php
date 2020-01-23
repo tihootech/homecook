@@ -11,6 +11,12 @@ function settings($p=null)
     return $settings ? ( $p ? $settings->$p : $settings ) : null;
 }
 
+function website($p=null)
+{
+    $website = \App\Website::first();
+    return $website ? ( $p ? $website->$p : $website ) : null;
+}
+
 function current_cook()
 {
     if (cook()) {
@@ -246,4 +252,9 @@ function current_cart($force=false)
 
     }
     return $cart;
+}
+
+function pretty_phone($phone)
+{
+    return substr($phone,0,4) . ' ' . substr($phone,4,3) . ' ' . substr($phone,7,4);
 }

@@ -8,27 +8,31 @@ use App\Cook;
 use App\TransactionItem;
 use App\User;
 use App\Cat;
+use App\Slide;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
     public function index()
     {
+        $website = website();
         $blogs = Blog::latest()->take(3)->get();
         $foods = Food::inRandomOrder()->whereType('food')->take(4)->get();
         $products = Food::inRandomOrder()->whereType('product')->take(3)->get();
+        $slides = Slide::wherePage('home_page')->get();
         $counts = [
             'cooks' => Cook::count(),
             'foods' => Food::count(),
             'orders' => TransactionItem::sum('count'),
             'users' => User::count(),
         ];
-    	return view('landing.index', compact('blogs', 'foods', 'products', 'counts'));
+    	return view('landing.index', compact('blogs', 'foods', 'products', 'counts', 'website', 'slides'));
     }
 
     public function new_cook()
     {
-        return view('landing.new_cook');
+        $slides = Slide::wherePage('new_cook')->get();
+        return view('landing.new_cook', compact('slides'));
     }
 
     public function show_cook($name, $uid)
@@ -46,8 +50,8 @@ class LandingController extends Controller
 
     public function order($order = 1, Request $request)
     {
-
         $type = rn() == 'order_food' ? 'food' : 'product';
+        $slides = Slide::wherePage(rn())->get();
         $cats = Cat::whereType($type)->get();
         $foods = Food::select( '*',
              \DB::raw('(price - ROUND((price * discount) / 100, 2 )) AS f_cost'),
@@ -86,12 +90,13 @@ class LandingController extends Controller
 
         $foods = $foods->paginate(9);
 
-        return view('landing.order', compact('foods', 'food_count', 'order', 'cats'));
+        return view('landing.order', compact('foods', 'food_count', 'order', 'cats', 'slides'));
     }
 
     public function blogs(Request $request)
     {
         // init vars
+        $slides = Slide::wherePage('blogs')->get();
         $count = Blog::count();
 
         // prepare query
@@ -104,7 +109,7 @@ class LandingController extends Controller
         }
 
         $blogs = $blogs->paginate(9);
-        return view('landing.blogs', compact('blogs', 'count'));
+        return view('landing.blogs', compact('blogs', 'count', 'slides'));
     }
 
     public function show_blog($title)
@@ -116,7 +121,8 @@ class LandingController extends Controller
 
     public function message()
     {
+        $slides = Slide::wherePage('message')->get();
         $message = session('message');
-        return view('landing.message', compact('message'));
+        return view('landing.message', compact('message', 'slides'));
     }
 }

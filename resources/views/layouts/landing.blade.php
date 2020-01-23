@@ -54,11 +54,6 @@
 							<i class="material-icons">menu_book</i> وبلاگ
 						</a>
 					</li>
-                    <li class="nav-item @if(rn() == 'x') active @endif">
-						<a href="#" class="nav-link">
-							<i class="material-icons">person_pin</i> در باره ما
-						</a>
-					</li>
                     <li class="nav-item @if(rn() == 'new_cook') active @endif">
 						<a href="{{route('new_cook')}}" class="nav-link">
 							<i class="material-icons">how_to_reg</i> همکاری
@@ -107,24 +102,39 @@
         <div class="overlay"></div>
         <div class="container">
             <div class="row mb-5">
-                <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
+                <div class="col-lg-2 col-md-6 mb-5 mb-md-5">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2"> در باره ما </h2>
-                        <p>
-                            توضیحات ابتدایی متن در باره ما در اینجا آورد میشود
-                            توضیحات ابتدایی متن در باره ما در اینجا آورد میشود
-                            ...
-                        </p>
-                        <a href="#" class="btn btn-white btn-outline-white px-3 py-2">
-                            متن کامل
-                        </a>
-                        <ul class="ftco-footer-social list-unstyled mt-5">
-                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                            <li class="ftco-animate"><a href="#"><span class="icon-telegram"></span></a></li>
+                        <h2 class="ftco-heading-2"> شبکه های اجتماعی </h2>
+                        <ul class="ftco-footer-social list-unstyled mt-5 p-0">
+                            @if ($instagram = website('instagram'))
+                            	<li class="ftco-animate">
+									<a href="https://instagram.com/{{$instagram}}"><span class="icon-instagram"></span></a>
+								</li>
+                            @endif
+                            @if ($telegram = website('telegram'))
+                            	<li class="ftco-animate">
+									<a href="https://t.me/{{$telegram}}"><span class="icon-telegram"></span></a>
+								</li>
+                            @endif
+                            @if ($twitter = website('twitter'))
+                            	<li class="ftco-animate">
+									<a href="https://twitter.com/{{$twitter}}"><span class="icon-twitter"></span></a>
+								</li>
+                            @endif
+                            @if ($facebook = website('facebook'))
+                            	<li class="ftco-animate">
+									<a href="https://facebook.com/{{$facebook}}"><span class="icon-facebook"></span></a>
+								</li>
+                            @endif
+                            @if ($linkedin = website('linkedin'))
+                            	<li class="ftco-animate">
+									<a href="https://linkedin.com/{{$linkedin}}"><span class="icon-linkedin"></span></a>
+								</li>
+                            @endif
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-5 mb-md-5">
+                <div class="col-lg-5 col-md-6 mb-5 mb-md-5">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">آخرین مطالب</h2>
                         @foreach (best_blogs(2) as $blog)
@@ -148,19 +158,30 @@
                         <h2 class="ftco-heading-2"> تماس با ما </h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li>
-                                    <span class="icon icon-map-marker"></span>
-                                    <span class="text">
-                                        آدرس - اینجا - قرار - داده - میشود
-                                    </span>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon icon-phone"></span>
-                                        <span class="text" dir="ltr"> +98 833 727 1234 </span>
-                                    </a>
-                                </li>
-                                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                                @if (website('address'))
+									<li>
+	                                    <span class="icon icon-map-marker"></span>
+	                                    <span class="text">
+	                                        {{website('address')}}
+	                                    </span>
+	                                </li>
+                                @endif
+                                @if (website('phone'))
+									<li>
+	                                    <a href="tel:{{website('phone')}}">
+	                                        <span class="icon icon-phone"></span>
+	                                        <span class="text" dir="ltr">{{pretty_phone(website('phone'))}}</span>
+	                                    </a>
+	                                </li>
+                                @endif
+                                @if (website('email'))
+									<li>
+										<a href="mailto:{{website('email')}}">
+											<span class="icon icon-envelope"></span>
+											<span class="text">{{website('email')}}</span>
+										</a>
+									</li>
+                                @endif
                             </ul>
                         </div>
                     </div>
