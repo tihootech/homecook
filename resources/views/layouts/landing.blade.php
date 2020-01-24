@@ -21,180 +21,26 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/aos.css')}}">
 
-    <link rel="stylesheet" href="{{asset('assets/css/bootstrap-datepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/jquery.timepicker.css')}}">
-
     <link rel="stylesheet" href="{{asset('assets/css/icomoon.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css?v=1.2')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css?v=1.3')}}">
+	<link rel="stylesheet" href="{{asset('assets/css/navbar.css')}}">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" dir="rtl">
-        <div class="container">
-            <a class="navbar-brand" href="{{url('/')}}">خونه<small>پز</small></a>
-            <div class="collapse navbar-collapse order-sm-1 order-12" id="ftco-nav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item @if(rn() == 'index') active @endif">
-						<a href="{{url('/')}}" class="nav-link">
-							<i class="material-icons">home</i> صفحه اصلی
-						</a>
-					</li>
-                    <li class="nav-item @if(rn() == 'order_food') active @endif">
-						<a href="{{route('order_food')}}" class="nav-link">
-							<i class="material-icons">fastfood</i> سفارش غذا
-						</a>
-					</li>
-					<li class="nav-item @if(rn() == 'order_product') active @endif">
-						<a href="{{route('order_product')}}" class="nav-link">
-							<i class="material-icons">store</i> فروشگاه
-						</a>
-					</li>
-                    <li class="nav-item @if(rn() == 'blogs') active @endif">
-						<a href="{{route('blogs')}}" class="nav-link">
-							<i class="material-icons">menu_book</i> وبلاگ
-						</a>
-					</li>
-                    <li class="nav-item @if(rn() == 'new_cook') active @endif">
-						<a href="{{route('new_cook')}}" class="nav-link">
-							<i class="material-icons">how_to_reg</i> همکاری
-						</a>
-					</li>
-                    {{-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="room.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="shop.html">Shop</a>
-                            <a class="dropdown-item" href="product-single.html">Single Product</a>
-                            <a class="dropdown-item" href="room.html">Cart</a>
-                            <a class="dropdown-item" href="checkout.html">Checkout</a>
-                        </div>
-                    </li> --}}
-                </ul>
-            </div>
-			<div class="topbar order-sm-12 order-1">
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	                <span class="material-icons">menu</span>
-	            </button>
-				<a href="{{route('home')}}" data-toggle="popover" data-content="ناحیه کاربری" data-trigger="hover" data-placement="bottom">
-					<span class="material-icons">person</span>
-				</a>
-				<a href="{{route('cart.checkout')}}" class="nav-link" data-toggle="popover" data-trigger="hover" data-placement="bottom"
-					data-content="برای مشاهده سبد خرید کلیک کنید." rel="nofollow">
-					<span class="material-icons">shopping_cart</span>
-					@php
-						$cart = current_cart()
-					@endphp
-					@if ($cart_count = count($cart))
-						<span class="bag d-flex justify-content-center align-items-center">
-							<small id="cart-count">{{$cart_count}}</small>
-						</span>
-					@endif
-				</a>
-            </div>
-        </div>
-    </nav>
-    <!-- END nav -->
 
+	@include('includes.landing_header')
 
 	@yield('content')
 
+	@include('includes.landing_footer')
 
-    <footer class="ftco-footer ftco-section img">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-2 col-md-6 mb-5 mb-md-5">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2"> شبکه های اجتماعی </h2>
-                        <ul class="ftco-footer-social list-unstyled mt-5 p-0">
-                            @if ($instagram = website('instagram'))
-                            	<li class="ftco-animate">
-									<a href="https://instagram.com/{{$instagram}}"><span class="icon-instagram"></span></a>
-								</li>
-                            @endif
-                            @if ($telegram = website('telegram'))
-                            	<li class="ftco-animate">
-									<a href="https://t.me/{{$telegram}}"><span class="icon-telegram"></span></a>
-								</li>
-                            @endif
-                            @if ($twitter = website('twitter'))
-                            	<li class="ftco-animate">
-									<a href="https://twitter.com/{{$twitter}}"><span class="icon-twitter"></span></a>
-								</li>
-                            @endif
-                            @if ($facebook = website('facebook'))
-                            	<li class="ftco-animate">
-									<a href="https://facebook.com/{{$facebook}}"><span class="icon-facebook"></span></a>
-								</li>
-                            @endif
-                            @if ($linkedin = website('linkedin'))
-                            	<li class="ftco-animate">
-									<a href="https://linkedin.com/{{$linkedin}}"><span class="icon-linkedin"></span></a>
-								</li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-6 mb-5 mb-md-5">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">آخرین مطالب</h2>
-                        @foreach (best_blogs(2) as $blog)
-							@include('includes.blog_item')
-                        @endforeach
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-5 mb-md-5">
-                    <div class="ftco-footer-widget mb-4 ml-md-4">
-                        <h2 class="ftco-heading-2"> لینک ها </h2>
-                        <ul class="list-unstyled p-0">
-                            <li><a href="{{route('new_cook')}}" class="py-2 d-block"> همکاری با ما </a></li>
-                            <li><a href="{{route('blogs')}}" class="py-2 d-block"> مطالب وبسایت </a></li>
-                            <li><a href="{{route('order_food')}}" class="py-2 d-block"> سفارش غذا </a></li>
-                            <li><a href="{{route('order_product')}}" class="py-2 d-block"> محصولات خانگی </a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-5 mb-md-5">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2"> تماس با ما </h2>
-                        <div class="block-23 mb-3">
-                            <ul>
-                                @if (website('address'))
-									<li>
-	                                    <span class="icon icon-map-marker"></span>
-	                                    <span class="text">
-	                                        {{website('address')}}
-	                                    </span>
-	                                </li>
-                                @endif
-                                @if (website('phone'))
-									<li>
-	                                    <a href="tel:{{website('phone')}}">
-	                                        <span class="icon icon-phone"></span>
-	                                        <span class="text" dir="ltr">{{pretty_phone(website('phone'))}}</span>
-	                                    </a>
-	                                </li>
-                                @endif
-                                @if (website('email'))
-									<li>
-										<a href="mailto:{{website('email')}}">
-											<span class="icon icon-envelope"></span>
-											<span class="text">{{website('email')}}</span>
-										</a>
-									</li>
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen">
         <svg class="circular" width="48px" height="48px">
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#c49b63" />
         </svg>
     </div>
 
@@ -209,11 +55,9 @@
     <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{asset('assets/js/aos.js')}}"></script>
     <script src="{{asset('assets/js/jquery.animateNumber.min.js')}}"></script>
-    <script src="{{asset('assets/js/bootstrap-datepicker.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.timepicker.min.js')}}"></script>
     <script src="{{asset('assets/js/scrollax.min.js')}}"></script>
-    <script src="{{asset('assets/js/main.js?v=1.2')}}"></script>
-    <script src="{{asset('assets/js/custom.js')}}"></script>
+    <script src="{{asset('assets/js/main.js?v=1.3')}}"></script>
+    <script src="{{asset('assets/js/custom.js?v=1.1')}}"></script>
 
 </body>
 

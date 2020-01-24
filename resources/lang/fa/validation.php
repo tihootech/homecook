@@ -39,7 +39,7 @@ return [
     'dimensions'           => ' :attribute has invalid image dimensions.',
     'distinct'             => ' :attribute field has a duplicate value.',
     'email'                => ' ایمیل وارد شده صحیح نیست.',
-    'exists'               => ' :attribute در سیستم ثبت نشده است.',
+    'exists'               => ' :attribute وارد شده صحیح نیست.',
     'file'                 => ' :attribute must be a file.',
     'filled'               => ' :attribute field must have a value.',
     'image'                => ' :attribute must be an image.',
@@ -144,6 +144,7 @@ return [
         'city'=> 'شهر',
         'hood'=> 'محله',
         'current_password'=> 'رمزعبور فعلی',
+        'code'=> 'کد تایید',
     ],
 
 ];

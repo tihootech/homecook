@@ -313,33 +313,8 @@
     	<div class="overlay"></div>
     	<div class="container-wrap">
     		<div class="row no-gutters d-md-flex align-items-center">
-    			<div class="col-md-6 d-flex align-self-stretch">
+    			<div class="col-md-12 d-flex align-self-stretch">
     				<iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2692.2537373597593!2d47.056201136305184!3d34.31323392847227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ffaee741488d481%3A0x328a8f04799f6230!2sSina%20Hotel!5e0!3m2!1sen!2s!4v1578678558051!5m2!1sen!2s" frameborder="0" allowfullscreen="true"></iframe>
-    			</div>
-    			<div class="col-md-6 appointment ftco-animate">
-    				<h3 class="mb-3">تماس با ما</h3>
-    				<form action="#" class="appointment-form">
-    					<div class="d-flex">
-    						<div class="form-group">
-    							<input type="text" class="form-control" placeholder="نام شما">
-    						</div>
-    					</div>
-    					<div class="d-flex">
-    						<div class="form-group">
-    							<input type="text" class="form-control" placeholder="موضوع">
-    						</div>
-    					</div>
-    					<div class="d-flex">
-    						<div class="form-group">
-    							<textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="متن پیام"></textarea>
-    						</div>
-    					</div>
-    					<div class="d-flex justify-content-center">
-    						<div class="form-group w-50">
-    							<input type="submit" value="ارسال پیام" class="btn btn-primary py-3 px-4">
-    						</div>
-    					</div>
-    				</form>
     			</div>
     		</div>
     	</div>

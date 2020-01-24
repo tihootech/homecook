@@ -1,62 +1,78 @@
-@extends('layouts.landing')
+@extends('layouts.acc')
 
 @section('meta')
-	<title> خونه پز - ورود به جساب کاربری </title>
-	<meta name="keywords" content="خونه پز, رزرو غذا کرمانشاه, غذای خانگی, سفارش غذا">
-	<meta name="description" content="خونه پز - ورود به جساب کاربری">
+	<title> خونه پز - ورود به حساب کاربری </title>
 @endsection
-
 
 @section('content')
 
-	<section class="home-slider owl-carousel other-pages">
 
-		<div class="slider-item" style="background-image: url('{{asset('assets/images/login.jpg')}}');" data-stellar-background-ratio="0.5">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row slider-text justify-content-center align-items-center">
+	<form class="login100-form validate-form" method="post" action="{{ route('login') }}" autocomplete="off">
+		@csrf
 
-					<div class="col-md-7 col-sm-12 text-center ftco-animate">
-						<h1 class="mb-3 mt-5 bread">  ورود به حساب کاربری </h1>
-					</div>
+		<span class="login100-form-title p-b-43">
+			ورود به حساب کاربری
+		</span>
 
-				</div>
+		<div class="wrap-input100 rs1 validate-input" data-validate = "نام کاربری الزامی است">
+			<input class="input100" type="text" name="username">
+			<span class="label-input100">نام کاربری</span>
+		</div>
+
+
+		<div class="wrap-input100 rs2 validate-input" data-validate="رمز عبور الزامی است">
+			<input class="input100" type="password" name="password">
+			<span class="label-input100">رمز عبور</span>
+		</div>
+
+		<div class="container-login100-form-btn">
+			<button class="login100-form-btn">
+				ورود
+			</button>
+		</div>
+
+		<div class="w-full text-center">
+			<div class="custom-control custom-checkbox d-inline-block mt-3">
+				<input type="checkbox" class="custom-control-input" id="remember"
+				{{ old('remember') ? 'checked' : '' }} >
+				<label class="custom-control-label" for="remember">
+					<small class="text-bright mr-4"> مرا به خاطر بسپار </small>
+				</label>
 			</div>
 		</div>
-	</section>
 
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-xl-10 ftco-animate">
-					@include('includes.errors')
-					<form action="{{route('login')}}" method="post" class="billing-form ftco-bg-dark p-3 p-md-5">
-						@csrf
-						<h3 class="mb-4 billing-heading"> ورود به حساب کاربری </h3>
-                        <hr>
-						<div class="row align-items-end">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="username"> نام کاربری </label>
-									<input type="text" name="username" id="username" class="form-control" value="{{old('username')}}">
-								</div>
-							</div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="password"> رمزعبور </label>
-                                    <input type="password" name="password" id="password" class="form-control">
-                                </div>
-                            </div>
-							<div class="col-md-2 mx-auto">
-								<div class="form-group">
-									<button type="submit" class="btn btn-primary btn-block py-3 px-4"> تایید </button>
-								</div>
-							</div>
-						</div>
-					</form><!-- END -->
-
-				</div>
+		<div class="text-center w-full p-t-23">
+			<div class="d-flex justify-content-between">
+				<a href="#forgot-password" class="txt1" data-toggle="collapse">
+					<i class="material-icons">info</i>
+					رمز عبور خود را فراموش کردید؟
+				</a>
+				<a href="{{route('acc.register')}}" class="txt1">
+					<i class="material-icons">person_add</i>
+					ایجاد حساب کاربری
+				</a>
 			</div>
 		</div>
-	</section>
+	</form>
+
+	@include('includes.errors')
+
+	<form class="collapse mt-4" action="{{route('acc.forget')}}" method="post" id="forgot-password">
+		@csrf
+		<label for="kwd" class="text-bright mb-2">
+			<small>
+				برای بازیابی رمز عبور،
+				نام کاربری یا شماره تماس خود را وارد کنید.
+			</small>
+		</label>
+		<div class="row">
+			<div class="col-md-10 my-2">
+				<input type="text" name="keyword" class="form-control tp" id="kwd" value="{{old('keyword')}}">
+			</div>
+			<div class="col-md-2 my-auto">
+				<button type="submit" class="login100-form-btn simple"> تایید </button>
+			</div>
+		</div>
+	</form>
+
 @endsection

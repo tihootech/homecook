@@ -5,6 +5,13 @@ Route::get('/', 'LandingController@index')->name('index');
 Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
+// customize laravel acc login pattern
+Route::get('register', 'CustomAccController@register_form')->name('acc.register');
+Route::post('password/forget', 'CustomAccController@forget_password')->name('acc.forget');
+Route::post('acc/code/send/{user}', 'CustomAccController@send_code')->name('acc.send_code');
+Route::get('acc/code/enter/{user}', 'CustomAccController@enter_code')->name('acc.enter_code');
+Route::post('acc/password/reset/{user}', 'CustomAccController@reset_password')->name('acc.reset_password');
+
 // general user account control
 Route::get('acc', 'AccController@edit')->name('acc');
 Route::put('acc', 'AccController@update')->name('acc_update');
@@ -61,7 +68,7 @@ Route::get('غذا/{title}/{uid}', 'LandingController@show_food')->name('show_fo
 Route::post('food/confirm_all', 'FoodController@confirm_all')->name('food.confirm_all');
 Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm');
 
-// other landing pages
+// other landing pages & routes
 Route::get('landing/message', 'LandingController@message')->name('landing.message');
 
 // comment

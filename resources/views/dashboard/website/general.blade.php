@@ -95,6 +95,10 @@
             <div class="container">
 
                 <h3> <i class="material-icons">room_service</i> ستون خدمات </h3>
+                <a href="https://material.io/resources/icons/?style=baseline" target="_blank">
+                    <i class="material-icons icon">info</i>
+                    برای مشاهده لیست آیکون ها کلیک کنید.
+                </a>
     			<hr>
 
                 @foreach ($website->columns() as $i => $col)
