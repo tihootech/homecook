@@ -72,13 +72,11 @@
 						<span>+</span>
 					</div>
 				</div>
-				<div class="row my-2 justify-content-center">
-					<div class="col-lg-4 my-1">
-						<a href="javascript:void" class="btn btn-primary btn-outline-primary btn-block" data-action="add-to-cart">
-							<i class="material-icons ml-1">add</i>
-							افزودن
-						</a>
-					</div>
+				<div class="my-3 text-center">
+					<a href="javascript:void" class="btn btn-primary btn-outline-primary" data-action="add-to-cart">
+						<i class="material-icons ml-1">add</i>
+						افزودن
+					</a>
 				</div>
 			</form>
 		</div>

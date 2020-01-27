@@ -39,9 +39,6 @@ class CartController extends Controller
         // finantial data
         $count = $request->count;
         $payable = $food->cost;
-        $tax = percent($payable, $settings->tax);
-        $added_price = percent($payable, $settings->added_price);
-        $cook_cut = $payable - $added_price - $tax;
 
         // new items in db
         TransactionItem::create([
@@ -49,9 +46,6 @@ class CartController extends Controller
             'food_id' => $food->id,
             'cook_id' => $food->cook_id,
             'payable' => $payable,
-            'tax' => $tax,
-            'added_price' => $added_price,
-            'cook_cut' => $cook_cut,
             'count' => $count,
             'total_payable' => $payable * $count,
         ]);
@@ -88,8 +82,12 @@ class CartController extends Controller
 	{
 		$user = User::whereUsername($request->username)->first();
         if ($user && $user->password == \Hash::check($request->password, $user->password)) {
-            \Auth::login($user);
-            return redirect()->route('cart.address', $user->owner->uid);
+            if ($user->type != 'customer') {
+                return back()->withErrors(['با این حساب کاربری نمیتوان خرید انجام داد. لطفا یک حساب کاربری مختص خرید ایجاد کنید.']);
+            }else {
+                \Auth::login($user);
+                return redirect()->route('cart.address', $user->owner->uid);
+            }
         }else {
             return back()->withErrors(['نام کاربری یا رمزعبور اشتباه است.']);
         }
@@ -101,6 +99,11 @@ class CartController extends Controller
 		$customer = Customer::whereUid($uid)->firstOrFail();
 		return view('landing.checkout', compact('type', 'customer'));
 	}
+
+    public function send_again($mobile)
+    {
+        return back()->withErrors(['در دست ساخت']);
+    }
 
 	public function address($uid)
 	{
@@ -159,7 +162,8 @@ class CartController extends Controller
             'total' => $transaction->calc_total(),
             'peyk_share' => settings('peyk_share'),
             'cook_share' => $transaction->calc_cook_share(),
-            'cook_share' => $transaction->calc_master_share(),
+            'master_share' => $transaction->calc_master_share(),
+            'tax' => $transaction->calc_tax(),
         ]);
         return redirect()->route('cart.review', $transaction->uid);
     }
@@ -183,5 +187,27 @@ class CartController extends Controller
 
         return isset($transaction) && $transaction ? $transaction->calc_total() : 0;
 	}
+
+    public function finish($tuid)
+    {
+        // find transaction
+        $transaction = Transaction::whereUid($tuid)->firstOrFail();
+
+        // pony transaction
+        $transaction->ponied = 1;
+        $transaction->save();
+        TransactionItem::where('transaction_id', $transaction->id)->update([
+            'ponied' => 1
+        ]);
+
+        // clear session data
+        session([
+            'tuid' => null,
+            'cart' => null,
+        ]);
+
+        // show message
+        return redirect()->route('landing.message')->withMessage('تراکنش شما با موفقیت انجام شد.');
+    }
 
 }

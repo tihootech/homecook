@@ -15357,3 +15357,9 @@ table .material-icons {
     position: relative;
     top: 4px;
 }
+
+.rating > i {
+    color : #C49B63;
+    cursor: pointer;
+    font-size: 2em;
+}

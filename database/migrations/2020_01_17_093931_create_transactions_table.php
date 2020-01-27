@@ -26,6 +26,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('peyk_share')->nullable();
             $table->unsignedBigInteger('cook_share')->nullable();
             $table->unsignedBigInteger('master_share')->nullable();
+            $table->unsignedBigInteger('tax')->nullable();
 
             $table->boolean('open')->default(1);
             $table->boolean('ponied')->default(0);

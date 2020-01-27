@@ -17,12 +17,26 @@ class Transaction extends Model
 
     public function calc_cook_share()
     {
-        return TransactionItem::where('transaction_id', $this->id)->sum(\DB::raw('cook_cut * count'));
+        $total = $this->calc_total();
+        $pure_total = $total - settings('peyk_share');
+        $tax = percent($pure_total, settings('tax'));
+        $added_price = percent($pure_total, settings('added_price'));
+        $cook_share = $pure_total - $tax - $added_price;
+        return $cook_share;
     }
 
     public function calc_master_share()
     {
-        return TransactionItem::where('transaction_id', $this->id)->sum(\DB::raw('added_price * count'));
+        $total = $this->calc_total();
+        $pure_total = $total - settings('peyk_share');
+        return percent($pure_total, settings('added_price'));
+    }
+
+    public function calc_tax()
+    {
+        $total = $this->calc_total();
+        $pure_total = $total - settings('peyk_share');
+        return percent($pure_total, settings('tax'));
     }
 
     public static function make()

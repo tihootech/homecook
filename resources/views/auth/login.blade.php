@@ -55,7 +55,9 @@
 		</div>
 	</form>
 
-	@include('includes.errors')
+	<div class="mt-4">
+		@include('includes.errors')
+	</div>
 
 	<form class="collapse mt-4" action="{{route('acc.forget')}}" method="post" id="forgot-password">
 		@csrf

@@ -44,8 +44,9 @@ Route::get('cart/address/{uid}', 'CartController@address')->name('cart.address')
 Route::get('cart/review/{tuid}', 'CartController@review')->name('cart.review');
 Route::post('cart/activate/{uid}', 'CartController@activate')->name('cart.activate');
 Route::post('cart/finalize', 'CartController@finalize')->name('cart.finalize');
-Route::post('cart/finish', 'CartController@finish')->name('cart.finish');
+Route::post('cart/finish/{tuid}', 'CartController@finish')->name('cart.finish');
 Route::post('cart/destroy/{uid}', 'CartController@destroy')->name('cart.destroy');
+Route::post('cart/send/again/{mobile}', 'CartController@send_again')->name('cart.send_again');
 
 // cooks
 Route::get('همکاری', 'LandingController@new_cook')->name('new_cook');
@@ -70,6 +71,10 @@ Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm'
 
 // other landing pages & routes
 Route::get('landing/message', 'LandingController@message')->name('landing.message');
+
+// reviews & transactions
+Route::resource('review', 'ReviewController');
+Route::resource('transaction', 'TransactionController');
 
 // comment
 Route::put('comment/{comment}/confirm', 'CommentController@confirm')->name('comment.confirm');

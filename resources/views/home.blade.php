@@ -107,4 +107,46 @@
         </div>
     @endcook
 
+
+    @customer
+        <div class="tile">
+            <div class="row justify-content-center">
+                @foreach ($transactions as $transaction)
+                    @foreach ($transaction->items as $item)
+                        @unless ($customer->review_on($item->food_id))
+
+                            <div class="col-md-6">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5> {{$item->food->title}} </h5>
+                                        <h6> {{$item->food->cook->full_name()}} </h6>
+                                        <hr>
+                                        <p> از سفارش خود راضی بودید؟ </p>
+                                        <form class="my-2" action="{{route('review.store')}}" method="post" data-selected="0">
+                                            @csrf
+                                            <input type="hidden" name="food_uid" value="{{$item->food->uid}}">
+
+                                            <div class="rating"></div>
+
+                                            <textarea name="body" rows="4" class="form-control hidden my-3" placeholder="توضیحات (اختیاری)"></textarea>
+
+                                            <div class="w-100 my-3"></div>
+
+                                            <button type="submit" class="btn btn-primary"> ثبت کردن </button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        @endunless
+                    @endforeach
+                @endforeach
+            </div>
+            <div class="text-center my-3">
+                <a href="{{route('transaction.index')}}" class="btn btn-primary"> لیست سفارشات شما </a>
+            </div>
+        </div>
+    @endcustomer
+
 @endsection

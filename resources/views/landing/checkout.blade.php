@@ -24,6 +24,8 @@
 	<section class="ftco-section" dir="rtl">
 		<div class="container">
 
+			@include('includes.errors')
+
 			@if ($type == 'review')
 				<div class="ftco-bg-dark p-3 p-md-5">
 
@@ -41,9 +43,9 @@
 								<b> شماره تماس : </b>
 								<span> {{$transaction->customer->mobile}} </span>
 							</p>
-							<form action="{{route('cart.finish')}}" method="post">
+							<form action="{{route('cart.finish', $transaction->uid)}}" method="post">
 								@csrf
-								<button type="button" class="btn btn-primary p-3 px-4"> تایید و پرداخت </button>
+								<button type="submit" class="btn btn-primary p-3 px-4"> تایید و پرداخت </button>
 							</form>
 						</div>
 					@else
@@ -71,7 +73,6 @@
 			@if ($type == 'checkout')
 				@if ($transaction && $transaction->items->count())
 					<div class="ftco-bg-dark p-3 p-md-5">
-						@include('includes.errors')
 						<div class="row">
 							@if (!user() || user('type') != 'customer')
 								<div class="col-md-5">

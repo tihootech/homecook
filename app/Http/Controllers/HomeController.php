@@ -34,6 +34,10 @@ class HomeController extends Controller
         }elseif (cook()) {
             $cook = current_cook();
             return view('home', compact('cook'));
+        }elseif (customer()) {
+            $transactions = current_customer('transactions');
+            $customer = current_customer();
+            return view('home', compact('transactions', 'customer'));
         }else {
             return view('home');
         }

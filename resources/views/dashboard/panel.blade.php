@@ -1,4 +1,9 @@
-
+<li>
+	<a class="app-menu__item @if( rn() == 'transaction.index' ) active @endif" href="{{route("transaction.index")}}">
+		<i class="ml-2 material-icons">shopping_cart</i>
+		<span class="app-menu__label"> لیست سفارشات </span>
+	</a>
+</li>
 
 @if (master() || active_cook())
 	<li>

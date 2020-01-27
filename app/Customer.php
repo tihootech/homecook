@@ -25,6 +25,11 @@ class Customer extends AccountOwner
 		return $this->hasMany(Address::class);
 	}
 
+    public function review_on($food_id)
+    {
+        return Review::where('customer_id', $this->id)->where('food_id', $food_id)->first();
+    }
+
     public function add_address($body)
     {
         $address = Address::create([

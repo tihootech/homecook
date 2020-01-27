@@ -9,6 +9,10 @@
 		<button type="submit" class="btn btn-primary btn-block"> تایید و ادامه </button>
 	</div>
 	<div class="col-lg-{{$cols/2}} my-1">
-		<button type="button" class="btn btn-primary btn-block btn-large"> ارسال دوباره کد تایید </button>
+		<button onclick="$('#send-again').submit()" type="button" class="btn btn-primary btn-block btn-large"> ارسال دوباره کد تایید </button>
 	</div>
+</form>
+
+<form class="d-none" action="{{route('cart.send_again', $customer->mobile)}}" method="post" id="send-again">
+	@csrf
 </form>
