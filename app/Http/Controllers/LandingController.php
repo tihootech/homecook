@@ -53,11 +53,16 @@ class LandingController extends Controller
         $type = rn() == 'order_food' ? 'food' : 'product';
         $slides = Slide::wherePage(rn())->get();
         $cats = Cat::whereType($type)->get();
-        $foods = Food::select( '*',
-             \DB::raw('(price - ROUND((price * discount) / 100, 2 )) AS f_cost'),
-             \DB::raw('RAND()*5 AS f_rate'),
-             \DB::raw('RAND()*100 AS f_sells')
-        );
+
+        $foods = Food::select(
+            'foods.*',
+            \DB::raw('(price - ROUND((price * discount) / 100, 2 )) AS cost'),
+            \DB::raw('CASE WHEN AVG(reviews.rate) IS NULL THEN 0 ELSE AVG(reviews.rate) END AS rate'),
+            \DB::raw('SUM(transaction_items.count) AS sells'),
+        )->leftJoin('reviews', 'foods.id', '=', 'reviews.food_id')
+        ->leftJoin('transaction_items', 'foods.id', '=', 'transaction_items.food_id');
+
+        // TODO: check and fix sells attribute
 
         $foods = $foods->whereConfirmed(1)->whereType($type);
         if ($request->t) {
@@ -70,16 +75,16 @@ class LandingController extends Controller
 
         if ($order == 1) {
             // best
-            $foods = $foods->orderBy('f_rate', 'DESC');
+            $foods = $foods->orderBy('rate', 'DESC');
         }elseif ($order == 2) {
             // most expensive
-            $foods = $foods->orderBy('f_cost', 'DESC');
+            $foods = $foods->orderBy('cost', 'DESC');
         }elseif ($order == 3) {
             // cheapest
-            $foods = $foods->orderBy('f_cost', 'ASC');
+            $foods = $foods->orderBy('cost', 'ASC');
         }elseif ($order == 4) {
             // best selling
-            $foods = $foods->orderBy('f_sells', 'DESC');
+            $foods = $foods->orderBy('sells', 'DESC');
         }elseif ($order == 5) {
             // latest
             $foods = $foods->latest();
@@ -88,7 +93,7 @@ class LandingController extends Controller
             $foods = $foods->where('discount', '<>', '0')->orderBy('discount', 'DESC');
         }
 
-        $foods = $foods->paginate(9);
+        $foods = $foods->groupBy('foods.id')->paginate(9);
 
         return view('landing.order', compact('foods', 'food_count', 'order', 'cats', 'slides'));
     }

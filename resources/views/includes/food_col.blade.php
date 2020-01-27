@@ -16,9 +16,12 @@
 						{{$food->cook->full_name()}}
 					</a>
 				</div>
-				@if ($rate = $food->f_rate ?? $food->rate)
+				@php
+					$rate = $food->rate ?? $food->getRate()
+				@endphp
+				@if ($rate > 0)
 					<div class="mr-auto" data-toggle="popover" data-trigger="hover" data-placement="top"
-						data-content="{{rand(5,50)}} بررسی با میانگین {{round($rate, 2)}} امتیاز برای این غذا">
+						data-content="{{$food->reviews->count()}} بررسی با میانگین {{round($rate, 2)}} امتیاز برای این غذا">
 						<a href="javascript:void" class="meta-chat">
 							@for ($i = 1; $i <= 5; $i++)
 								<span class="material-icons @if(round($rate) >= $i) text-primary @endif">star</span>
@@ -37,7 +40,7 @@
 				</div>
 				@if ($food->discount)
 					<div class="text-primary">
-						{{toman($food->f_cost ?? $food->cost)}}
+						{{toman($food->cost ?? $food->getCost())}}
 					</div>
 				@endif
 			</div>

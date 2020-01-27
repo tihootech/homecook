@@ -137,7 +137,7 @@
                                         -
                                     @endif
                                 </td>
-                                <td> {{toman($food->cost)}} </td>
+                                <td> {{toman($food->getCost())}} </td>
                                 <td> @include('dashboard.partials.yesno', ['boolean' => $food->confirmed]) </td>
                                 <td align="center">
                                     <a href="javascript:void" data-toggle="popover" data-placement="right" data-html="true"

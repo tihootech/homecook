@@ -10,7 +10,7 @@ class Food extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $appends = ['cost', 'rate', 'sells', 'persian_type'];
+    protected $appends = ['persian_type'];
 
     public function getPersianTypeAttribute()
     {
@@ -23,19 +23,19 @@ class Food extends Model
         }
     }
 
-    public function getRateAttribute()
+    public function getRate()
     {
-        return rand(0,500) / 100;
+        return Review::where('food_id', $this->id)->average('rate');
     }
 
-    public function getCostAttribute()
+    public function getCost()
     {
         return $this->discount ? dp($this->price, $this->discount) : $this->price;
     }
 
-    public function getSellsAttribute()
+    public function getSells()
     {
-        return  Transaction::where('food_id', $this->id)->wherePonied(1)->sum('count');
+        return  TransactionItem::where('food_id', $this->id)->wherePonied(1)->sum('count');
     }
 
 	public function cook()
@@ -56,5 +56,10 @@ class Food extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

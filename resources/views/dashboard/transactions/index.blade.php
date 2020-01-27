@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-	@master
+	{{-- @master
         <div class="tile text-center">
             <a href="#search-box" data-toggle="collapse" class="btn btn-primary m-2"> <i class="material-icons">search</i> جستجو </a>
             <div class="collapse @if(request()->getQueryString()) show @endif" id="search-box">
@@ -83,6 +83,12 @@
                 موردی یافت نشد.
             </div>
         </div>
-    @endif
+    @endif --}}
+
+    <div class="tile">
+        <div class="alert alert-warning m-0">
+            بعد از حل چالش
+        </div>
+    </div>
 
 @endsection
