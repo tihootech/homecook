@@ -1,10 +1,54 @@
 @extends('layouts.dashboard')
 @section('title')
-    داشبورد ما
+    اطلاعات سفارش برای پیک
 @endsection
 @section('content')
 
     @master
+
+        @if ($orders->count())
+
+            <div class="tile">
+
+                <h2 class="mb-3"> سفارشات جدید </h2>
+
+                <div class="row justify-content-center">
+                    @foreach ($orders as $transaction)
+                        <div class="col-md-6 my-2">
+                            <div class="card">
+                                <form class="card-body" action="{{route('transaction.set_peyk', $transaction->id)}}" method="post">
+                                    @csrf
+                                    <h5> اقلام سفارش </h5>
+                                    <ul>
+                                        @foreach ($transaction->items as $item)
+                                            <li>
+                                                <a href="{{$item->food->public_link()}}"> {{$item->food->title}} </a>
+                                                (تعداد:{{$item->count}})
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <h5> آدرس </h5>
+                                    <p> {{$item->transaction->address->body}} </p>
+                                    <h5 class="mb-3"> انتخاب پیک </h5>
+                                    <select class="select2" name="peyk" data-placeholder="-- انتخاب پیک --" required>
+                                        <option value=""></option>
+                                        @foreach ($peyks as $peyk)
+                                            <option value="{{$peyk->id}}">{{$peyk->full_name()}} - {{$peyk->mobile}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="text-center mt-3">
+                                        <button type="submit" class="btn btn-outline-primary"> تایید و اطلاع رسانی </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+
+        @endif
+
         @if ($pending_comments->count() || $fresh_cooks->count() || $pending_foods->count())
             <div class="tile">
                 <div class="container">

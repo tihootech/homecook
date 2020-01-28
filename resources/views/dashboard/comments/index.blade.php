@@ -102,7 +102,7 @@
         @else
             <div class="alert alert-warning">
                 <i class="fa fa-warning ml-2"></i>
-                @lang('NOTHING_FOUND')
+                موردی یافت نشد.
             </div>
         @endif
 	</div>

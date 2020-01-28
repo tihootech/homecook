@@ -42,6 +42,11 @@ class Cook extends AccountOwner
         return $password;
     }
 
+    public function foods()
+    {
+        return $this->hasMany(Food::class);
+    }
+
     public function public_link()
     {
         return route('show_cook', [urf($this->full_name()), $this->uid]);

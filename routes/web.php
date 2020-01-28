@@ -69,12 +69,16 @@ Route::get('غذا/{title}/{uid}', 'LandingController@show_food')->name('show_fo
 Route::post('food/confirm_all', 'FoodController@confirm_all')->name('food.confirm_all');
 Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm');
 
-// other landing pages & routes
+// other routes
 Route::get('landing/message', 'LandingController@message')->name('landing.message');
+Route::post('transaction/{transaction}/peyk', 'TransactionController@set_peyk')->name('transaction.set_peyk');
+Route::get('order/peyk/{tuid}', 'LandingController@peyk_view_transaction')->name('peyk.view_transaction');
 
-// reviews & transactions
+// other resources
 Route::resource('review', 'ReviewController');
+Route::post('review/{review}/accept', 'ReviewController@accept')->name('review.accept');
 Route::resource('transaction', 'TransactionController');
+Route::resource('peyk', 'PeykController')->except('show');
 
 // comment
 Route::put('comment/{comment}/confirm', 'CommentController@confirm')->name('comment.confirm');

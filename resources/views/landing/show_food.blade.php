@@ -27,10 +27,48 @@
 	</section>
 
 	<section class="ftco-section" dir="rtl">
+
 		<div class="container">
-			<p class="h3"> این قسمت در دست ساخت است </p>
+			<div class="row">
+				<div class="col-lg-6 mb-5 ftco-animate">
+					<a href="{{asset($food->image)}}" class="image-popup">
+						<img src="{{asset($food->image)}}" class="img-fluid" alt="{{$food->title}}">
+					</a>
+				</div>
+				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+					<h3>{{$food->title}}</h3>
+					<p class="price">
+						@if ($food->discount)
+							<span class="off ml-3">{{$food->price}}</span>
+						@endif
+						<span>{{toman($food->getCost())}}</span>
+					</p>
+					<p>{{$food->material}}</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<p class="h3"> بررسی های کاربران </p>
 			<hr class="gray-border">
-			<a href="{{url('/')}}" class="btn btn-primary btn-outline-primary px-4 py-3"> رفتن به صفحه اصلی وبسایت </a>
+			@if ($food->reviews->count())
+				@foreach ($food->reviews as $review)
+					@for ($i = 1; $i <= 5; $i++)
+						<span class="material-icons @if(round($review->rate) >= $i) text-primary @endif">star</span>
+					@endfor
+					<p>
+						@if ($review->body)
+							{{$review->body}}
+						@else
+							<em> بدون توضیحات </em>
+						@endif
+					</p>
+				@endforeach
+			@else
+				<div class="alert alert-warning">
+					بدون بررسی
+				</div>
+			@endif
 		</div>
 	</section>
 @endsection

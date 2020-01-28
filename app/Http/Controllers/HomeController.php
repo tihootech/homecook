@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Cook;
 use App\Comment;
 use App\Food;
+use App\Transaction;
+use App\Peyk;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,10 +29,12 @@ class HomeController extends Controller
     public function index()
     {
         if (master()) {
+            $orders = Transaction::wherePonied(1)->whereNull('peyk_id')->get();
             $fresh_cooks = Cook::whereFresh(1)->get();
             $pending_comments = Comment::whereConfirmed(0)->get();
             $pending_foods = Food::whereConfirmed(0)->get();
-            return view('home', compact('fresh_cooks', 'pending_comments', 'pending_foods'));
+            $peyks = Peyk::all();
+            return view('home', compact('fresh_cooks', 'pending_comments', 'pending_foods', 'orders', 'peyks'));
         }elseif (cook()) {
             $cook = current_cook();
             return view('home', compact('cook'));

@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Blog;
 use App\Food;
 use App\Cook;
+use App\Transaction;
 use App\TransactionItem;
 use App\User;
 use App\Cat;
 use App\Slide;
+use App\Review;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -17,6 +19,7 @@ class LandingController extends Controller
     {
         $website = website();
         $blogs = Blog::latest()->take(3)->get();
+        $reviews = Review::whereAccepted(1)->whereNotNull('body')->inRandomOrder()->take(5)->get();
         $foods = Food::inRandomOrder()->whereType('food')->take(4)->get();
         $products = Food::inRandomOrder()->whereType('product')->take(3)->get();
         $slides = Slide::wherePage('home_page')->get();
@@ -26,7 +29,7 @@ class LandingController extends Controller
             'orders' => TransactionItem::sum('count'),
             'users' => User::count(),
         ];
-    	return view('landing.index', compact('blogs', 'foods', 'products', 'counts', 'website', 'slides'));
+    	return view('landing.index', compact('blogs', 'foods', 'products', 'counts', 'website', 'slides', 'reviews'));
     }
 
     public function new_cook()
@@ -129,5 +132,11 @@ class LandingController extends Controller
         $slides = Slide::wherePage('message')->get();
         $message = session('message');
         return view('landing.message', compact('message', 'slides'));
+    }
+
+    public function peyk_view_transaction($tuid)
+    {
+        $transaction = Transaction::whereUid($tuid)->firstOrFail();
+        return view('landing.peyk', compact('transaction'));
     }
 }

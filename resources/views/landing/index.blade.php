@@ -207,75 +207,19 @@
     	</div>
     	<div class="container-wrap">
     		<div class="row d-flex no-gutters">
-    			<div class="col-lg align-self-sm-end ftco-animate">
-    				<div class="testimony">
-    					<blockquote>
-    						<p>
-    							&rdquo;
-    							نشان دادن نظرات کاربران در صفحه اصلی تکنیک جالبی است
-    							که اخیرا بسیاری از وبسایت های معروف از آن استفاده میکنند.
-    							حال در این صفحه 5 نظر  به صورت اتفاقی از لیست تایین شده نمایش داده میشود.
-    							در مورد قمت نظرات کاربران توضیحات بیشتری داده خواهد شد.
-    							&ldquo;
-    						</p>
-    					</blockquote>
-    				</div>
-    			</div>
-    			<div class="col-lg align-self-sm-end">
-    				<div class="testimony overlay">
-    					<blockquote>
-    						<p>
-    							&rdquo;
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    							&ldquo;
-    						</p>
-    					</blockquote>
-    				</div>
-    			</div>
-    			<div class="col-lg align-self-sm-end ftco-animate">
-    				<div class="testimony">
-    					<blockquote>
-    						<p>
-    							&rdquo;
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    							&ldquo;
-    						</p>
-    					</blockquote>
-    				</div>
-    			</div>
-    			<div class="col-lg align-self-sm-end">
-    				<div class="testimony overlay">
-    					<blockquote>
-    						<p>
-    							&rdquo;
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    							&ldquo;
-    						</p>
-    					</blockquote>
-    				</div>
-    			</div>
-    			<div class="col-lg align-self-sm-end ftco-animate">
-    				<div class="testimony">
-    					<blockquote>
-    						<p>
-    							&rdquo;
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    								برخی از نظرات در این قسمت نمایش داده میشوند
-    							&ldquo;
-    						</p>
-    					</blockquote>
-    				</div>
-    			</div>
+    			@foreach ($reviews as $ri => $review)
+                    <div class="col-lg align-self-sm-end ftco-animate">
+        				<div class="testimony @if($ri%2==0) overlay @endif">
+        					<blockquote>
+        						<p>
+        							&rdquo;
+        							{{$review->body}}
+        							&ldquo;
+        						</p>
+        					</blockquote>
+        				</div>
+        			</div>
+                @endforeach
     		</div>
     	</div>
     </section>

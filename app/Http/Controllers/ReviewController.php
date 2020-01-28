@@ -12,12 +12,21 @@ class ReviewController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('master')->except('store');
         $this->middleware('only_customer')->only('store');
+    }
+
+    public function accept(Review $review)
+    {
+        $review->accepted = !$review->accepted;
+        $review->save();
+        return back()->withMessage(__('SUCCESS'));
     }
 
     public function index()
     {
-        //
+        $reviews = Review::latest()->paginate(12);
+        return view('dashboard.reviews.index', compact('reviews'));
     }
 
     public function create()

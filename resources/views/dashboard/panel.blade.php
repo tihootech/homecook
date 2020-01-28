@@ -25,6 +25,29 @@
 </li>
 
 @php
+	$routes = ['peyk.index', 'peyk.create'];
+@endphp
+<li class="treeview @if( in_array(rn(), $routes) ) is-expanded @endif">
+	<a class="app-menu__item" href="#" data-toggle="treeview">
+		<i class="ml-2 material-icons">motorcycle</i>
+		<span class="app-menu__label"> مدیریت پیک ها </span>
+		<i class="treeview-indicator fa fa-angle-left"></i>
+	</a>
+	<ul class="treeview-menu">
+		<li>
+			<a class="treeview-item @if(rn() == $routes[0]) active @endif" href="{{route($routes[0])}}">
+				<i class="icon material-icons ml-2">list</i> لیست پیک ها
+			</a>
+		</li>
+		<li>
+			<a class="treeview-item @if(rn() == $routes[1]) active @endif" href="{{route($routes[1])}}">
+				<i class="icon material-icons ml-2">add</i> تعریف پیک جدید
+			</a>
+		</li>
+	</ul>
+</li>
+
+@php
 	$routes = ['cook.fresh_requests', 'cook.index', 'cook.create'];
 @endphp
 <li class="treeview @if( in_array(rn(), $routes) ) is-expanded @endif">
@@ -107,6 +130,13 @@
 	<a class="app-menu__item @if( rn() == 'comment.index' ) active @endif" href="{{route("comment.index")}}">
 		<i class="ml-2 material-icons">comment</i>
 		<span class="app-menu__label"> مدیریت کامنت ها </span>
+	</a>
+</li>
+
+<li>
+	<a class="app-menu__item @if( rn() == 'review.index' ) active @endif" href="{{route("review.index")}}">
+		<i class="ml-2 material-icons">rate_review</i>
+		<span class="app-menu__label"> بازنگری ها </span>
 	</a>
 </li>
 
