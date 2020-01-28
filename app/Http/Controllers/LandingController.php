@@ -61,7 +61,7 @@ class LandingController extends Controller
             'foods.*',
             \DB::raw('(price - ROUND((price * discount) / 100, 2 )) AS cost'),
             \DB::raw('CASE WHEN AVG(reviews.rate) IS NULL THEN 0 ELSE AVG(reviews.rate) END AS rate'),
-            \DB::raw('SUM(transaction_items.count) AS sells'),
+            \DB::raw('SUM(transaction_items.count) AS sells')
         )->leftJoin('reviews', 'foods.id', '=', 'reviews.food_id')
         ->leftJoin('transaction_items', 'foods.id', '=', 'transaction_items.food_id');
 
