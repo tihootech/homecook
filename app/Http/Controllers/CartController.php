@@ -38,7 +38,7 @@ class CartController extends Controller
 
         // finantial data
         $count = $request->count;
-        $payable = $food->cost;
+        $payable = $food->getCost();
 
         // new items in db
         TransactionItem::create([
