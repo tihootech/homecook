@@ -14,7 +14,7 @@
 		@foreach ($users as $user)
 			<form class="col-md-6 mx-auto" action="{{route('acc.send_code', $user->id)}}" method="post">
 				@csrf
-				<button type="submit" class="login100-form-btn simple"> ارسال کد بازیابی به {{$user->owner->mobile}} </button>
+				<button type="submit" class="login100-form-btn simple"> ارسال کد بازیابی به {{$user->owner->mobile ?? '-'}} </button>
 			</form>
 		@endforeach
 	</div>
