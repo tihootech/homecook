@@ -68,13 +68,13 @@
         				</div>
                     </div>
                     <div class="w-100"></div>
-					<div class="col-md-2 my-1">
+					<div class="col-md-3 my-1">
 						<button type="submit" class="btn btn-primary btn-block">
 							<i class="material-icons">check</i> تایید و جستجو
 						</button>
 					</div>
 					@if(request()->getQueryString())
-						<div class="col-md-2 my-1">
+						<div class="col-md-3 my-1">
 							<a class="btn btn-primary btn-block" href="{{route(rn())}}">
 								<i class="material-icons">close</i> بازنشانی جستجو
 							</a>

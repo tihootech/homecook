@@ -223,9 +223,9 @@ function dp($price, $discount)
     return $price - percent($price, $discount);
 }
 
-function percent($price, $percent)
+function percent($value, $percent)
 {
-    return round( ($price*$percent) / 100 );
+    return round( ($value*$percent) / 100 );
 }
 
 function best_blogs($count=3)

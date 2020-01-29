@@ -9,35 +9,48 @@ class Transaction extends Model
 {
     use SoftDeletes;
     protected $guarded = ['id'];
+    protected $appends = ['sum'];
 
-    public function calc_total()
+    public function getSumAttribute()
     {
-        return TransactionItem::where('transaction_id', $this->id)->sum('total_payable');
+        return $this->total + $this->peyk_share;
     }
 
-    public function calc_cook_share()
+    public function update_changes_to_cart()
     {
-        $total = $this->calc_total();
-        $pure_total = $total - settings('peyk_share');
-        $tax = percent($pure_total, settings('tax'));
-        $added_price = percent($pure_total, settings('added_price'));
-        $cook_share = $pure_total - $tax - $added_price;
-        return $cook_share;
+        $this->peyk_share = $this->count_cooks() * settings('peyk_share');
+        $this->total = TransactionItem::where('transaction_id', $this->id)->sum('payable');
+        $this->save();
     }
 
-    public function calc_master_share()
+    public function count_cooks()
     {
-        $total = $this->calc_total();
-        $pure_total = $total - settings('peyk_share');
-        return percent($pure_total, settings('added_price'));
+        return TransactionItem::where('transaction_id', $this->id)->distinct('cook_id')->count();
     }
 
-    public function calc_tax()
-    {
-        $total = $this->calc_total();
-        $pure_total = $total - settings('peyk_share');
-        return percent($pure_total, settings('tax'));
-    }
+    // public function calc_cook_share()
+    // {
+    //     $total = $this->total;
+    //     $pure_total = $total - settings('peyk_share');
+    //     $tax = percent($pure_total, settings('tax'));
+    //     $added_price = percent($pure_total, settings('added_price'));
+    //     $cook_share = $pure_total - $tax - $added_price;
+    //     return $cook_share;
+    // }
+    //
+    // public function calc_master_share()
+    // {
+    //     $total = $this->total;
+    //     $pure_total = $total - settings('peyk_share');
+    //     return percent($pure_total, settings('added_price'));
+    // }
+    //
+    // public function calc_tax()
+    // {
+    //     $total = $this->total;
+    //     $pure_total = $total - settings('peyk_share');
+    //     return percent($pure_total, settings('tax'));
+    // }
 
     public static function make()
     {
@@ -52,24 +65,9 @@ class Transaction extends Model
         return $this->hasMany(TransactionItem::class);
     }
 
-	public function food()
-	{
-		return $this->belongsTo(Food::class);
-	}
-
-	public function cook()
-	{
-		return $this->belongsTo(Cook::class);
-	}
-
 	public function customer()
 	{
 		return $this->belongsTo(Customer::class);
-	}
-
-	public function user()
-	{
-		return $this->belongsTo(User::class);
 	}
 
 	public function peyk()

@@ -16,8 +16,6 @@ $(document).ready(function () {
 		var row = $(this).parents('tr');
 		var token = form.find('input[name=_token]').val();
 		var formdata = {_token:token};
-		var amount = Number($(this).data('amount'));
-		var sum = Number($('#sum').data('amount'));
 
 		$.ajaxSetup({
 			headers: {
@@ -30,9 +28,17 @@ $(document).ready(function () {
 			data: formdata,
 			success: function(data){
 				row.remove();
-				total = Number(data);
-				$('#sum').attr('data-amount', total);
+				var total = Number(data.total);
+				var peykShare = Number(data.peyk_share);
 				$('#sum span').text(total.toLocaleString());
+				$('.peyk-share').text(peykShare.toLocaleString());
+				$('#cook-count').text(data.cook_count);
+				if (data.cook_count < 2) {
+					$('#many-cooks-alert').slideUp();
+				}
+				if (data.cook_count < 1) {
+					location.reload();
+				}
 			}
 		});
 

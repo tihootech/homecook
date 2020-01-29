@@ -10,17 +10,24 @@ class Food extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
-    protected $appends = ['persian_type'];
+    protected $appends = ['persian_type', 'cook_share'];
 
     public function getPersianTypeAttribute()
     {
         if ($this->type == 'food') {
-            return 'غذا';
+            return 'غذا - پیش سفارش';
         }elseif ($this->type == 'product') {
             return 'محصول خانگی';
+        }elseif ($this->type == 'online') {
+            return 'غذا - سفارش لحظه ای';
         }else {
             return $this->type;
         }
+    }
+
+    public function getCookShareAttribute()
+    {
+        return percent($this->cost, settings('cook_percent'));
     }
 
     public function getRate()

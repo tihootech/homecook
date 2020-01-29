@@ -7,7 +7,7 @@
 	<div class="tile">
         <div class="container">
 
-            <form action="{{$food->id ? route('food.update', $food->id) : route('food.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{$food->id ? route('food.update', $food->id) : route('food.store')}}" method="post" enctype="multipart/form-data" id="food-form" data-cook-percent="{{settings('cook_percent')}}">
             	@csrf
             	@if (isset($food) && $food->id)
             		@method('PUT')
@@ -87,6 +87,37 @@
             				</div>
             			</div>
             		@endmaster
+
+                    <hr class="w-100">
+
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <span> قیمت اولیه : </span>
+                                <b class="calibri" id="first-price"> {{$food->price}} </b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <span> قیمت با تخفیف : </span>
+                                <b class="calibri" id="price-with-discount"> {{$food->cost}} </b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <span> سهم شما : </span>
+                                <b class="calibri text-info" id="your-share"> {{$food->cook_share}} </b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="w-100">
 
             		<div class="col-md-2 mx-auto">
             			<div class="form-group">

@@ -7,7 +7,7 @@
 			<th> قیمت </th>
 			<th> تعداد </th>
 			<th> قابل پرداخت </th>
-			<th> عملیات </th>
+			<th> حذف </th>
 		</tr>
 	</thead>
 	<tbody>
@@ -20,13 +20,13 @@
 					</a>
 				</td>
 				<td>{{$item->food->persian_type}}</td>
-				<td>{{nf($item->payable)}}</td>
+				<td>{{nf($item->cost)}}</td>
 				<td>{{$item->count}}</td>
-				<td>{{nf($item->total_payable)}}</td>
+				<td>{{nf($item->payable)}}</td>
 				<td>
 					<form class="d-inline" action="{{route('cart.destroy', $item->food->uid)}}" method="post">
 						@csrf
-						<a href="javascript:void" data-toggle="popover" data-trigger="hover" data-content="حذف" data-placement="top" data-action="delete-from-cart" data-amount="{{$item->total_payable}}">
+						<a href="javascript:void" data-action="delete-from-cart">
 							<i class="material-icons">close</i>
 						</a>
 					</form>
@@ -36,12 +36,12 @@
 	</tbody>
 </table>
 <div class="d-flex justify-content-between text-center">
-	<p id="sum">
+	<p>
 		هزینه ارسال <br>
-		<span>{{nf(settings('peyk_share'))}}</span> تومان
+		<span class="peyk-share">{{nf($transaction->peyk_share)}}</span> تومان
 	</p>
-	<p data-amount="{{$sum = $transaction->calc_total() + settings('peyk_share')}}" id="sum">
+	<p id="sum">
 		مجموع <br>
-		<span>{{nf($sum)}}</span> تومان
+		<span>{{nf($transaction->sum)}}</span> تومان
 	</p>
 </div>

@@ -38,21 +38,30 @@ class CartController extends Controller
 
         // finantial data
         $count = $request->count;
-        $payable = $food->getCost();
+        $cost = $food->getCost();
+        $payable = $count * $cost;
 
         // new items in db
         TransactionItem::create([
             'transaction_id' => $transaction->id,
             'food_id' => $food->id,
             'cook_id' => $food->cook_id,
-            'payable' => $payable,
+
+            'cost' => $cost,
             'count' => $count,
-            'total_payable' => $payable * $count,
+            'payable' => $payable,
+
+            'master_share' => percent($payable, $settings->added_price),
+            'tax' => percent($payable, $settings->tax),
+            'cook_share' => percent($payable, $settings->cook_percent),
         ]);
 
         // take care of the session
 		$cart[$food->uid] = $request->count;
 		session(compact('cart'));
+
+        // update total and peyk share for transaction
+        $transaction->update_changes_to_cart();
 
 		return view('includes.added_to_cart');
     }
@@ -156,14 +165,8 @@ class CartController extends Controller
             return back()->withError(__('ERROR'));
         }
         $transaction->update([
-            'user_id' => auth()->id(),
             'customer_id' => $customer->id,
             'address_id' => $address->id,
-            'total' => $transaction->calc_total(),
-            'peyk_share' => settings('peyk_share'),
-            'cook_share' => $transaction->calc_cook_share(),
-            'master_share' => $transaction->calc_master_share(),
-            'tax' => $transaction->calc_tax(),
         ]);
         return redirect()->route('cart.review', $transaction->uid);
     }
@@ -181,11 +184,19 @@ class CartController extends Controller
             $tuid = session('tuid');
             $transaction = Transaction::whereUid($tuid)->first();
             if ($transaction) {
-                TransactionItem::where('transaction_id', $transaction->id)->where('food_id', $food->id)->delete();
+                $item = TransactionItem::where('transaction_id', $transaction->id)->where('food_id', $food->id)->first();
+                $decrement = $item->payed ?? 0;
+                $item->delete();
+                $transaction->update_changes_to_cart();
             }
         }
 
-        return isset($transaction) && $transaction ? $transaction->calc_total() : 0;
+        // prepare output
+        $output['total'] = $transaction->total ?? 0;
+        $output['peyk_share'] = $transaction->peyk_share ?? 0;
+        $output['cook_count'] = isset($transaction) ? $transaction->count_cooks() : 0;
+
+        return $output;
 	}
 
     public function finish($tuid)

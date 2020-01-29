@@ -15,21 +15,17 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('uid');
+            $table->string('uid')->unique()->index();
 
-            $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('peyk_id')->nullable();
             $table->unsignedInteger('customer_id')->nullable();
             $table->unsignedInteger('address_id')->nullable();
 
-            $table->unsignedBigInteger('total')->nullable();
-            $table->unsignedBigInteger('peyk_share')->nullable();
-            $table->unsignedBigInteger('cook_share')->nullable();
-            $table->unsignedBigInteger('master_share')->nullable();
-            $table->unsignedBigInteger('tax')->nullable();
+            $table->unsignedBigInteger('total')->default(0);
+            $table->unsignedBigInteger('peyk_share')->default(0);
 
-            $table->boolean('open')->default(1);
             $table->boolean('ponied')->default(0);
+            $table->boolean('peyk_ponied')->default(0);
 
             $table->softDeletes();
             $table->timestamps();

@@ -67,8 +67,3 @@
 	});
 
 })();
-
-
-$(document).on('click', '.rating > i', function () {
-	$(this).parents('.rating').siblings('textarea[name=body]').slideDown();
-})

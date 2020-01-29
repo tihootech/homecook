@@ -92,23 +92,23 @@
 													@csrf
 
 													<div class="col-md-6 form-group">
-														<input type="text" name="first_name" id="first-name" value="{{old('first_name')}}" class="form-control" placeholder="نام شما" required>
+														<input type="text" name="first_name" value="{{old('first_name')}}" class="form-control" placeholder="نام شما" required>
 													</div>
 
 													<div class="col-md-6 form-group">
-														<input type="text" name="last_name" id="last-name" value="{{old('last_name')}}" class="form-control" placeholder="نام خانوادگی" required>
+														<input type="text" name="last_name" value="{{old('last_name')}}" class="form-control" placeholder="نام خانوادگی" required>
 													</div>
 
 													<div class="col-md-6 form-group">
-														<input type="text" name="mobile" id="mobile" value="{{old('mobile')}}" class="form-control" placeholder="شماره موبایل" required>
+														<input type="text" name="mobile" value="{{old('mobile')}}" class="form-control" placeholder="شماره موبایل" required>
 													</div>
 
 													<div class="col-md-6 form-group">
-														<input type="text" name="username" id="username" value="{{old('username')}}" class="form-control" placeholder="نام کاربری" required>
+														<input type="text" name="username" value="{{old('username')}}" class="form-control" placeholder="نام کاربری" required>
 													</div>
 
 													<div class="col-md-6 form-group">
-														<input type="password" name="password" id="password" class="form-control" placeholder="رمزعبور" required>
+														<input type="password" name="password" class="form-control" placeholder="رمزعبور" required>
 													</div>
 
 													<div class="col-md-6 align-self-end form-group">
@@ -130,11 +130,11 @@
 													@csrf
 
 													<div class="col-md-6 form-group">
-														<input type="text" name="username" id="username" value="{{old('username')}}" class="form-control" placeholder="نام کاربری" required>
+														<input type="text" name="username" value="{{old('username')}}" class="form-control" placeholder="نام کاربری" required>
 													</div>
 
 													<div class="col-md-6 form-group">
-														<input type="password" name="password" id="password" class="form-control" placeholder="رمزعبور" required>
+														<input type="password" name="password" class="form-control" placeholder="رمزعبور" required>
 													</div>
 
 													<div class="col-md-6 form-group">
@@ -165,12 +165,23 @@
 							<div class="col-md-7">
 								<div class="table-responsive-md">
 									@include('includes.cart_items')
+									@if ($transaction->count_cooks() > 1)
+										<div class="alert alert-warning" id="many-cooks-alert">
+											<i class="material-icons icon">info</i>
+											به علت سفارش از
+											<b id="cook-count" class="text-dark mx-1"> {{$transaction->count_cooks()}} </b>
+											آشپز مختلف، هزینه ارسال شما
+											<b class="peyk-share text-dark mx-1">{{nf($transaction->peyk_share)}}</b>
+											تومان
+											میباشد.
+										</div>
+									@endif
 								</div>
 							</div>
 						</div>
 					</div>
 				@else
-					<div class="alert alert-warning">
+					<div class="alert alert-warning mt-5">
 						<i class="material-icons icon">warning</i>
 						سبد خرید شما خالی است.
 					</div>

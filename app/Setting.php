@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     protected $guarded = ['id'];
-	protected $appends = ['master_share'];
+	protected $appends = ['cook_percent'];
 
-	public function getMasterShareAttribute()
+	public function getCookPercentAttribute()
 	{
-		return 100 - $this->cook_share;
+		return 100 - $this->tax - $this->added_price;
 	}
 }

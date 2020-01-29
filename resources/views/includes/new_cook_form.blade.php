@@ -64,7 +64,7 @@
 					<div class="custom-control custom-checkbox">
 						<input type="hidden" name="active" value="0">
 						<input type="checkbox" class="custom-control-input" id="active" name="active" value="1"
-							@if(isset($cook) && $cook->active) checked @endif>
+						 @if($cook->id) {{$cook->active ? 'checked' : ''}}  @else checked @endif>
 						<label class="custom-control-label" for="active">
 							<span class="mr-2"> فعال </span>
 						</label>

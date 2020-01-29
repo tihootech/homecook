@@ -16,12 +16,23 @@ class CreateTransactionItemsTable extends Migration
         Schema::create('transaction_items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('transaction_id');
+
             $table->unsignedInteger('food_id');
             $table->unsignedInteger('cook_id');
-            $table->unsignedBigInteger('payable');
+
+            $table->unsignedBigInteger('cost');
             $table->unsignedSmallInteger('count');
-            $table->unsignedBigInteger('total_payable');
+            $table->unsignedBigInteger('payable');
+
+            $table->unsignedBigInteger('master_share');
+            $table->unsignedBigInteger('tax');
+            $table->unsignedBigInteger('cook_share');
+
             $table->boolean('ponied')->default(0);
+            $table->boolean('cook_ponied')->default(0);
+
+            $table->boolean('delivered')->default(0);
+
             $table->timestamps();
         });
     }

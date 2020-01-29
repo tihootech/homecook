@@ -9,9 +9,14 @@ class TransactionItem extends Model
     protected $guarded = ['id'];
 
     public function food()
-    {
-        return $this->belongsTo(Food::class);
-    }
+	{
+		return $this->belongsTo(Food::class);
+	}
+
+	public function cook()
+	{
+		return $this->belongsTo(Cook::class);
+	}
 
     public function transaction()
     {
