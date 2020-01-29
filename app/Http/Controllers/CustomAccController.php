@@ -36,7 +36,7 @@ class CustomAccController extends Controller
 				$class = class_name($acc_type);
 				$found = $class::whereMobile($request->keyword)->first();
 				if ($found) {
-					$users [$found->user_id]= $found;
+					$users [$found->user_id]= $found->owner;
 				}
 			}
 
