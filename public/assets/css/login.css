@@ -485,3 +485,11 @@ input.input100 {
 ul {
 	font-size: 14px;
 }
+
+.hr-primary {
+	border-color: #c49b63;
+}
+
+.hr-light {
+	border-color: #979797;
+}

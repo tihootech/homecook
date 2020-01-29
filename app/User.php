@@ -41,6 +41,7 @@ class User extends Authenticatable
         switch ($this->type) {
             case 'cook': return 'همکار'; break;
             case 'customer': return 'مشتری'; break;
+            case 'peyk': return 'پیک'; break;
             default: return strtoupper($this->type); break;
         }
     }

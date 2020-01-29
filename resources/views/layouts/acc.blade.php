@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/util.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/navbar.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/login.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/login.css?v=1.1')}}">
 </head>
 <body>
 
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script src="{{asset('assets/js/jquery.min.js')}}"></script>
 	<script src="{{asset('assets/js/popper.min.js')}}"></script>
 	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
