@@ -65,6 +65,7 @@ Route::get('text-messages', 'TextMessageController@index')->name('text_messages'
 Route::resource('food', 'FoodController');
 Route::get('سفارش-غذا/{order?}', 'LandingController@order')->name('order_food');
 Route::get('محصولات-خانگی/{order?}', 'LandingController@order')->name('order_product');
+Route::get('جستجو', 'LandingController@search')->name('search');
 Route::get('غذا/{title}/{uid}', 'LandingController@show_food')->name('show_food');
 Route::post('food/confirm_all', 'FoodController@confirm_all')->name('food.confirm_all');
 Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm');

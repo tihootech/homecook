@@ -55,21 +55,21 @@ class LandingController extends Controller
         return view('landing.show_food', compact('food'));
     }
 
+    public function search(Request $request)
+    {
+        $food = $request->f;
+        $foods = Food::getList();
+        $foods = $foods->whereConfirmed(1)->where('title', 'like', "%$food%")->paginate(9);
+        return view('landing.search', compact('foods'));
+    }
+
     public function order($order = 1, Request $request)
     {
         $type = rn() == 'order_food' ? 'food' : 'product';
         $slides = Slide::wherePage(rn())->get();
         $cats = Cat::whereType($type)->get();
 
-        $foods = Food::select(
-            'foods.*',
-            \DB::raw('(price - ROUND((price * discount) / 100, 2 )) AS cost'),
-            \DB::raw('CASE WHEN AVG(reviews.rate) IS NULL THEN 0 ELSE AVG(reviews.rate) END AS rate'),
-            \DB::raw('SUM(transaction_items.count) AS sells')
-        )->leftJoin('reviews', 'foods.id', '=', 'reviews.food_id')
-        ->leftJoin('transaction_items', 'foods.id', '=', 'transaction_items.food_id');
-
-        // TODO: check and fix sells attribute
+        $foods = Food::getList();
 
         $foods = $foods->whereConfirmed(1)->whereType($type);
         if ($request->t) {

@@ -34,11 +34,11 @@
     				</div>
     			</div>
     			<div class="book p-4">
-    				<h3 class="text-center"> جستجو در سایت </h3>
-    				<form action="#" class="appointment-form">
+    				<h3 class="text-center"> جستجو در محصولات و غذا ها </h3>
+    				<form action="{{route('search')}}" class="appointment-form">
     					<div class="d-flex justify-content-center">
     						<div class="form-group w-75">
-    							<input type="text" class="form-control" placeholder="عبارت مورد نظر">
+    							<input type="text" name="f" class="form-control" placeholder="عبارت مورد نظر">
     						</div>
     					</div>
     					<div class="d-flex justify-content-center">
