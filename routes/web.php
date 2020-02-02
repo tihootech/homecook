@@ -39,7 +39,7 @@ Route::post('cart/add', 'CartController@add')->name('cart.add');
 Route::post('cart/register', 'CartController@register')->name('cart.register');
 Route::post('cart/login', 'CartController@login')->name('cart.login');
 Route::get('checkout', 'CartController@checkout')->name('cart.checkout');
-Route::get('cart/code/{uid}', 'CartController@code')->name('cart.code');
+Route::get('cart/code/{uid}/{in_cart}', 'CartController@code')->name('cart.code');
 Route::get('cart/address/{uid}', 'CartController@address')->name('cart.address');
 Route::get('cart/review/{tuid}', 'CartController@review')->name('cart.review');
 Route::post('cart/activate/{uid}', 'CartController@activate')->name('cart.activate');

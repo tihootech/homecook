@@ -1,5 +1,7 @@
 <form class="row justify-content-center billing-form" action="{{route('cart.activate', $customer->uid)}}" method="post">
 	@csrf
+	<input type="hidden" name="in_cart" value="{{$in_cart}}">
+
 	<div class="col-lg-{{$cols}} form-group">
 		<label for="code"> کد 6 رقمی ارسال شده به موبایل شما </label>
 		<input type="text" dir="ltr" id="code" name="code" class="form-control" value="{{old('code')}}">

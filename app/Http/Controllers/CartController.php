@@ -79,12 +79,12 @@ class CartController extends Controller
 			'first_name' => 'required|string|max:190',
 			'last_name' => 'required|string|max:190',
 			'username' => 'required|string|min:3|max:100|unique:users',
-			'password' => 'required|string|min:4',
+			'password' => 'required|string|min:4|confirmed',
 			'mobile' => 'required|string|digits:11|unique:customers',
 		]);
         $data['password'] = bcrypt('password');
 		$customer = Customer::make($data);
-		return redirect()->route('cart.code', $customer->uid);
+		return redirect()->route('cart.code', [$customer->uid, $request->in_cart]);
 	}
 
     public function login(Request $request)
@@ -102,11 +102,11 @@ class CartController extends Controller
         }
 	}
 
-	public function code($uid)
+	public function code($uid, $in_cart)
 	{
 		$type = 'code';
 		$customer = Customer::whereUid($uid)->firstOrFail();
-		return view('landing.checkout', compact('type', 'customer'));
+		return view('landing.checkout', compact('type', 'customer', 'in_cart'));
 	}
 
     public function send_again($mobile)
@@ -140,7 +140,11 @@ class CartController extends Controller
 			$user = $customer->user;
 			$user->acc_verified_at = Carbon::now();
 			$user->save();
-			return redirect()->route('cart.address', $customer->uid);
+            if ($request->in_cart) {
+                return redirect()->route('cart.address', $customer->uid);
+            }else {
+                return redirect()->route('home');
+            }
 		}else {
 			return back()->withErrors(['کد وارد شده صحیح نیست'])->withInput();
 		}

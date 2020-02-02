@@ -87,37 +87,7 @@
 											</a>
 											<div id="register" class="collapse show my-3" data-parent="#account">
 
-												<form class="row justify-content-center" action="{{route('cart.register')}}" method="post">
-
-													@csrf
-
-													<div class="col-md-6 form-group">
-														<input type="text" name="first_name" value="{{old('first_name')}}" class="form-control" placeholder="نام شما" required>
-													</div>
-
-													<div class="col-md-6 form-group">
-														<input type="text" name="last_name" value="{{old('last_name')}}" class="form-control" placeholder="نام خانوادگی" required>
-													</div>
-
-													<div class="col-md-6 form-group">
-														<input type="text" name="mobile" value="{{old('mobile')}}" class="form-control" placeholder="شماره موبایل" required>
-													</div>
-
-													<div class="col-md-6 form-group">
-														<input type="text" name="username" value="{{old('username')}}" class="form-control" placeholder="نام کاربری" required>
-													</div>
-
-													<div class="col-md-6 form-group">
-														<input type="password" name="password" class="form-control" placeholder="رمزعبور" required>
-													</div>
-
-													<div class="col-md-6 align-self-end form-group">
-														<button type="submit" class="btn btn-primary btn-block">
-															ایجاد حساب کاربری
-														</button>
-													</div>
-
-												</form>
+												@include('includes.register_form', ['in_cart'=>true])
 
 											</div>
 											<a href="#login" data-toggle="collapse" class="d-block">

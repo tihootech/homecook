@@ -16,7 +16,7 @@ class CustomAccController extends Controller
 
     public function register_form()
     {
-
+		return view('auth.register');
     }
 
 	public function forget_password(Request $request)
