@@ -121,6 +121,7 @@ class FoodController extends Controller
             'cat_id' => 'nullable|exists:cats,id',
             'price' => 'required|integer',
             'discount' => 'nullable|integer|min:0|max:99',
+            'min' => 'nullable|integer|min:1',
             'material' => 'required',
             'type' => [
                 'required',

@@ -34,6 +34,12 @@
 				<a href="{{$food->public_link()}}"> {{$food->title}} </a>
 			</h3>
 			<p class="text-center"> {{$food->material}} </p>
+			@if ($food->min > 1)
+				<p class="text-center">
+					<i class="text-primary material-icons icon">info</i>
+					حداقل تعداد سفارش : {{$food->min}}
+				</p>
+			@endif
 			<div class="d-flex justify-content-around">
 				<div class="text-light">
 					<span @if($food->discount) class="off" @endif> {{toman($food->price)}} </span>
@@ -45,14 +51,14 @@
 				@endif
 			</div>
 			<hr class="hr-primary">
-			<div class="row justify-content-between">
-				<div class="col-lg-4 my-1">
+			<div class="row px-3">
+				<div class="col-lg-4 px-1 my-1">
 					<a href="{{$food->public_link()}}" class="btn btn-primary btn-outline-primary btn-block">
 						<i class="material-icons ml-1">list</i>
 						جزییات
 					</a>
 				</div>
-				<div class="col-lg-8 my-1">
+				<div class="col-lg-8 px-1 my-1">
 					<a href="#food-{{$food->uid}}" data-toggle="collapse" class="btn btn-primary btn-outline-primary btn-block">
 						<i class="material-icons ml-1">add_shopping_cart</i>
 						افزودن به سبد خرید
@@ -61,6 +67,12 @@
 			</div>
 			<form class="collapse" action="{{route('cart.add')}}" method="post" id="food-{{$food->uid}}">
 				<hr>
+				<div class="alert alert-danger text-center hidden" id="min-error-{{$food->uid}}">
+					<i class="material-icons icon">error</i>
+					برای این محصول حداقل تعداد سفارش
+					{{$food->min}}
+					عدد میباشد.
+				</div>
 				<p class="text-center"> لطفا تعداد را انتخاب کنید </p>
 				@csrf
 				<input type="hidden" name="food" value="{{$food->uid}}">
@@ -69,14 +81,14 @@
 						<span>-</span>
 					</div>
 					<div class="col-8 col-lg-6 mx-auto input">
-						<input type="text" name="count" value="1" class="form-control">
+						<input type="text" name="count" value="{{$food->min}}" class="form-control">
 					</div>
 					<div class="col-2 change" data-action='add'>
 						<span>+</span>
 					</div>
 				</div>
 				<div class="my-3 text-center">
-					<a href="javascript:void" class="btn btn-primary btn-outline-primary" data-action="add-to-cart">
+					<a href="javascript:void" class="btn btn-primary btn-outline-primary" data-action="add-to-cart" data-min="{{$food->min}}">
 						<i class="material-icons ml-1">add</i>
 						افزودن
 					</a>

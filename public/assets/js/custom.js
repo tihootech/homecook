@@ -59,24 +59,36 @@ $(document).ready(function () {
 	$('[data-action=add-to-cart]').click(function () {
 		var col = $(this).parents('.food-col');
 		var form = $(this).parents('form');
+		var min = $(this).data('min');
 		var count = form.find('input[name=count]').val();
 		var food = form.find('input[name=food]').val();
 		var token = form.find('input[name=_token]').val();
 		var formdata = {count:count, food:food, _token:token};
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': token
-			}
-		})
-		$.ajax({
-			url: form.attr('action'),
-			type: "POST",
-			data: formdata,
-			success: function(data){
-				form.hide();
-				col.append(data);
-			}
-		});
+
+		if (count >= min) {
+
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': token
+				}
+			})
+			$.ajax({
+				url: form.attr('action'),
+				type: "POST",
+				data: formdata,
+				success: function(data){
+					form.hide();
+					col.append(data);
+					$('#min-error-'+food).slideUp();
+				}
+			});
+
+		}else {
+
+			$('#min-error-'+food).slideDown();
+
+		}
+
 	});
 
 });

@@ -21,6 +21,7 @@ class CreateFoodsTable extends Migration
             $table->string('title');
             $table->unsignedBigInteger('price');
             $table->unsignedSmallInteger('discount')->default(0);
+            $table->unsignedSmallInteger('min')->default(1);
             $table->text('material')->nullable();
             $table->text('info')->nullable();
             $table->string('image');

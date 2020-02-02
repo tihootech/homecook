@@ -12434,3 +12434,11 @@ footer a:hover {
 .text-gray {
 	color: gray;
 }
+
+.search-form-icon {
+	font-size: 14px;
+	font-weight: bold;
+	position: relative;
+	top: 3px;
+	margin-right: 2px;
+}

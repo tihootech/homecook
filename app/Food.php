@@ -27,7 +27,7 @@ class Food extends Model
 
     public function getCookShareAttribute()
     {
-        return percent($this->cost, settings('cook_percent'));
+        return percent($this->getCost(), settings('cook_percent'));
     }
 
     public static function getList()

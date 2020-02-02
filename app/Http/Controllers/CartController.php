@@ -23,17 +23,18 @@ class CartController extends Controller
 
     public function add(Request $request)
     {
+
+        $food = Food::whereUid($request->food)->firstOrFail();
+
         // validate request
 		$request->validate([
-			'count'=>'required|integer',
-			'food'=>'required|exists:foods,uid',
+			'count'=>'required|integer|min:'.$food->min,
 		]);
 
         // extract session and initial variables
         $cart = current_cart(true);
         $tuid = session('tuid');
         $settings = settings();
-        $food = Food::whereUid($request->food)->firstOrFail();
         $transaction = Transaction::whereUid($tuid)->firstOrFail();
 
         // finantial data

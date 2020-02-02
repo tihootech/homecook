@@ -52,6 +52,13 @@
 
             		<div class="col-md-3">
             			<div class="form-group">
+            				<label for="min"> حداقل تعداد سفارش </label>
+            				<input type="number" name="min" id="min" class="form-control" value="{{$food->min ?? old('min') ?? 1}}">
+            			</div>
+            		</div>
+
+            		<div class="col-md-3">
+            			<div class="form-group">
             				<label for="image"> @if($food->id) تغییر @endif تصویر </label>
             				<input type="file" name="image" id="image" class="form-control" @unless($food->id) required @endunless>
             			</div>
@@ -94,7 +101,7 @@
                         <div class="card text-center">
                             <div class="card-body">
                                 <span> قیمت اولیه : </span>
-                                <b class="calibri" id="first-price"> {{$food->price}} </b>
+                                <b class="calibri" id="first-price"> {{nf($food->price)}} </b>
                             </div>
                         </div>
                     </div>
@@ -103,7 +110,7 @@
                         <div class="card text-center">
                             <div class="card-body">
                                 <span> قیمت با تخفیف : </span>
-                                <b class="calibri" id="price-with-discount"> {{$food->cost}} </b>
+                                <b class="calibri" id="price-with-discount"> {{nf($food->getCost())}} </b>
                             </div>
                         </div>
                     </div>
@@ -112,7 +119,7 @@
                         <div class="card text-center">
                             <div class="card-body">
                                 <span> سهم شما : </span>
-                                <b class="calibri text-info" id="your-share"> {{$food->cook_share}} </b>
+                                <b class="calibri text-info" id="your-share"> {{nf($food->cook_share)}} </b>
                             </div>
                         </div>
                     </div>

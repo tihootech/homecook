@@ -88,22 +88,23 @@
 	@if ($foods->count())
 		<div class="tile">
 
-			<div class="table-responsive-lg">
+			<div class="table-responsive">
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th> ردیف </th>
                             @master
-                                <th> همکار </th>
+                                <th style="min-width:100px"> همکار </th>
                             @endmaster
-							<th> عنوان </th>
-							<th> دسته بندی </th>
-							<th> نوع </th>
-							<th> قیمت </th>
-                            <th> تخفیف </th>
-							<th> قیمت با تخفیف </th>
-							<th> تاییدشده </th>
-							<th> تصویر </th>
+							<th style="min-width:150px"> عنوان </th>
+							<th style="min-width:100px"> دسته بندی </th>
+							<th style="min-width:100px"> نوع </th>
+							<th style="min-width:100px"> قیمت </th>
+                            <th style="min-width:100px"> تخفیف </th>
+							<th style="min-width:150px"> قیمت با تخفیف </th>
+                            <th style="min-width:75px"> حداقل </th>
+							<th style="min-width:75px"> تاییدشده </th>
+							<th style="min-width:75px"> تصویر </th>
 							<th colspan="4"> عملیات </th>
 						</tr>
 					</thead>
@@ -138,6 +139,7 @@
                                     @endif
                                 </td>
                                 <td> {{toman($food->getCost())}} </td>
+                                <td class="calibri"> {{$food->min}} </td>
                                 <td> @include('dashboard.partials.yesno', ['boolean' => $food->confirmed]) </td>
                                 <td align="center">
                                     <a href="javascript:void" data-toggle="popover" data-placement="right" data-html="true"

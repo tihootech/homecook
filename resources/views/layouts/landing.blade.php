@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/select2.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css?v=1.3')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css?v=1.4')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/navbar.css')}}">
 </head>
 
@@ -58,8 +58,8 @@
 	<script src="{{asset("dashboard/js/plugins/select2.min.js")}}"></script>
     <script src="{{asset('assets/js/jquery.animateNumber.min.js')}}"></script>
     <script src="{{asset('assets/js/scrollax.min.js')}}"></script>
-    <script src="{{asset('assets/js/main.js?v=1.3')}}"></script>
-    <script src="{{asset('assets/js/custom.js?v=1.1')}}"></script>
+    <script src="{{asset('assets/js/main.js?v=1.4')}}"></script>
+    <script src="{{asset('assets/js/custom.js?v=1.2')}}"></script>
 	<script src="{{asset("js/general.js")}}"></script>
 
 

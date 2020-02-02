@@ -43,7 +43,10 @@
     					</div>
     					<div class="d-flex justify-content-center">
     						<div class="form-group w-50">
-    							<input type="submit" value="جستجو" class="btn btn-white py-3 px-4">
+                                <button type="submit" class="btn btn-white py-3 px-4">
+                                    جستجو
+                                    <i class="material-icons search-form-icon">search</i>
+                                </button>
     						</div>
     					</div>
     				</form>
