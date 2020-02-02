@@ -17,6 +17,7 @@ class TextMessage extends Model
             case 'code': return 'کد تایید'; break;
             case 'newpeyk': return 'پیک جدید'; break;
             case 'setpeyk': return 'اطلاع به پیک'; break;
+            case 'neworder': return 'سفارش جدید مشتری'; break;
             // TODO: cookmodifyagain
             default: return $this->template; break;
         }

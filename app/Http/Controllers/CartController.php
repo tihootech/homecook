@@ -204,17 +204,27 @@ class CartController extends Controller
         return $output;
 	}
 
-    public function finish($tuid)
+    public function finish($tuid, Request $request)
     {
+        // validate
+        $request->validate([
+            'time' => 'required|integer|min:12|max:18'
+        ]);
+
         // find transaction
         $transaction = Transaction::whereUid($tuid)->firstOrFail();
 
         // pony transaction
         $transaction->ponied = 1;
+        $transaction->time = $request->time;
+        $transaction->delivery = $transaction->generate_delivery();
         $transaction->save();
         TransactionItem::where('transaction_id', $transaction->id)->update([
             'ponied' => 1
         ]);
+
+        // text message
+        TextMessageController::store('neworder', $transaction->customer->mobile, [route('view_transaction', ['customer', $transaction->uid])]);
 
         // clear session data
         session([

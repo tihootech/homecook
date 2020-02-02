@@ -138,9 +138,13 @@ class LandingController extends Controller
         return view('landing.message', compact('message', 'slides'));
     }
 
-    public function peyk_view_transaction($tuid)
+    public function view_transaction($type, $tuid)
     {
         $transaction = Transaction::whereUid($tuid)->firstOrFail();
-        return view('landing.peyk', compact('transaction'));
+        $list = ['peyk', 'customer'];
+        if (!in_array($type, $list)) {
+            abort(404);
+        }
+        return view('landing.view_transaction', compact('transaction', 'type'));
     }
 }

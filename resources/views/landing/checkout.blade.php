@@ -43,9 +43,25 @@
 								<b> شماره تماس : </b>
 								<span> {{$transaction->customer->mobile}} </span>
 							</p>
+							<p>
+								<b> تاریخ تحویل : </b>
+								<span class="mx-1"> {{$transaction->generate_delivery('persian')}} </span>
+								<span class="mx-1"> ساعت 12 الی 18 </span>
+							</p>
 							<form action="{{route('cart.finish', $transaction->uid)}}" method="post">
 								@csrf
-								<button type="submit" class="btn btn-primary p-3 px-4"> تایید و پرداخت </button>
+								<div class="row justify-content-center">
+									<div class="col-lg-3 col-md-6">
+										<select class="simple-select2" name="time">
+											@for ($i=12; $i <= 18; $i++)
+												<option value="{{$i}}" @if($i==14) selected @endif> {{$i}} بعد از ظهر </option>
+											@endfor
+										</select>
+									</div>
+									<div class="col-lg-2 col-md-6">
+										<button type="submit" class="btn btn-primary btn-block p-3 px-4"> تایید و پرداخت </button>
+									</div>
+								</div>
 							</form>
 						</div>
 					@else

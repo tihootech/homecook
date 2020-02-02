@@ -27,6 +27,9 @@ class CreateTransactionsTable extends Migration
             $table->boolean('ponied')->default(0);
             $table->boolean('peyk_ponied')->default(0);
 
+            $table->date('delivery')->nullable();
+            $table->string('time')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

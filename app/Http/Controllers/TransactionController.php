@@ -60,7 +60,7 @@ class TransactionController extends Controller
         $peyk = Peyk::findOrFail($request->peyk);
         $transaction->peyk_id = $peyk->id;
         $transaction->save();
-        TextMessageController::store('setpeyk', $peyk->mobile, [route('peyk.view_transaction', $transaction->uid)]);
+        TextMessageController::store('setpeyk', $peyk->mobile, [route('view_transaction', ['peyk', $transaction->uid])]);
         return back()->withMessage(__('SUCCESS'));
     }
 }

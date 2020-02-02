@@ -11,6 +11,11 @@ AOS.init({
        width: '100%',
     });
 
+    $('.simple-select2').select2({
+       width: '100%',
+       minimumResultsForSearch: Infinity
+    });
+
     $('[data-toggle=popover]').popover();
 
     $(window).stellar({

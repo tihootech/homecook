@@ -7,7 +7,9 @@
 			<th> قیمت </th>
 			<th> تعداد </th>
 			<th> قابل پرداخت </th>
-			<th> حذف </th>
+			@if (!isset($no_action))
+				<th> حذف </th>
+			@endif
 		</tr>
 	</thead>
 	<tbody>
@@ -23,14 +25,16 @@
 				<td>{{nf($item->cost)}}</td>
 				<td>{{$item->count}}</td>
 				<td>{{nf($item->payable)}}</td>
-				<td>
-					<form class="d-inline" action="{{route('cart.destroy', $item->food->uid)}}" method="post">
-						@csrf
-						<a href="javascript:void" data-action="delete-from-cart">
-							<i class="material-icons">close</i>
-						</a>
-					</form>
-				</td>
+				@if (!isset($no_action))
+					<td>
+						<form class="d-inline" action="{{route('cart.destroy', $item->food->uid)}}" method="post">
+							@csrf
+							<a href="javascript:void" data-action="delete-from-cart">
+								<i class="material-icons">close</i>
+							</a>
+						</form>
+					</td>
+				@endif
 			</tr>
 		@endforeach
 	</tbody>

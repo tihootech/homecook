@@ -73,7 +73,9 @@ Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm'
 // other routes
 Route::get('landing/message', 'LandingController@message')->name('landing.message');
 Route::post('transaction/{transaction}/peyk', 'TransactionController@set_peyk')->name('transaction.set_peyk');
-Route::get('order/peyk/{tuid}', 'LandingController@peyk_view_transaction')->name('peyk.view_transaction');
+
+// peygiri
+Route::get('order/{type}/{tuid}', 'LandingController@view_transaction')->name('view_transaction');
 
 // other resources
 Route::resource('review', 'ReviewController');

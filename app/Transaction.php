@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class Transaction extends Model
 {
@@ -27,30 +28,6 @@ class Transaction extends Model
     {
         return TransactionItem::where('transaction_id', $this->id)->distinct('cook_id')->count();
     }
-
-    // public function calc_cook_share()
-    // {
-    //     $total = $this->total;
-    //     $pure_total = $total - settings('peyk_share');
-    //     $tax = percent($pure_total, settings('tax'));
-    //     $added_price = percent($pure_total, settings('added_price'));
-    //     $cook_share = $pure_total - $tax - $added_price;
-    //     return $cook_share;
-    // }
-    //
-    // public function calc_master_share()
-    // {
-    //     $total = $this->total;
-    //     $pure_total = $total - settings('peyk_share');
-    //     return percent($pure_total, settings('added_price'));
-    // }
-    //
-    // public function calc_tax()
-    // {
-    //     $total = $this->total;
-    //     $pure_total = $total - settings('peyk_share');
-    //     return percent($pure_total, settings('tax'));
-    // }
 
     public static function make()
     {
@@ -80,4 +57,14 @@ class Transaction extends Model
 		return $this->belongsTo(Address::class);
 	}
 
+    public function generate_delivery($type='english')
+    {
+        $now = Carbon::now();
+        $start = '00:00:00';
+        $end   = '18:00:00';
+        $time  = $now->format('H:i:s');
+        $days = ($time >= $start && $time <= $end) ? 1 : 2;
+        $delivery = $now->addDays($days);
+        return $type == 'persian' ? human_date($delivery) : $delivery->format('Y-m-d');
+    }
 }
