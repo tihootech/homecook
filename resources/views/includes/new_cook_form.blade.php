@@ -1,4 +1,4 @@
-<form action="{{isset($cook) && $cook->id ? (master() ? route('cook.update', $cook->id) : route('cook.cook_update', $cook->uid) ) : route('cook.store')}}" method="post" class="billing-form ftco-bg-dark p-3 p-md-5">
+<form action="{{isset($cook) && $cook->id ? (master() ? route('cook.update', $cook->id) : route('cook.cook_update', $cook->uid) ) : route('cook.store')}}" method="post" class="billing-form ftco-bg-dark p-3 p-md-5" data-state-change-route="{{route('state_change')}}">
 	@csrf
 	@if (isset($cook) && $cook->id)
 		@method('PUT')
@@ -37,13 +37,25 @@
 		<div class="col-md-4">
 			<div class="form-group">
 				<label for="state"> * استان </label>
-				<input type="text" name="state" id="state" class="form-control" value="{{$cook->state ?? old('state')}}" required>
+				<select class="select2" name="state_id" id="state" required>
+					@foreach ($states as $state)
+						<option value="{{$state->id}}" @if(isset($cook) && $cook->state_id == $state->id ) selected @elseif($state->id == 22) selected @endif>
+							{{$state->name}}
+						</option>
+					@endforeach
+				</select>
 			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="form-group">
 				<label for="city"> * شهر </label>
-				<input type="text" name="city" id="city" class="form-control" value="{{$cook->city ?? old('city')}}" required>
+				<select class="select2" name="city_id" id="cities" required>
+					@foreach ($cities as $city)
+						<option value="{{$city->id}}" @if(isset($cook) && $cook->city_id == $city->id ) selected @elseif($city->id == 936) selected @endif>
+							{{$city->name}}
+						</option>
+					@endforeach
+				</select>
 			</div>
 		</div>
 		<div class="col-md-4">

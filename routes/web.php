@@ -80,6 +80,9 @@ Route::post('review/{review}/accept', 'ReviewController@accept')->name('review.a
 Route::resource('transaction', 'TransactionController');
 Route::resource('peyk', 'PeykController')->except('show');
 
+// ajaxes
+Route::get('ajax/state', 'AjaxController@state_change')->name('state_change');
+
 // comment
 Route::put('comment/{comment}/confirm', 'CommentController@confirm')->name('comment.confirm');
 Route::post('comment/confirm_all', 'CommentController@confirm_all')->name('confirm_all_comments');

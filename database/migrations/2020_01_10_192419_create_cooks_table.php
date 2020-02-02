@@ -21,8 +21,8 @@ class CreateCooksTable extends Migration
             $table->string('last_name');
             $table->string('telephone')->nullable();
             $table->string('mobile')->unique();
-            $table->string('state');
-            $table->string('city');
+            $table->unsignedInteger('state_id');
+            $table->unsignedInteger('city_id');
             $table->string('hood');
             $table->text('address');
             $table->text('modify_reason')->nullable();

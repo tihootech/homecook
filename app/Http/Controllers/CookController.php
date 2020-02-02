@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cook;
+use App\City;
+use App\State;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -44,7 +46,9 @@ class CookController extends Controller
     public function create()
     {
         $cook = new Cook;
-        return view('dashboard.cooks.form', compact('cook'));
+        $states = State::all();
+        $cities = City::where('state_id', 22)->get();
+        return view('dashboard.cooks.form', compact('cook', 'cities', 'states'));
     }
 
     public function store(Request $request)
@@ -156,8 +160,8 @@ class CookController extends Controller
             'last_name' => 'required|string|max:190',
             'telephone' => 'nullable|digits:11',
             'mobile' => 'required|digits:11|unique:cooks,mobile,'.$id,
-            'state' => 'required|string|max:190',
-            'city' => 'required|string|max:190',
+            'state_id' => 'required|exists:states,id',
+            'city_id' => 'required|exists:cities,id',
             'hood' => 'required|string|max:190',
             'address' => 'required',
         ]);

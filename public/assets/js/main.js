@@ -7,6 +7,10 @@ AOS.init({
 
     "use strict";
 
+    $('.select2').select2({
+       width: '100%',
+    });
+
     $('[data-toggle=popover]').popover();
 
     $(window).stellar({

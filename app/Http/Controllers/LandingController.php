@@ -11,6 +11,8 @@ use App\User;
 use App\Cat;
 use App\Slide;
 use App\Review;
+use App\City;
+use App\State;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -35,7 +37,9 @@ class LandingController extends Controller
     public function new_cook()
     {
         $slides = Slide::wherePage('new_cook')->get();
-        return view('landing.new_cook', compact('slides'));
+        $states = State::all();
+        $cities = City::where('state_id', 22)->get();
+        return view('landing.new_cook', compact('slides', 'cities', 'states'));
     }
 
     public function show_cook($name, $uid)
