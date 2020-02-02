@@ -52,208 +52,21 @@
     	</div>
     </section>
 
-    <section class="ftco-about d-md-flex">
-    	<div class="one-half img" style="background-image: url('{{asset($website->about_image)}}');"></div>
-    	<div class="one-half ftco-animate">
-    		<div class="overlap">
-    			<div class="heading-section ftco-animate ">
-    				<span class="subheading">About Us</span>
-    				<h2 class="mb-4"> درباره ما </h2>
-    			</div>
-    			<div class="about-text">
-    				<p class="rtl-justify">{{$website->about}}</p>
-    				<a href="{{route('new_cook')}}" class="btn btn-primary btn-outline-primary px-4 py-3">
-    					برای همکاری با ما کلیک کنید
-    				</a>
-    			</div>
-    		</div>
-    	</div>
-    </section>
 
-    <section class="ftco-section ftco-services">
-    	<div class="container">
-    		<div class="row">
+    @include('landing.index_sections.order_food')
 
-                @foreach ($website->columns() as $col)
-                    <div class="col-md-4 ftco-animate">
-        				<div class="media d-block text-center block-6 services">
-        					<div class="icon d-flex justify-content-center align-items-center mb-5">
-        						<span class="material-icons">{{$col[0]}}</span>
-        					</div>
-        					<div class="media-body">
-        						<h3 class="heading">{{$col[1]}}</h3>
-        						<p>{{$col[2]}}</p>
-        					</div>
-        				</div>
-        			</div>
-                @endforeach
+    @include('landing.index_sections.cols')
 
-    		</div>
-    	</div>
-    </section>
+    @include('landing.index_sections.products')
 
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row align-items-center">
-    			<div class="col-md-6 pl-md-5">
-    				<div class="heading-section text-md-right ftco-animate">
-    					<span class="subheading">Order</span>
-    					<h2 class="mb-4"> سفارش غذا </h2>
-    					<p class="mb-4 rtl-justify">{{$website->order_food}}</p>
-    					<p><a href="{{route('order_food')}}" class="btn btn-primary btn-outline-primary px-4 py-3">مشاهده منوی کامل</a></p>
-    				</div>
-    			</div>
-    			<div class="col-md-6">
-    				<div class="row">
-    					@foreach ($foods as $food)
-                            <div class="col-md-6">
-        						<div class="menu-entry">
-        							<a href="{{$food->public_link()}}" class="img"
-                                        style="background-image: url('{{asset($food->image)}}');">
-                                    </a>
-        						</div>
-        					</div>
-                        @endforeach
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
+    @include('landing.index_sections.testimonial')
 
-    <section class="ftco-counter ftco-bg-dark img" id="section-counter" style="background-image: url('{{asset($website->statics_image)}}')" data-stellar-background-ratio="0.5">
-    	<div class="overlay"></div>
-    	<div class="container">
-    		<div class="row justify-content-center">
-    			<div class="col-md-10">
-    				<div class="row">
-    					<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-    						<div class="block-18 text-center">
-    							<div class="text">
-    								<div class="icon"> <span class="material-icons">people</span> </div>
-    								<strong class="number" data-number="{{$counts['cooks']}}">0</strong>
-    								<span>آشپز مختلف</span>
-    							</div>
-    						</div>
-    					</div>
-    					<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-    						<div class="block-18 text-center">
-    							<div class="text">
-    								<div class="icon"> <span class="material-icons">fastfood</span> </div>
-    								<strong class="number" data-number="{{$counts['foods']}}">0</strong>
-    								<span>غذای گوناگون</span>
-    							</div>
-    						</div>
-    					</div>
-    					<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-    						<div class="block-18 text-center">
-    							<div class="text">
-    								<div class="icon"> <span class="material-icons">room_service</span> </div>
-    								<strong class="number" data-number="{{$counts['orders']}}">0</strong>
-    								<span>سفارش غذا</span>
-    							</div>
-    						</div>
-    					</div>
-    					<div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-    						<div class="block-18 text-center">
-    							<div class="text">
-    								<div class="icon"> <span class="material-icons">emoji_emotions</span> </div>
-    								<strong class="number" data-number="{{$counts['users']}}">0</strong>
-    								<span>کاربر فعال</span>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
+    @include('landing.index_sections.blogs')
 
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5 pb-3">
-    			<div class="col-md-7 heading-section ftco-animate text-center">
-    				<span class="subheading">Shop</span>
-    				<h2 class="mb-4">محصولات خانگی</h2>
-    				<p>{{$website->order_product}}</p>
-    			</div>
-    		</div>
-    		<div class="row">
-    			@if ($products->count())
-                    @foreach ($products as $food)
-                        @include('includes.food_col')
-                    @endforeach
-                @else
-                    <div class="alert alert-danger mx-auto">
-                        <p class="m-0"> <i class="material-icons icon">error</i> هنوز هیچ محصولی در سیستم ثبت نشده. </p>
-                    </div>
-                @endif
-    		</div>
-    		<hr class="hr-primary">
-    		<div class="text-center">
-    			<a href="{{route('order_product')}}" class="btn btn-primary btn-outline-primary px-4 py-3">
-    				مشاهده همه محصولات خانگی
-    			</a>
-    		</div>
-    	</div>
-    </section>
+    @include('landing.index_sections.statics')
 
-    <section class="ftco-section img" id="ftco-testimony" style="background-image: url('{{asset($website->testimonial_image)}}');" data-stellar-background-ratio="0.5">
-    	<div class="overlay"></div>
-    	<div class="container">
-    		<div class="row justify-content-center mb-5">
-    			<div class="col-md-7 heading-section text-center ftco-animate">
-    				<span class="subheading">Testimony</span>
-    				<h2 class="mb-4">نظرات کاربران</h2>
-    			</div>
-    		</div>
-    	</div>
-    	<div class="container-wrap">
-    		<div class="row d-flex no-gutters">
-    			@foreach ($reviews as $ri => $review)
-                    <div class="col-lg align-self-sm-end ftco-animate">
-        				<div class="testimony @if($ri%2==0) overlay @endif">
-        					<blockquote>
-        						<p>
-        							&rdquo;
-        							{{$review->body}}
-        							&ldquo;
-        						</p>
-        					</blockquote>
-        				</div>
-        			</div>
-                @endforeach
-    		</div>
-    	</div>
-    </section>
+    @include('landing.index_sections.about')
 
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5 pb-3">
-    			<div class="col-md-7 heading-section ftco-animate text-center">
-    				<span class="subheading">Blog</span>
-    				<h2 class="mb-4"> مطالب منتشر شده </h2>
-    				<p>{{$website->blogs}}</p>
-    			</div>
-    		</div>
-    		<div class="row d-flex">
-    			@if ($blogs->count())
-                    @foreach ($blogs as $blog)
-                        @include('includes.blog_col')
-                    @endforeach
-                @else
-                    <div class="alert alert-danger mx-auto">
-                        <p class="m-0"> <i class="material-icons icon">error</i> هنوز هیچ بلاگی در سیستم ثبت نشده. </p>
-                    </div>
-                @endif
-    		</div>
-    		<hr class="hr-primary">
-    		<div class="text-center">
-    			<a href="{{route('blogs')}}" class="btn btn-primary btn-outline-primary px-4 py-3">
-    				مشاهده همه مطالب
-    			</a>
-    		</div>
-    	</div>
-    </section>
 
     <section class="ftco-appointment">
     	<div class="overlay"></div>
