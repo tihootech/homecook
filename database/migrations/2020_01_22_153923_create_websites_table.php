@@ -17,7 +17,7 @@ class CreateWebsitesTable extends Migration
 
             $table->bigIncrements('id');
 
-            $table->string('phone')->nullable();
+            $table->text('phones')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->nullable();
 

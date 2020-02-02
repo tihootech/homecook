@@ -18,8 +18,10 @@
     					<div class="col-sm-5 d-flex ftco-animate">
     						<div class="icon"><span class="material-icons">phone</span></div>
     						<div class="text">
-    							<h3 dir="ltr"> <a href="tel:{{$website->phone}}"> {{pretty_phone($website->phone)}} </a> </h3>
-    							<p> شماره تماس پشتیبانی </p>
+                                <h3> <a href="javascript:void"> شماره تماس پشتیبانی </a> </h3>
+    							@foreach ($website->phones_list() as $phone)
+                                    <p dir="ltr"> <a href="tel:{{$phone}}" class="text-gray font-weight-bold"> {{pretty_phone($phone)}} </a> </p>
+                                @endforeach
     						</div>
     					</div>
     					<div class="col-sm-7 d-flex ftco-animate">

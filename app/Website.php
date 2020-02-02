@@ -8,6 +8,11 @@ class Website extends Model
 {
     protected $guarded = ['id'];
 
+    public function phones_list()
+    {
+        return explode('-', $this->phones);
+    }
+
     public function columns()
     {
         $cols = explode('&&&', $this->cols);

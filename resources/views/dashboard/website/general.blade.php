@@ -19,8 +19,9 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="phone"> <i class="material-icons icon">phone</i> شماره تماس پشتیبانی </label>
-                            <input type="text" name="phone" id="phone" class="form-control" value="{{$website->phone}}">
+                            <label for="phones"> <i class="material-icons icon">phone</i> شماره تماس پشتیبانی </label>
+                            <input type="text" name="phones" id="phones" class="form-control" value="{{$website->phones}}">
+                            <small class="text-info"> شماره تماس ها را با - از هم جدا کنید </small>
                         </div>
                     </div>
 

@@ -66,13 +66,15 @@
 									</span>
 								</li>
 							@endif
-							@if (website('phone'))
-								<li>
-									<a href="tel:{{website('phone')}}">
-										<span class="icon icon-phone"></span>
-										<span class="text" dir="ltr">{{pretty_phone(website('phone'))}}</span>
-									</a>
-								</li>
+							@if (website('phones'))
+								@foreach (website()->phones_list() as $phone)
+									<li>
+										<a href="tel:{{$phone}}">
+											<span class="icon icon-phone"></span>
+											<span class="text" dir="ltr">{{pretty_phone($phone)}}</span>
+										</a>
+									</li>
+								@endforeach
 							@endif
 							@if (website('email'))
 								<li>
