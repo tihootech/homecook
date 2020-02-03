@@ -35,5 +35,14 @@ class AppServiceProvider extends ServiceProvider
         \Blade::if('customer', function () {
             return customer();
         });
+        \Blade::if('peyk', function () {
+            return peyk();
+        });
+        \Blade::if('not_peyk', function () {
+            return !peyk();
+        });
+        \Blade::if('master_or_peyk', function () {
+            return peyk() || master();
+        });
     }
 }

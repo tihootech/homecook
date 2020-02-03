@@ -115,7 +115,7 @@
                                 @master
                                     <td>
                                         @if ($food->cook)
-                                            <a href="{{route('user.show', $food->cook->user_id)}}"> {{$food->cook->full_name()}} </a>
+                                            <a href="{{$food->cook->dashboard_link()}}"> {{$food->cook->full_name()}} </a>
                                         @else
                                             <em> - </em>
                                         @endif

@@ -73,4 +73,14 @@ class Cook extends AccountOwner
         return route('show_cook', [urf($this->full_name()), $this->uid]);
     }
 
+    public function total_income()
+    {
+        return TransactionItem::where('cook_id', $this->id)->sum('cook_share');
+    }
+
+    public function balance()
+    {
+        return TransactionItem::where('cook_id', $this->id)->where('cook_ponied', 0)->sum('cook_share');
+    }
+
 }

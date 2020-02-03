@@ -4,38 +4,6 @@
 @endsection
 @section('content')
 
-	{{-- @master
-        <div class="tile text-center">
-            <a href="#search-box" data-toggle="collapse" class="btn btn-primary m-2"> <i class="material-icons">search</i> جستجو </a>
-            <div class="collapse @if(request()->getQueryString()) show @endif" id="search-box">
-                <hr>
-                <div class="container">
-                    <form class="row text-right justify-content-center" method="GET">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="receptor"> موبایل دریافت کننده </label>
-                                <input type="text" id="receptor" name="receptor" value="{{request('receptor')}}" class="form-control">
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-md-2 my-1">
-                            <button type="submit" class="btn btn-primary btn-block">
-                                <i class="material-icons">check</i> تایید و جستجو
-                            </button>
-                        </div>
-                        @if(request()->getQueryString())
-                            <div class="col-md-2 my-1">
-                                <a class="btn btn-primary btn-block" href="{{route(rn())}}">
-                                    <i class="material-icons">close</i> بازنشانی جستجو
-                                </a>
-                            </div>
-                        @endif
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endmaster
-
 	@if ($transactions->count())
 		<div class="tile">
 
@@ -44,16 +12,31 @@
 					<thead>
 						<tr>
 							<th> ردیف </th>
+                            @master
+                                <th> مشتری </th>
+                            @endmaster
                             <th> اقلام سفارش </th>
-                            <th> قابل پرداخت </th>
-                            <th> پرداخت شده </th>
-                            <th> تحویل داده شده </th>
+                            @not_peyk
+                                <th> پرداختی </th>
+                            @endnot_peyk
+                            <th> سهم پیک </th>
+                            @master_or_peyk
+                                <th> تسویه پیک </th>
+                            @endmaster_or_peyk
+                            <th> تاریخ سفارش </th>
+                            <th> تاریخ تحویل </th>
+                            @master
+                                <th> جزییات </th>
+                            @endmaster
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($transactions as $index => $transaction)
 							<tr>
 								<th> {{$index+1}} </th>
+                                @master
+                                    <th> <a href="{{$transaction->customer->dashboard_link()}}"> {{$transaction->customer->full_name()}} </a> </th>
+                                @endmaster
 								<td>
                                     <ul>
                                         @foreach ($transaction->items as $item)
@@ -66,9 +49,28 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td> {{toman($transaction->total)}} </td>
-                                <td> @include('dashboard.partials.yesno', ['boolean' => $transaction->ponied]) </td>
-                                <td> @include('dashboard.partials.yesno', ['boolean' => !$transaction->open]) </td>
+                                @not_peyk
+                                    <td> <span class="calibri">{{nf($transaction->sum)}}</span> تومان </td>
+                                @endnot_peyk
+                                <td> <span class="calibri">{{nf($transaction->peyk_share)}}</span> تومان </td>
+                                @master_or_peyk
+                                    <td> @include('dashboard.partials.yesno', ['boolean' => $transaction->peyk_ponied]) </td>
+                                @endmaster_or_peyk
+                                <td>
+                                    {{date_picker_date($transaction->created_at)}}
+                                    <br>
+                                    <span class="calibri"> {{$transaction->created_at->format('H:i')}} </span>
+                                </td>
+                                <td>
+                                    {{date_picker_date($transaction->delivery)}}
+                                    <br>
+                                    ساعت {{$transaction->time}}
+                                </td>
+                                @master
+                                    <td>
+                                        <a href="{{route('transaction.show', $transaction->id)}}" class="btn btn-outline-primary"> جزییات </a>
+                                    </td>
+                                @endmaster
 							</tr>
 				    	@endforeach
 					</tbody>
@@ -83,12 +85,6 @@
                 موردی یافت نشد.
             </div>
         </div>
-    @endif --}}
-
-    <div class="tile">
-        <div class="alert alert-warning m-0">
-            بعد از حل چالش
-        </div>
-    </div>
+    @endif
 
 @endsection

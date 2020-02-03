@@ -18,4 +18,15 @@ class Peyk extends AccountOwner
         $user->save();
         return $user;
     }
+
+    public function total_income()
+    {
+        return Transaction::where('peyk_id', $this->id)->sum('peyk_share');
+    }
+
+    public function balance()
+    {
+        return Transaction::where('peyk_id', $this->id)->where('peyk_ponied', 0)->sum('peyk_share');
+    }
+
 }

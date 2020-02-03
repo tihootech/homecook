@@ -18,17 +18,25 @@
                             <div class="card">
                                 <form class="card-body" action="{{route('transaction.set_peyk', $transaction->id)}}" method="post">
                                     @csrf
-                                    <h5> اقلام سفارش </h5>
+                                    <h5> <i class="material-icons icon">list</i> اقلام سفارش </h5>
                                     <ul>
                                         @foreach ($transaction->items as $item)
                                             <li>
+                                                {{$item->count}}
+                                                عدد
                                                 <a href="{{$item->food->public_link()}}"> {{$item->food->title}} </a>
-                                                (تعداد:{{$item->count}})
+                                                از
+                                                <a href="{{$item->food->cook->dashboard_link()}}"> {{$item->food->cook->full_name()}} </a>
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <h5> آدرس </h5>
+                                    <hr>
+                                    <h5> <i class="material-icons icon">home_work</i> آدرس مشتری </h5>
                                     <p> {{$item->transaction->address->body}} </p>
+                                    <hr>
+                                    <h5> <i class="material-icons icon">access_time</i> زمان و تاریخ تحویل </h5>
+                                    <p> {{human_date($transaction->delivery)}} - ساعت {{$transaction->time}} </p>
+                                    <hr>
                                     <h5 class="mb-3"> انتخاب پیک </h5>
                                     <select class="select2" name="peyk" data-placeholder="-- انتخاب پیک --" required>
                                         <option value=""></option>
@@ -124,8 +132,27 @@
                     میباشد.
                 </div>
             @else
-                <div class="">
-                    داشبرد همکار
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                درآمد قابل برداشت
+                                <hr>
+                                <b class="calibri text-info"> {{nf(current_cook()->balance())}} </b>
+                                تومان
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                مجموع درآمد شما
+                                <hr>
+                                <b class="calibri text-info"> {{nf(current_cook()->total_income())}} </b>
+                                تومان
+                            </div>
+                        </div>
+                    </div>
                 </div>
             @endif
 
@@ -192,5 +219,35 @@
             </div>
         </div>
     @endcustomer
+
+
+    @peyk
+
+        <div class="tile">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            درآمد قابل برداشت
+                            <hr>
+                            <b class="calibri text-info"> {{nf(current_peyk()->balance())}} </b>
+                            تومان
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            مجموع درآمد شما
+                            <hr>
+                            <b class="calibri text-info"> {{nf(current_peyk()->total_income())}} </b>
+                            تومان
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    @endpeyk
 
 @endsection

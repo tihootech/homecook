@@ -17,17 +17,19 @@ function website($p=null)
     return $website ? ( $p ? $website->$p : $website ) : null;
 }
 
-function current_cook()
+function current_cook($p=null)
 {
     if (cook()) {
-        return \App\Cook::where('user_id', auth()->id())->first();
+        $cook = \App\Cook::where('user_id', auth()->id())->first();
+        return $cook ? ( $p ? $cook->$p : $cook ) : null;
     }
 }
 
-function current_peyk()
+function current_peyk($p=null)
 {
     if (peyk()) {
-        return \App\Peyk::where('user_id', auth()->id())->first();
+        $peyk = \App\Peyk::where('user_id', auth()->id())->first();
+        return $peyk ? ( $p ? $peyk->$p : $peyk ) : null;
     }
 }
 
@@ -54,7 +56,7 @@ function cook()
 function peyk()
 {
     $user = user();
-    return $user && $user->type == 'cook';
+    return $user && $user->type == 'peyk';
 }
 
 function active_cook()

@@ -23,4 +23,9 @@ class AccountOwner extends Model
 		$type = $this->user->type ?? '';
 		return $this->hasMany(Transaction::class, "{$type}_id")->latest();
 	}
+
+	public function dashboard_link()
+	{
+		return route('user.show', $this->user_id);
+	}
 }

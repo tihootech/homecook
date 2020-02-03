@@ -81,7 +81,8 @@ Route::get('order/{type}/{tuid}', 'LandingController@view_transaction')->name('v
 Route::resource('review', 'ReviewController');
 Route::post('review/{review}/accept', 'ReviewController@accept')->name('review.accept');
 Route::resource('peyk', 'PeykController')->except('show');
-Route::resource('transaction', 'TransactionController@index')->except('transaction.index');
+Route::get('transaction', 'TransactionController@index')->name('transaction.index');
+Route::get('transaction/{transaction}', 'TransactionController@show')->name('transaction.show');
 
 // ajaxes
 Route::get('ajax/state', 'AjaxController@state_change')->name('state_change');
