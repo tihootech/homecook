@@ -16,8 +16,15 @@ class TransactionController extends Controller
         $this->middleware('master')->except('index');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+
+        if (master() && $request->cook) {
+
+            $items = TransactionItem::where('cook_id', $request->cook)->whereCookPonied(0)->paginate(20);
+            return view('dashboard.transactions.cook_list', compact('items'));
+
+        }
 
         if ( cook() ) {
 
@@ -32,6 +39,9 @@ class TransactionController extends Controller
             }
             if (peyk()) {
                 $transactions = $transactions->where('peyk_id', current_peyk('id'));
+            }
+            if (master() && $request->peyk) {
+                $transactions = $transactions->where('peyk_id', $request->peyk)->wherePeykPonied(0);
             }
             $transactions = $transactions->paginate(20);
             return view('dashboard.transactions.index', compact('transactions'));

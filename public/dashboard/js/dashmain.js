@@ -65,5 +65,25 @@
 			}
 		});
 	});
+	$('.are-you-sure').click(function(){
+		var htmlID = $(this).attr('data-target');
+		var target = htmlID ? $('form#'+htmlID) : $(this).parents('form');
+		swal({
+			title: "آیا مطمئن هستید؟",
+			text: "",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonText: "بله. مطمئن هستم",
+			cancelButtonText: "لغو",
+			closeOnConfirm: false,
+			closeOnCancel: false
+		}, function(isConfirm) {
+			if (isConfirm) {
+				target.submit();
+			} else {
+				swal("عملیات لغو شد.", "", "error");
+			}
+		});
+	});
 
 })();

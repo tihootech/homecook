@@ -84,6 +84,10 @@ Route::resource('peyk', 'PeykController')->except('show');
 Route::get('transaction', 'TransactionController@index')->name('transaction.index');
 Route::get('transaction/{transaction}', 'TransactionController@show')->name('transaction.show');
 
+// payments
+Route::get('payments', 'PaymentController@payments')->name('payments');
+Route::resource('payment', 'PaymentController')->only(['index', 'store']);
+
 // ajaxes
 Route::get('ajax/state', 'AjaxController@state_change')->name('state_change');
 

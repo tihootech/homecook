@@ -29,4 +29,9 @@ class Peyk extends AccountOwner
         return Transaction::where('peyk_id', $this->id)->where('peyk_ponied', 0)->sum('peyk_share');
     }
 
+    public function payment_ids()
+    {
+        return implode(',', Transaction::where('peyk_id', $this->id)->where('peyk_ponied', 0)->pluck('id')->toArray());
+    }
+
 }

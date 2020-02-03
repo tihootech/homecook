@@ -83,4 +83,9 @@ class Cook extends AccountOwner
         return TransactionItem::where('cook_id', $this->id)->where('cook_ponied', 0)->sum('cook_share');
     }
 
+    public function payment_ids()
+    {
+        return implode(',', TransactionItem::where('cook_id', $this->id)->where('cook_ponied', 0)->pluck('id')->toArray());
+    }
+
 }
