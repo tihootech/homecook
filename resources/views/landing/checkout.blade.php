@@ -45,20 +45,27 @@
 							</p>
 							<p>
 								<b> تاریخ تحویل : </b>
-								<span class="mx-1"> {{$transaction->generate_delivery('persian')}} </span>
+								<span class="mx-1"> از {{$transaction->generate_delivery('persian')}} </span>
 								<span class="mx-1"> ساعت 12 الی 18 </span>
 							</p>
 							<form action="{{route('cart.finish', $transaction->uid)}}" method="post">
 								@csrf
 								<div class="row justify-content-center">
-									<div class="col-lg-3 col-md-6">
+									<div class="col-lg-3 col-md-6 my-1">
 										<select class="simple-select2" name="time">
 											@for ($i=12; $i <= 18; $i++)
 												<option value="{{$i}}" @if($i==14) selected @endif> {{$i}} بعد از ظهر </option>
 											@endfor
 										</select>
 									</div>
-									<div class="col-lg-2 col-md-6">
+									<div class="col-lg-3 col-md-6 my-1">
+										<select class="simple-select2" name="delivery">
+											@for ($i=0; $i <= 7; $i++)
+												<option value="{{$i}}"> {{human_date($transaction->generate_delivery()->addDays($i))}} </option>
+											@endfor
+										</select>
+									</div>
+									<div class="col-lg-2 col-md-6 my-1">
 										<button type="submit" class="btn btn-primary btn-block p-3 px-4"> تایید و پرداخت </button>
 									</div>
 								</div>

@@ -65,6 +65,6 @@ class Transaction extends Model
         $time  = $now->format('H:i:s');
         $days = ($time >= $start && $time <= $end) ? 1 : 2;
         $delivery = $now->addDays($days);
-        return $type == 'persian' ? human_date($delivery) : $delivery->format('Y-m-d');
+        return $type == 'persian' ? human_date($delivery) : $delivery;
     }
 }

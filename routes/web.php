@@ -80,8 +80,8 @@ Route::get('order/{type}/{tuid}', 'LandingController@view_transaction')->name('v
 // other resources
 Route::resource('review', 'ReviewController');
 Route::post('review/{review}/accept', 'ReviewController@accept')->name('review.accept');
-Route::resource('transaction', 'TransactionController');
 Route::resource('peyk', 'PeykController')->except('show');
+Route::resource('transaction', 'TransactionController@index')->except('transaction.index');
 
 // ajaxes
 Route::get('ajax/state', 'AjaxController@state_change')->name('state_change');

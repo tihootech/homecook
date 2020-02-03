@@ -24,6 +24,13 @@ function current_cook()
     }
 }
 
+function current_peyk()
+{
+    if (peyk()) {
+        return \App\Peyk::where('user_id', auth()->id())->first();
+    }
+}
+
 function current_customer($p=null)
 {
     if (customer()) {
@@ -39,6 +46,12 @@ function master()
 }
 
 function cook()
+{
+    $user = user();
+    return $user && $user->type == 'cook';
+}
+
+function peyk()
 {
     $user = user();
     return $user && $user->type == 'cook';

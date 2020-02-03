@@ -208,7 +208,8 @@ class CartController extends Controller
     {
         // validate
         $request->validate([
-            'time' => 'required|integer|min:12|max:18'
+            'time' => 'required|integer|min:12|max:18',
+            'delivery' => 'required|integer|min:0|max:7',
         ]);
 
         // find transaction
@@ -217,7 +218,7 @@ class CartController extends Controller
         // pony transaction
         $transaction->ponied = 1;
         $transaction->time = $request->time;
-        $transaction->delivery = $transaction->generate_delivery();
+        $transaction->delivery = $transaction->generate_delivery()->addDays($request->delivery)->format('Y-m-d');
         $transaction->save();
         TransactionItem::where('transaction_id', $transaction->id)->update([
             'ponied' => 1
