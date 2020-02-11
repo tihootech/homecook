@@ -28,6 +28,9 @@ class CookController extends Controller
         if ($request->mobile) {
             $cooks = $cooks->where('mobile', 'like', "%$request->mobile%");
         }
+        if ($request->nickname) {
+            $cooks = $cooks->where('nickname', 'like', "%$request->nickname%");
+        }
         if ($request->telephone) {
             $cooks = $cooks->where('telephone', 'like', "%$request->telephone%");
         }
@@ -66,14 +69,18 @@ class CookController extends Controller
 
     public function edit(Cook $cook)
     {
-        return view('dashboard.cooks.form', compact('cook'));
+        $states = State::all();
+        $cities = City::where('state_id', 22)->get();
+        return view('dashboard.cooks.form', compact('cook', 'cities', 'states'));
     }
 
     public function cook_edit($uid)
     {
         $cook = Cook::where('uid', $uid)->firstOrFail();
         check($cook, 'cook');
-        return view('dashboard.cooks.form', compact('cook'));
+        $states = State::all();
+        $cities = City::where('state_id', 22)->get();
+        return view('dashboard.cooks.form', compact('cook', 'cities', 'states'));
     }
 
     public function update(Cook $cook, Request $request)
@@ -88,7 +95,9 @@ class CookController extends Controller
         $cook = Cook::where('uid', $uid)->firstOrFail();
         check($cook, 'cook');
         $data = self::validation($cook->id);
-        $data['fresh'] = 1;
+        if (!$request->nf) {
+            $data['fresh'] = 1;
+        }
         $cook->update($data);
         return redirect()->route('home')->withMessage(__('SUCCESS'));
     }
@@ -158,6 +167,7 @@ class CookController extends Controller
         $data = request()->validate([
             'first_name' => 'required|string|max:190',
             'last_name' => 'required|string|max:190',
+            'nickname' => 'nullable|string|max:190|unique:cooks,nickname,'.$id,
             'telephone' => 'nullable|digits:11',
             'mobile' => 'required|digits:11|unique:cooks,mobile,'.$id,
             'state_id' => 'required|exists:states,id',

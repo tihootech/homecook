@@ -19,6 +19,12 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
+							<label for="nickname"> نام مستعار </label>
+							<input type="text" id="nickname" name="nickname" value="{{request('nickname')}}" class="form-control">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
 							<label for="mobile"> موبایل </label>
 							<input type="text" id="mobile" name="mobile" value="{{request('mobile')}}" class="form-control">
 						</div>
@@ -73,6 +79,7 @@
 						<tr>
 							<th> ردیف </th>
 							<th> نام </th>
+							<th> نام مستعار </th>
 							<th> موبایل </th>
 							<th> تلفن </th>
 							<th> استان </th>
@@ -87,6 +94,7 @@
 							<tr>
 								<th> {{$index+1}} </th>
 								<td> {{$cook->full_name()}} </td>
+								<td> {{$cook->nickname ?? '-'}} </td>
 								<td> {{$cook->mobile}} </td>
 								<td> {{$cook->telephone ?? '-'}} </td>
 								<td> {{$cook->state}} </td>

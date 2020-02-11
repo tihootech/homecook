@@ -1,5 +1,7 @@
 @extends('layouts.dashboard')
-
+@section('title')
+	مدیریت حساب کاربری
+@endsection
 @section('content')
 	<div class="container">
 		<div class="card">

@@ -17,7 +17,7 @@
 					<div class="col-md-7 col-sm-12 text-center ftco-animate">
 						<h1 class="mb-3 mt-5 bread"> {{$food->title}} </h1>
 						@if ($cook = $food->cook)
-							<h3> {{$cook->full_name()}} </h3>
+							<h3> {{$cook->nickname ?? $cook->full_name()}} </h3>
 						@endif
 					</div>
 

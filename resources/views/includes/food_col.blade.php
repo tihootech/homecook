@@ -13,7 +13,7 @@
 				<div>
 					<a href="{{$food->cook->public_link()}}">
 						<span class="material-icons">person</span>
-						{{$food->cook->full_name()}}
+						{{$food->cook->nickname ?? $food->cook->full_name()}}
 					</a>
 				</div>
 				@php

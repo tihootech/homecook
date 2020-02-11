@@ -38,6 +38,9 @@ class AppServiceProvider extends ServiceProvider
         \Blade::if('peyk', function () {
             return peyk();
         });
+        \Blade::if('not_master', function () {
+            return !master();
+        });
         \Blade::if('not_peyk', function () {
             return !peyk();
         });

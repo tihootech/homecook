@@ -162,3 +162,15 @@
 		<span class="app-menu__label"> مدیریت حساب کاربری </span>
 	</a>
 </li>
+
+
+@active_cook
+
+<li>
+	<a class="app-menu__item @if( rn() == 'cook.cook_edit' ) active @endif" href="{{route("cook.cook_edit", current_cook('uid'))}}?nf=1">
+		<i class="ml-2 material-icons">how_to_reg</i>
+		<span class="app-menu__label"> ویرایش اطلاعات شخصی </span>
+	</a>
+</li>
+
+@endactive_cook

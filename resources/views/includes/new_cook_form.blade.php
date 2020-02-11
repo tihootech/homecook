@@ -3,13 +3,16 @@
 	@if (isset($cook) && $cook->id)
 		@method('PUT')
 	@endif
+	@if (request('nf'))
+		<input type="hidden" name="nf" value="1">
+	@endif
 	@if($in_panel)
 		<input type="hidden" name="in_panel" value="1">
 	@else
 		<h3 class="mb-4 billing-heading"> فرم همکاری </h3>
 		<hr>
 	@endif
-	<div class="row align-items-end">
+	<div class="row justify-content-center align-items-end">
 		<div class="col-md-6">
 			<div class="form-group">
 				<label for="first-name"> * نام </label>
@@ -22,13 +25,21 @@
 				<input type="text" name="last_name" id="last-name" class="form-control" value="{{$cook->last_name ?? old('last_name')}}" required>
 			</div>
 		</div>
-		<div class="col-md-6">
+		@if ($in_panel)
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="nickname"> نام مستعار </label>
+					<input type="text" name="nickname" id="nickname" class="form-control" value="{{$cook->nickname ?? old('nickname')}}">
+				</div>
+			</div>
+		@endif
+		<div class="col-md-4">
 			<div class="form-group">
 				<label for="telephone"> تلفن ثابت </label>
 				<input type="text" name="telephone" id="telephone" class="form-control" value="{{$cook->telephone ?? old('telephone')}}">
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="form-group">
 				<label for="mobile"> * تلفن همراه </label>
 				<input type="text" name="mobile" id="mobile" class="form-control" value="{{$cook->mobile ?? old('mobile')}}" required>
