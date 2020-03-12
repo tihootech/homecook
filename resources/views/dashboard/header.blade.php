@@ -29,7 +29,7 @@
                 @else
                     <li class="app-notification__title"> شما اعلامیه جدیدی ندارید. </li>
                 @endif
-                <li class="app-notification__footer"> <a href="{{url("notifications")}}"> مشاهده همه اعلامیه ها </a> </li>
+                <li class="app-notification__footer"> <a href="#"> مشاهده همه اعلامیه ها </a> </li>
             </ul>
         </li>
         <!-- User Menu-->
