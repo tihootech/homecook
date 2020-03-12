@@ -42,23 +42,31 @@
 			<div class="row">
 
 				<div class="col-md-2 p-0">
+
+
 					<form class="billing-form ftco-bg-dark p-3 mb-3">
 
-						@foreach ($cats as $cat)
-							<div class="form-group">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="cat-{{$cat->id}}" name="c[]" value="{{$cat->id}}"
-										@if( is_array(request('c')) && in_array($cat->id, request('c')) ) checked @endif>
-									<label class="custom-control-label" for="cat-{{$cat->id}}">
-										<span class="mr-4"> {{$cat->title}} </span>
-									</label>
+						<div class="text-center =">
+							<small> <a href="#filter-cats" data-toggle="collapse"> انتخاب دسته بندی </a> </small>
+						</div>
+
+						<div class="collapse mt-3" id="filter-cats">
+							@foreach ($cats as $cat)
+								<div class="form-group">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="cat-{{$cat->id}}" name="c[]" value="{{$cat->id}}"
+											@if( is_array(request('c')) && in_array($cat->id, request('c')) ) checked @endif>
+										<label class="custom-control-label" for="cat-{{$cat->id}}">
+											<span class="mr-4"> {{$cat->title}} </span>
+										</label>
+									</div>
 								</div>
-							</div>
-						@endforeach
-						{{-- <div class="form-group">
-							<input type="text" name="t" class="form-control" value="{{request('t')}}" placeholder="نام غذا">
-						</div> --}}
-						<button type="submit" class="btn btn-primary btn-outline-primary btn-block"> فیلتر کردن </button>
+							@endforeach
+							{{-- <div class="form-group">
+								<input type="text" name="t" class="form-control" value="{{request('t')}}" placeholder="نام غذا">
+							</div> --}}
+							<button type="submit" class="btn btn-primary btn-outline-primary btn-block"> فیلتر کردن </button>
+						</div>
 
 					</form>
 				</div>
