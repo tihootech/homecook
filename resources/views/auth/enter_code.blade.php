@@ -14,7 +14,7 @@
 			<input type="password" name="password" class="form-control tp" placeholder="رمزعبور جدید" required>
 		</div>
 		<div class="col-md-6 my-2">
-			<input type="password" name="password_confirmation" class="form-control tp" placeholder="رمزعبور جدید" required>
+			<input type="password" name="password_confirmation" class="form-control tp" placeholder="تکرار رمزعبور جدید" required>
 		</div>
 		<div class="col-md-9 my-2">
 			<input type="text" name="code" class="form-control tp" placeholder="کد تایید ارسال شده به موبایل شما" required>
