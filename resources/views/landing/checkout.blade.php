@@ -138,6 +138,28 @@
 
 												</form>
 
+												<a href="#forgot-password" class="text-muted" data-toggle="collapse">
+													رمز عبور خود را فراموش کردید؟
+												</a>
+
+												<form class="collapse mt-4" action="{{route('acc.forget')}}" method="post" id="forgot-password">
+													@csrf
+													<label for="kwd" class="text-bright mb-2">
+														<small>
+															برای بازیابی رمز عبور،
+															نام کاربری یا شماره تماس خود را وارد کنید.
+														</small>
+													</label>
+													<div class="row">
+														<div class="col-md-10 my-2">
+															<input type="text" name="keyword" class="form-control tp" id="kwd" value="{{old('keyword')}}">
+														</div>
+														<div class="col-md-2 my-auto">
+															<button type="submit" class="btn btn-primary"> تایید </button>
+														</div>
+													</div>
+												</form>
+
 											</div>
 										</div>
 									</div>
