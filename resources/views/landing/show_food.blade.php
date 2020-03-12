@@ -1,7 +1,7 @@
 @extends('layouts.landing')
 
 @section('meta')
-	<title> خونه پز - {{$food->title}} </title>
+	<title> کوفته ریزه - {{$food->title}} </title>
 @endsection
 
 

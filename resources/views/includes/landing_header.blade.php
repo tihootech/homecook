@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar" dir="rtl">
 	<div class="container">
-		<a class="navbar-brand" href="{{url('/')}}">خونه<small>پز</small></a>
+		<a class="navbar-brand" href="{{url('/')}}">کوفته<small>ریزه</small></a>
 		<div class="collapse navbar-collapse order-sm-1 order-12" id="ftco-nav">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item @if(rn() == 'index') active @endif">

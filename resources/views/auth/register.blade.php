@@ -1,7 +1,7 @@
 @extends('layouts.acc')
 
 @section('meta')
-	<title> خونه پز - ایجاد حساب کاربری </title>
+	<title> کوفته ریزه - ایجاد حساب کاربری </title>
 @endsection
 
 @section('content')

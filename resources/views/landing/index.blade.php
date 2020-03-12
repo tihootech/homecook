@@ -1,9 +1,9 @@
 @extends('layouts.landing')
 
 @section('meta')
-    <title> خونه پز - سرویس سفارش غذای خانگی </title>
-    <meta name="keywords" content="خونه پز, رزرو غذا کرمانشاه, غذای خانگی, سفارش غذا">
-    <meta name="description" content="خونه پز - سرویس سفارش غذای خانگی">
+    <title> کوفته ریزه - سرویس سفارش غذای خانگی </title>
+    <meta name="keywords" content="کوفته ریزه, رزرو غذا کرمانشاه, غذای خانگی, سفارش غذا">
+    <meta name="description" content="کوفته ریزه - سرویس سفارش غذای خانگی">
 @endsection
 
 @section('content')

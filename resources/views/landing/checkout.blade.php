@@ -2,7 +2,7 @@
 
 @section('meta')
 	<title>
-		خونه پز -
+		کوفته ریزه -
 		@if ($type == 'checkout')
 			سبد خرید
 		@endif

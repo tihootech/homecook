@@ -1,7 +1,7 @@
 @extends('layouts.landing')
 
 @section('meta')
-	<title> خونه پز - همکاری با ما </title>
+	<title> کوفته ریزه - همکاری با ما </title>
 @endsection
 
 

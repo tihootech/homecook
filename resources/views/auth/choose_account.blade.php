@@ -1,7 +1,7 @@
 @extends('layouts.acc')
 
 @section('meta')
-	<title> خونه پز - بازیابی رمزعبور </title>
+	<title> کوفته ریزه - بازیابی رمزعبور </title>
 @endsection
 
 @section('content')

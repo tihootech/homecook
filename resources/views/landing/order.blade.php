@@ -1,7 +1,7 @@
 @extends('layouts.landing')
 
 @section('meta')
-	<title> خونه پز - سفارش غذا </title>
+	<title> کوفته ریزه - سفارش غذا </title>
 @endsection
 
 
