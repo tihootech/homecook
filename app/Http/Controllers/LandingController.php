@@ -22,7 +22,7 @@ class LandingController extends Controller
         $website = website();
         $blogs = Blog::latest()->take(3)->get();
         $reviews = Review::whereAccepted(1)->whereNotNull('body')->inRandomOrder()->take(5)->get();
-        $foods = Food::inRandomOrder()->whereType('food')->take(4)->get();
+        $foods = Food::inRandomOrder()->whereConfirmed(1)->whereType('food')->take(4)->get();
         $products = Food::inRandomOrder()->whereType('product')->take(3)->get();
         $slides = Slide::wherePage('home_page')->get();
         $counts = [
@@ -50,7 +50,7 @@ class LandingController extends Controller
 
     public function show_food($title, $uid)
     {
-        $food = Food::whereUid($uid)->firstOrFail();
+        $food = Food::whereUid($uid)->whereConfirmed(1)->firstOrFail();
         $food->increment('seens');
         return view('landing.show_food', compact('food'));
     }

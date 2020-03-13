@@ -18,6 +18,7 @@
                             <th> تعداد </th>
                             <th> قابل پرداخت </th>
                             <th> سهم آشپز </th>
+                            <th> تاریخ تحویل </th>
                             <th> تسویه شده </th>
                         </tr>
                     </thead>
@@ -30,6 +31,11 @@
                                 <td class="calibri"> {{$item->count}} </td>
                                 <td class="calibri"> {{nf($item->payable)}} </td>
                                 <td class="calibri"> {{nf($item->cook_share)}} </td>
+                                <td>
+                                    {{date_picker_date($item->transaction->delivery)}}
+                                    <br>
+                                    ساعت {{$item->transaction->time}}
+                                </td>
                                 <td> @include('dashboard.partials.yesno', ['boolean' => $item->cook_ponied]) </td>
                             </tr>
                         @endforeach
