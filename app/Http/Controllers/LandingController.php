@@ -147,4 +147,9 @@ class LandingController extends Controller
         }
         return view('landing.view_transaction', compact('transaction', 'type'));
     }
+
+    public function rnr()
+    {
+        return view('landing.rnr');
+    }
 }

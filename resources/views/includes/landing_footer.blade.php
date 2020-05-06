@@ -50,6 +50,7 @@
 						<li><a href="{{route('blogs')}}" class="py-2 d-block"> مطالب وبسایت </a></li>
 						<li><a href="{{route('order_food')}}" class="py-2 d-block"> سفارش غذا </a></li>
 						<li><a href="{{route('order_product')}}" class="py-2 d-block"> محصولات خانگی </a></li>
+						<li><a href="{{route('rnr')}}" class="py-2 d-block"> قوانین و مقررات </a></li>
 					</ul>
 				</div>
 			</div>

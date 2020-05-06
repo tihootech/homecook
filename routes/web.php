@@ -96,6 +96,9 @@ Route::put('comment/{comment}/confirm', 'CommentController@confirm')->name('comm
 Route::post('comment/confirm_all', 'CommentController@confirm_all')->name('confirm_all_comments');
 Route::resource('comment', 'CommentController')->except(['show', 'create']);
 
+// other
+Route::get('قوانین-و-مقررات', 'LandingController@rnr')->name('rnr');
+
 // blogs
 Route::resource('blog', 'BlogController')->except('show');
 Route::get('وبلاگ', 'LandingController@blogs')->name('blogs');
