@@ -32,12 +32,15 @@
 							</li>
 						@endif
 					</ul>
+					<a target="_blank" href="https://trustseal.enamad.ir/?id=153926&amp;Code=yOGiFaCIGgIJNdSB3rXO">
+						<img src="https://Trustseal.eNamad.ir/logo.aspx?id=153926&amp;Code=yOGiFaCIGgIJNdSB3rXO" alt="e-namad" id="yOGiFaCIGgIJNdSB3rXO">
+					</a>
 				</div>
 			</div>
 			<div class="col-lg-5 col-md-6 mb-5 mb-md-5">
 				<div class="ftco-footer-widget mb-4">
 					<h2 class="ftco-heading-2">آخرین مطالب</h2>
-					@foreach (best_blogs(2) as $blog)
+					@foreach (best_blogs(3) as $blog)
 						@include('includes.blog_item')
 					@endforeach
 				</div>
