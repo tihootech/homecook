@@ -32,7 +32,7 @@
 							</li>
 						@endif
 					</ul>
-					<a target="_blank" href="https://trustseal.enamad.ir/?id=153926&amp;Code=yOGiFaCIGgIJNdSB3rXO">
+					<a target="_blank" href="https://trustseal.enamad.ir/?id=153926&amp;Code=yOGiFaCIGgIJNdSB3rXO" class="d-block py-3 text-center bg-light">
 						<img src="https://Trustseal.eNamad.ir/logo.aspx?id=153926&amp;Code=yOGiFaCIGgIJNdSB3rXO" alt="e-namad" id="yOGiFaCIGgIJNdSB3rXO">
 					</a>
 				</div>
