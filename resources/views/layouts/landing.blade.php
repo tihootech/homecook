@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/select2.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css?v=1.4')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css?v=1.5')}}">
 	<link rel="stylesheet" href="{{asset('assets/css/navbar.css')}}">
 </head>
 
