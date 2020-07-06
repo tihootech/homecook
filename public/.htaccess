@@ -19,9 +19,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    # ir to com redirect
-    RewriteCond %{HTTP_HOST} ^koofterizeh.ir [NC,OR]
-    RewriteCond %{HTTP_HOST} ^www.koofterizeh.ir [NC]
-    RewriteRule ^(.*)$ http://koofterizeh.com/$1 [L,R=301,NC]
+    # 301 Redirect
+    RewriteCond %{HTTP_HOST} !^www\.
+    RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
 </IfModule>

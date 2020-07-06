@@ -11,7 +11,7 @@
 
 	<link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
 
-	<link rel="canonical" href="{{url()->current()}}">
+	<link rel="canonical" href="https://www.koofterizeh.com/{{request()->path() == '/' ? '' : request()->path()}}">
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
