@@ -3,12 +3,14 @@
 @section('meta')
     <title> کوفته ریزه - سفارش آنلاین غذا در کرمانشاه </title>
     <meta name="keywords" content="کوفته ریزه, رزرو غذا کرمانشاه, غذای خانگی, سفارش غذا, سفارش آنلاین غذا کرمانشاه">
-    <meta name="description" content="کوفته ریزه - سرویس سفارش غذا و خرید محصولات خانگی در کرمانشاه">
+    <meta name="description" content="کوفته ریزه - سرویس سفارش غذا و خرید محصولات خانگی در کرمانشاه. خرید آنلاین غذا در کرمانشاه و ارسال درب منزل.">
 @endsection
 
 @section('content')
 
     @include('includes.landing_slides', ['home_page'=>true])
+
+    <h1 class="d-none"> سفارش آنلاین غذا کرمانشاه </h1>
 
     <section class="ftco-intro">
     	<div class="container-wrap">

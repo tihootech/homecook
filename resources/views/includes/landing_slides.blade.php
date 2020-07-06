@@ -13,7 +13,7 @@
 								<span class="subheading">{{$slide->english_word}}</span>
 							@endif
 							@if ($slide->title)
-								<h1 class="mb-4">{{$slide->title}}</h1>
+								<h2 class="mb-4">{{$slide->title}}</h2>
 							@endif
 							@if ($slide->subtitle)
 								<p class="mb-4 mb-md-5">{{$slide->subtitle}}</p>
