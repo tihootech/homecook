@@ -1,5 +1,7 @@
 <?php
 
+Route::get('test', 'SadadController@test');
+
 // default laravel
 Route::get('/', 'LandingController@index')->name('index');
 Auth::routes(['register' => false]);
