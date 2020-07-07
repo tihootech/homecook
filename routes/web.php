@@ -1,6 +1,8 @@
 <?php
 
+// Sadad Payment Gate
 Route::get('test', 'SadadController@test');
+Route::get('verify', 'SadadController@verify');
 
 // default laravel
 Route::get('/', 'LandingController@index')->name('index');

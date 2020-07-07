@@ -31,7 +31,7 @@ class SadadController extends Controller
         $MerchantId="140333809";
         $TerminalId="24089363";
         $Amount=10000; //Rials
-        $OrderId="10";
+        $OrderId=123;
         $LocalDateTime=date("m/d/Y g:i:s a");
         $ReturnUrl="https://koofterizeh.com";
         $SignData=self::encrypt_pkcs7("$TerminalId;$OrderId;$Amount","$key");
@@ -54,5 +54,28 @@ class SadadController extends Controller
         else {
             die($arrres->Description);
         }
+    }
+
+    public function verify()
+    {
+        $key="hy9C6swnSA3JiJXwlxKOOZA/gw8hauah";
+        $OrderId=$_POST["OrderId"];
+        $Token=$_POST["token"];
+        $ResCode=$_POST["ResCode"];
+        if($ResCode==0)
+        {
+        	$verifyData = array('Token'=>$Token,'SignData'=>self::encrypt_pkcs7($Token,$key));
+        	$str_data = json_encode($verifyData);
+        	$res=self::CallAPI('https://sadad.shaparak.ir/vpg/api/v0/Advice/Verify',$str_data);
+        	$arrres=json_decode($res);
+        }
+        if($arrres->ResCode!=-1 && $arrres->ResCode==0)
+        {
+        	//Save $arrres->RetrivalRefNo,$arrres->SystemTraceNo,$arrres->OrderId to DataBase
+        	echo "شماره سفارش:".$OrderId."<br>"."شماره پیگیری : ".$arrres->SystemTraceNo."<br>"."شماره مرجع:".
+        	$arrres->RetrivalRefNo."<br> اطلاعات بالا را جهت پیگیری های بعدی یادداشت نمایید."."<br>";
+        }
+        else
+        	echo "تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد.";
     }
 }
