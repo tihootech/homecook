@@ -51,19 +51,13 @@ class SadadController extends Controller
         $res=self::CallAPI('https://sadad.shaparak.ir/vpg/api/v0/Advice/Verify',$str_data);
         $arrres=json_decode($res);
 
-        if($ResCode==0){
-            // find transaction
-            $transaction = Transaction::find($OrderId);
-            if (!$transaction) {
-                die('سیستم با خطا مواجه شد. کد پیگیری : 3207894');
-            }
+        // find transaction
+        $transaction = Transaction::find($OrderId);
+        if (!$transaction) {
+            die('سیستم با خطا مواجه شد. کد پیگیری : 3207894');
+        }
 
-            // mark as ponied
-            $transaction->ponied = 1;
-            $transaction->save();
-            TransactionItem::where('transaction_id', $transaction->id)->update([
-                'ponied' => 1
-            ]);
+        if($ResCode==0){
 
             // text message
             $mobile = $transaction->customer->mobile ?? null;
@@ -79,11 +73,20 @@ class SadadController extends Controller
 
         }
         if($arrres->ResCode!=-1 && $arrres->ResCode==0){
-        	//Save $arrres->RetrivalRefNo,$arrres->SystemTraceNo,$arrres->OrderId to DataBase
+            // save changes in db
+            $transaction->ponied = 1;
+            $transaction->retrival_ref_no = $arrres->RetrivalRefNo;
+            $transaction->system_trace_no = $arrres->SystemTraceNo;
+            $transaction->save();
+            TransactionItem::where('transaction_id', $transaction->id)->update([
+                'ponied' => 1
+            ]);
+
         	$message = "شماره سفارش:".$OrderId."<br>"."شماره پیگیری : ".$arrres->SystemTraceNo."<br>"."شماره مرجع:".
         	$arrres->RetrivalRefNo."<br> اطلاعات بالا را جهت پیگیری های بعدی یادداشت نمایید."."<br>";
         } else {
             $message = "تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد.";
+            $message .= "کد پیگیری : $transaction->uid - ";
         }
 
         return redirect()->route('landing.message')->withMessage($message);
