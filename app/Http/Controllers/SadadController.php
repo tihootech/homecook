@@ -45,6 +45,7 @@ class SadadController extends Controller
         $str_data = json_encode($data);
         $res=self::CallAPI('https://sadad.shaparak.ir/vpg/api/v0/Request/PaymentRequest',$str_data);
         $arrres=json_decode($res);
+        dd($arrres);
         if($arrres->ResCode==0)
         {
             $Token= $arrres->Token;
