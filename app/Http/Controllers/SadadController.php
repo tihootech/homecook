@@ -51,8 +51,7 @@ class SadadController extends Controller
         $res=self::CallAPI('https://sadad.shaparak.ir/vpg/api/v0/Advice/Verify',$str_data);
         $arrres=json_decode($res);
 
-        if($ResCode==0)
-        {
+        if($ResCode==0){
             // find transaction
             $transaction = Transaction::find($OrderId);
             if (!$transaction) {
@@ -78,14 +77,16 @@ class SadadController extends Controller
                 'cart' => null,
             ]);
 
-            // redirect()->route('landing.message')->withMessage('تراکنش شما با موفقیت انجام شد.');
         }
         if($arrres->ResCode!=-1 && $arrres->ResCode==0){
         	//Save $arrres->RetrivalRefNo,$arrres->SystemTraceNo,$arrres->OrderId to DataBase
-        	echo "شماره سفارش:".$OrderId."<br>"."شماره پیگیری : ".$arrres->SystemTraceNo."<br>"."شماره مرجع:".
+        	$message = "شماره سفارش:".$OrderId."<br>"."شماره پیگیری : ".$arrres->SystemTraceNo."<br>"."شماره مرجع:".
         	$arrres->RetrivalRefNo."<br> اطلاعات بالا را جهت پیگیری های بعدی یادداشت نمایید."."<br>";
-        } else
-        	echo "تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد.";
+        } else {
+            $message = "تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد.";
+        }
+
+        return redirect()->route('landing.message')->withMessage($message);
     }
 
 
