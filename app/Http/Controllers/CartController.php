@@ -220,21 +220,9 @@ class CartController extends Controller
         $transaction->time = $request->time;
         $transaction->delivery = $transaction->generate_delivery()->addDays($request->delivery)->format('Y-m-d');
         $transaction->save();
-        TransactionItem::where('transaction_id', $transaction->id)->update([
-            'ponied' => 1
-        ]);
-
-        // text message
-        TextMessageController::store('neworder', $transaction->customer->mobile, [route('view_transaction', ['customer', $transaction->uid])]);
-
-        // clear session data
-        session([
-            'tuid' => null,
-            'cart' => null,
-        ]);
 
         // show message
-        return redirect()->route('landing.message')->withMessage('تراکنش شما با موفقیت انجام شد.');
+        return SadadController::initGate($transaction->total * 10, $transaction->id);
     }
 
 }
