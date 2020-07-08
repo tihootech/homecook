@@ -11,7 +11,6 @@ class SadadController extends Controller
 
     public static function initGate($Amount, $OrderId)
     {
-        session_start();
         $key="hy9C6swnSA3JiJXwlxKOOZA/gw8hauah";
         $MerchantId="140333809";
         $TerminalId="24089363";
