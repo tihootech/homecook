@@ -40,7 +40,7 @@ class SadadController extends Controller
 
     public function verify()
     {
-        dd($_POST);
+        dd('here');
         $key="hy9C6swnSA3JiJXwlxKOOZA/gw8hauah";
         $OrderId=$_POST["OrderId"];
         $Token=$_POST["token"];
