@@ -41,15 +41,22 @@ class SadadController extends Controller
     public function verify(Request $request)
     {
         $key="hy9C6swnSA3JiJXwlxKOOZA/gw8hauah";
-        $OrderId=$_POST["OrderId"];
-        $Token=$_POST["token"];
-        $ResCode=$_POST["ResCode"];
+        $OrderId=$request->OrderId;
+        $Token=$request->token;
+        $ResCode=$request->ResCode;
+
+        // default Sadad Codes
+        $verifyData = array('Token'=>$Token,'SignData'=>self::encrypt_pkcs7($Token,$key));
+        $str_data = json_encode($verifyData);
+        $res=self::CallAPI('https://sadad.shaparak.ir/vpg/api/v0/Advice/Verify',$str_data);
+        $arrres=json_decode($res);
+
         if($ResCode==0)
         {
             // find transaction
             $transaction = Transaction::find($OrderId);
             if (!$transaction) {
-                die('سیستم با خطا مواجه شد. کد پیگیری : '. $arrres->SystemTraceNo);
+                die('سیستم با خطا مواجه شد. کد پیگیری : 3207894');
             }
 
             // mark as ponied
@@ -71,21 +78,13 @@ class SadadController extends Controller
                 'cart' => null,
             ]);
 
-            // default Sadad Codes
-        	$verifyData = array('Token'=>$Token,'SignData'=>self::encrypt_pkcs7($Token,$key));
-        	$str_data = json_encode($verifyData);
-        	$res=self::CallAPI('https://sadad.shaparak.ir/vpg/api/v0/Advice/Verify',$str_data);
-        	$arrres=json_decode($res);
-
             // redirect()->route('landing.message')->withMessage('تراکنش شما با موفقیت انجام شد.');
         }
-        if($arrres->ResCode!=-1 && $arrres->ResCode==0)
-        {
+        if($arrres->ResCode!=-1 && $arrres->ResCode==0){
         	//Save $arrres->RetrivalRefNo,$arrres->SystemTraceNo,$arrres->OrderId to DataBase
         	echo "شماره سفارش:".$OrderId."<br>"."شماره پیگیری : ".$arrres->SystemTraceNo."<br>"."شماره مرجع:".
         	$arrres->RetrivalRefNo."<br> اطلاعات بالا را جهت پیگیری های بعدی یادداشت نمایید."."<br>";
-        }
-        else
+        } else
         	echo "تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد.";
     }
 
