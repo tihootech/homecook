@@ -82,8 +82,8 @@ class SadadController extends Controller
                 'ponied' => 1
             ]);
 
-        	$message = "شماره سفارش:".$OrderId."<br>"."شماره پیگیری : ".$arrres->SystemTraceNo."<br>"."شماره مرجع:".
-        	$arrres->RetrivalRefNo."<br> اطلاعات بالا را جهت پیگیری های بعدی یادداشت نمایید."."<br>";
+        	$message = "شماره سفارش:".$OrderId."  ---  "."شماره پیگیری : ".$arrres->SystemTraceNo."  ---  "."شماره مرجع:".
+        	$arrres->RetrivalRefNo."  ---   اطلاعات بالا را جهت پیگیری های بعدی یادداشت نمایید."."  ---  ";
         } else {
             $message = "تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد.";
             $message .= "کد پیگیری : $transaction->uid - ";
