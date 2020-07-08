@@ -28,7 +28,7 @@ Route::get('test', function () {
     $MerchantId="140333809";
     $TerminalId="24089363";
     $Amount=20000; //Rials
-    $OrderId=rand(300,5000);
+    $OrderId=251;
     $LocalDateTime=date("m/d/Y g:i:s a");
     $ReturnUrl="https://www.koofterizeh.com/verify";
     $SignData=encrypt_pkcs7("$TerminalId;$OrderId;$Amount","$key");
