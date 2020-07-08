@@ -46,7 +46,7 @@ Route::get('test', function () {
     {
     	$Token= $arrres->Token;
     	$url="https://sadad.shaparak.ir/VPG/Purchase?Token=$Token";
-    	header("Location:$url");
+    	return redirect($url);
     }
     else
     	die($arrres->Description);
