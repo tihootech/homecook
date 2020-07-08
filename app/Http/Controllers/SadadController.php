@@ -46,16 +46,21 @@ class SadadController extends Controller
         $ResCode=$_POST["ResCode"];
         if($ResCode==0)
         {
+            // find transaction
             $transaction = Transaction::find($OrderId);
             if (!$transaction) {
                 die('سیستم با خطا مواجه شد. کد پیگیری : '. $arrres->SystemTraceNo);
             }
-            $mobile = $transaction->customer->mobile ?? null;
+
+            // mark as ponied
+            $transaction->ponied = 1;
+            $transaction->save();
             TransactionItem::where('transaction_id', $transaction->id)->update([
                 'ponied' => 1
             ]);
 
             // text message
+            $mobile = $transaction->customer->mobile ?? null;
             if ($mobile) {
                 TextMessageController::store('neworder', $mobile, [route('view_transaction', ['customer', $transaction->uid])]);
             }

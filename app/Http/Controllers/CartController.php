@@ -216,13 +216,12 @@ class CartController extends Controller
         $transaction = Transaction::whereUid($tuid)->firstOrFail();
 
         // pony transaction
-        $transaction->ponied = 1;
         $transaction->time = $request->time;
         $transaction->delivery = $transaction->generate_delivery()->addDays($request->delivery)->format('Y-m-d');
         $transaction->save();
 
         // show message
-        return SadadController::initGate($transaction->total * 10, $transaction->id);
+        return SadadController::initGate($transaction->sum * 10, $transaction->id);
     }
 
 }
