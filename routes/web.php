@@ -3,15 +3,18 @@
 
 Route::get('test', function () {
 
+    session_start();
+
     //Create sign data(Tripledes(ECB,PKCS7))
-    function encrypt_pkcs7($str, $key) {
+    function encrypt_pkcs7($str, $key)
+    {
         $key = base64_decode($key);
         $ciphertext = OpenSSL_encrypt($str,"DES-EDE3", $key, OPENSSL_RAW_DATA);
         return base64_encode($ciphertext);
     }
-
     //Send Data
-    function CallAPI($url, $data = false) {
+    function CallAPI($url, $data = false)
+    {
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($curl, CURLOPT_POSTFIELDS,$data);
@@ -21,34 +24,33 @@ Route::get('test', function () {
         curl_close($curl);
         return $result;
     }
-
     $key="hy9C6swnSA3JiJXwlxKOOZA/gw8hauah";
-    $Amount = 20000;
-    $OrderId = 251;
     $MerchantId="140333809";
     $TerminalId="24089363";
+    $Amount=20000; //Rials
+    $OrderId="YourOrderId";
     $LocalDateTime=date("m/d/Y g:i:s a");
-    $ReturnUrl="https://koofterizeh.com/verify";
+    $ReturnUrl="http://koofterizeh.com/verify";
     $SignData=encrypt_pkcs7("$TerminalId;$OrderId;$Amount","$key");
     $data = array('TerminalId'=>$TerminalId,
-    'MerchantId'=>$MerchantId,
-    'Amount'=>$Amount,
-    'SignData'=> $SignData,
-    'ReturnUrl'=>$ReturnUrl,
-    'LocalDateTime'=>$LocalDateTime,
-    'OrderId'=>$OrderId);
+                  'MerchantId'=>$MerchantId,
+                  'Amount'=>$Amount,
+                  'SignData'=> $SignData,
+    	      'ReturnUrl'=>$ReturnUrl,
+    	      'LocalDateTime'=>$LocalDateTime,
+    	      'OrderId'=>$OrderId);
     $str_data = json_encode($data);
     $res=CallAPI('https://sadad.shaparak.ir/vpg/api/v0/Request/PaymentRequest',$str_data);
     $arrres=json_decode($res);
     if($arrres->ResCode==0)
     {
-        $Token= $arrres->Token;
-        $url="https://sadad.shaparak.ir/VPG/Purchase?Token=$Token";
-        return redirect($url);
+    	$Token= $arrres->Token;
+    	$url="https://sadad.shaparak.ir/VPG/Purchase?Token=$Token";
+    	header("Location:$url");
     }
-    else {
-        die($arrres->Description);
-    }
+    else
+    	die($arrres->Description);
+
 });
 
 // Sadad Payment Gate
