@@ -40,8 +40,6 @@ class SadadController extends Controller
 
     public function verify(Request $request)
     {
-        die('success');
-        dd($request->all());
         $key="hy9C6swnSA3JiJXwlxKOOZA/gw8hauah";
         $OrderId=$_POST["OrderId"];
         $Token=$_POST["token"];
