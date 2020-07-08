@@ -49,7 +49,7 @@ class SadadController extends Controller
         {
             $Token= $arrres->Token;
             $url="https://sadad.shaparak.ir/VPG/Purchase?Token=$Token";
-            return header("Location:$url");
+            return redirect($url);
         }
         else {
             die($arrres->Description);
