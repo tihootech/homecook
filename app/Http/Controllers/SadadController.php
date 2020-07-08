@@ -15,7 +15,7 @@ class SadadController extends Controller
         $MerchantId="140333809";
         $TerminalId="24089363";
         $LocalDateTime=date("m/d/Y g:i:s a");
-        $ReturnUrl="https://koofterizeh.com/verify";
+        $ReturnUrl="https://www.koofterizeh.com/verify";
         $SignData=self::encrypt_pkcs7("$TerminalId;$OrderId;$Amount","$key");
         $data = array('TerminalId'=>$TerminalId,
         'MerchantId'=>$MerchantId,
