@@ -45,12 +45,11 @@ class SadadController extends Controller
         $str_data = json_encode($data);
         $res=self::CallAPI('https://sadad.shaparak.ir/vpg/api/v0/Request/PaymentRequest',$str_data);
         $arrres=json_decode($res);
-        dd($arrres);
         if($arrres->ResCode==0)
         {
             $Token= $arrres->Token;
             $url="https://sadad.shaparak.ir/VPG/Purchase?Token=$Token";
-            header("Location:$url");
+            return header("Location:$url");
         }
         else {
             die($arrres->Description);
@@ -59,6 +58,7 @@ class SadadController extends Controller
 
     public function verify()
     {
+        dd('ver');
         $key="hy9C6swnSA3JiJXwlxKOOZA/gw8hauah";
         $OrderId=$_POST["OrderId"];
         $Token=$_POST["token"];
