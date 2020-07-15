@@ -10,16 +10,16 @@ class TransactionItem extends Model
 
     public function food()
 	{
-		return $this->belongsTo(Food::class);
+		return $this->belongsTo(Food::class)->withTrashed();
 	}
 
 	public function cook()
 	{
-		return $this->belongsTo(Cook::class);
+		return $this->belongsTo(Cook::class)->withTrashed();
 	}
 
     public function transaction()
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo(Transaction::class)->withTrashed();
     }
 }

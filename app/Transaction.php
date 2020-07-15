@@ -44,12 +44,12 @@ class Transaction extends Model
 
 	public function customer()
 	{
-		return $this->belongsTo(Customer::class);
+		return $this->belongsTo(Customer::class)->withTrashed();
 	}
 
 	public function peyk()
 	{
-		return $this->belongsTo(Peyk::class);
+		return $this->belongsTo(Peyk::class)->withTrashed();
 	}
 
 	public function address()

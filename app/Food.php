@@ -58,7 +58,7 @@ class Food extends Model
 
 	public function cook()
 	{
-		return $this->belongsTo(Cook::class);
+		return $this->belongsTo(Cook::class)->withTrashed();
 	}
 
 	public function cat()

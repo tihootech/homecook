@@ -10,6 +10,6 @@ class Review extends Model
 
     public function food()
     {
-        return $this->belongsTo(Food::class);
+        return $this->belongsTo(Food::class)->withTrashed();
     }
 }
