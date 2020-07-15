@@ -138,14 +138,15 @@ class LandingController extends Controller
         return view('landing.message', compact('message', 'slides'));
     }
 
-    public function view_transaction($type, $tuid)
+    public function view_transaction($type, $tuid, $cuid=null)
     {
         $transaction = Transaction::whereUid($tuid)->firstOrFail();
-        $list = ['peyk', 'customer'];
-        if (!in_array($type, $list)) {
+        $list = ['peyk', 'customer', 'cook', 'master'];
+        $cook = Cook::whereUid($cuid)->first();
+        if ( !in_array($type, $list) || ($type == 'cook' && !$cook) ) {
             abort(404);
         }
-        return view('landing.view_transaction', compact('transaction', 'type'));
+        return view('landing.view_transaction', compact('transaction', 'type', 'cook'));
     }
 
     public function rnr()

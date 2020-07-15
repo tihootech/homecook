@@ -78,7 +78,7 @@ Route::get('landing/message', 'LandingController@message')->name('landing.messag
 Route::post('transaction/{transaction}/peyk', 'TransactionController@set_peyk')->name('transaction.set_peyk');
 
 // peygiri
-Route::get('order/{type}/{tuid}', 'LandingController@view_transaction')->name('view_transaction');
+Route::get('order/{type}/{tuid}/{cuid?}', 'LandingController@view_transaction')->name('view_transaction');
 
 // other resources
 Route::resource('review', 'ReviewController');

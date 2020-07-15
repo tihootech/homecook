@@ -37,13 +37,15 @@
 				<hr class="gray-border">
 				<p class="h5"> آدرسی مشتری که سفارش را تحویل میگیرد :  </p>
 				<p class="text-white"> {{$transaction->address->body}} </p>
+				<hr class="gray-border">
+				<p class="h5"> شماره تماس مشتری :  {{$transaction->customer->mobile}} </p>
 
 			@endif
 
-			@if ($type == 'customer')
+			@if ($type == 'customer' || $type == 'master' || $type == 'cook')
 
 				<div class="table-responsive-lg">
-					@include('includes.cart_items', ['no_action'=>true])
+					@include('includes.cart_items', ['no_action'=>true, 'filter_cook' => true])
 				</div>
 
 			@endif

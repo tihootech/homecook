@@ -59,11 +59,26 @@ class SadadController extends Controller
 
         if($ResCode==0){
 
-            // text message
-            $mobile = $transaction->customer->mobile ?? null;
-            if ($mobile) {
-                TextMessageController::store('neworder', $mobile, [route('view_transaction', ['customer', $transaction->uid])]);
+            // customer text message
+            $customer_mobile = $transaction->customer->mobile ?? null;
+            if ($customer_mobile) {
+                TextMessageController::store('neworder', $customer_mobile, [route('view_transaction', ['customer', $transaction->uid])]);
             }
+
+            // cooks text message
+            $cooks_list = [];
+            foreach ($transaction->items as $item) {
+                if ($cook = $item->cook) {
+                    $cooks_list[$cook->uid] = $cook->mobile;
+                }
+            }
+            foreach ($cooks_list as $cook_uid => $cook_mobile) {
+                TextMessageController::store('setpeyk', $cook_mobile, [route('view_transaction', ['cook', $transaction->uid, $cook_uid])]);
+            }
+
+
+            // master text_messages
+            TextMessageController::store('setpeyk', '09187310358', [route('view_transaction', ['master', $transaction->uid])]);
 
             // clear session data
             session([
