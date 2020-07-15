@@ -22,7 +22,7 @@
 	</thead>
 	<tbody>
 		@foreach ($transaction->items as $index => $item)
-			@if (!isset($filter_cook) || $cook->id == $item->cook_id)
+			@if (!isset($filter_cook) || (!isset($filter_cook)) || $cook->id == $item->cook_id)
 				<tr>
 					<td>{{$index+1}}</td>
 					<td>
