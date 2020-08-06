@@ -29,7 +29,7 @@ class HomeController extends Controller
     public function index()
     {
         if (master()) {
-            $orders = Transaction::wherePonied(1)->whereNull('peyk_id')->get();
+            $orders = Transaction::wherePonied(1)->where('peyk_share', '!=', 0)->whereNull('peyk_id')->get();
             $fresh_cooks = Cook::whereFresh(1)->get();
             $pending_comments = Comment::whereConfirmed(0)->get();
             $pending_foods = Food::whereConfirmed(0)->get();

@@ -185,10 +185,15 @@
 											<i class="material-icons icon">info</i>
 											به علت سفارش از
 											<b id="cook-count" class="text-dark mx-1"> {{$transaction->count_cooks()}} </b>
-											آشپز مختلف، هزینه ارسال شما
-											<b class="peyk-share text-dark mx-1">{{nf($transaction->peyk_share)}}</b>
-											تومان
-											میباشد.
+											آشپز مختلف،
+											@if ( settings('deliver_type') == 'peyk' )
+												هزینه ارسال شما
+												<b class="peyk-share text-dark mx-1">{{nf($transaction->peyk_share)}}</b>
+												تومان
+												میباشد.
+											@else
+												خرید های شما توسط {{$transaction->count_cooks()}} آژانس مختلف برای شما ارسال خواهد شد.
+											@endif
 										</div>
 									@endif
 								</div>

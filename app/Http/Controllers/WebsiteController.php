@@ -43,6 +43,7 @@ class WebsiteController extends Controller
 			'peyk_share' => 'required|integer',
 			'tax' => 'required|integer|min:1|max:99',
 			'added_price' => 'required|integer|min:1|max:99',
+			'deliver_type' => 'required',
 		]);
 		$settings = settings();
 		$settings->update($data);

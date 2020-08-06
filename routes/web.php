@@ -86,6 +86,7 @@ Route::post('review/{review}/accept', 'ReviewController@accept')->name('review.a
 Route::resource('peyk', 'PeykController')->except('show');
 Route::get('transaction', 'TransactionController@index')->name('transaction.index');
 Route::get('transaction/{transaction}', 'TransactionController@show')->name('transaction.show');
+Route::delete('transaction/{transaction}', 'TransactionController@destroy')->name('transaction.destroy');
 
 // payments
 Route::get('payments', 'PaymentController@payments')->name('payments');

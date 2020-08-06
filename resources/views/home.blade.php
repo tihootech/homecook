@@ -14,7 +14,7 @@
 
                 <div class="row justify-content-center">
                     @foreach ($orders as $transaction)
-                        <div class="col-md-6 my-2">
+                        <div class="col-md-4 my-2">
                             <div class="card">
                                 <form class="card-body" action="{{route('transaction.set_peyk', $transaction->id)}}" method="post">
                                     @csrf
@@ -40,12 +40,23 @@
                                     <h5 class="mb-3"> انتخاب پیک </h5>
                                     <select class="select2" name="peyk" data-placeholder="-- انتخاب پیک --" required>
                                         <option value=""></option>
+                                        @if (settings('deliver_type') != 'peyk')
+                                            <option value="0"> تحویل به آژانس </option>
+                                        @endif
                                         @foreach ($peyks as $peyk)
                                             <option value="{{$peyk->id}}">{{$peyk->full_name()}} - {{$peyk->mobile}}</option>
                                         @endforeach
                                     </select>
+                                    @if (settings('deliver_type') != 'peyk')
+                                        <div class="alert alert-warning mt-2">
+                                            این سفارش زمانی که نوع تحویل روی پیک بوده توسط مشتری ثبت شده است.
+                                            حال که نوع تحویل روی آژانس قرار دارد، سفارشات بعدی نیازی به تنظیم پیک نخواهد داشت.
+                                            درصورتی که تمایل دارید این سفارش نیز توسط آژانس تحویل داده شود
+                                            از منوی انتخاب پیک گزینه تحویل به آژانس را انتخاب کنید.
+                                        </div>
+                                    @endif
                                     <div class="text-center mt-3">
-                                        <button type="submit" class="btn btn-outline-primary"> تایید و اطلاع رسانی </button>
+                                        <button type="submit" class="btn btn-outline-primary"> تایید </button>
                                     </div>
                                 </form>
                             </div>

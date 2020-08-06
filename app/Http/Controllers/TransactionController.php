@@ -57,10 +57,21 @@ class TransactionController extends Controller
 
     public function set_peyk(Transaction $transaction, Request $request)
     {
-        $peyk = Peyk::findOrFail($request->peyk);
-        $transaction->peyk_id = $peyk->id;
+        if ($request->peyk == 0) {
+            $transaction->peyk_id = 0;
+            $transaction->peyk_share = 0;
+        }else {
+            $peyk = Peyk::findOrFail($request->peyk);
+            $transaction->peyk_id = $peyk->id;
+            TextMessageController::store('setpeyk', $peyk->mobile, [route('view_transaction', ['peyk', $transaction->uid])]);
+        }
         $transaction->save();
-        TextMessageController::store('setpeyk', $peyk->mobile, [route('view_transaction', ['peyk', $transaction->uid])]);
+        return back()->withMessage(__('SUCCESS'));
+    }
+
+    public function destroy(Transaction $transaction)
+    {
+        $transaction->delete();
         return back()->withMessage(__('SUCCESS'));
     }
 }

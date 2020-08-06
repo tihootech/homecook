@@ -14,12 +14,18 @@ class Transaction extends Model
 
     public function getSumAttribute()
     {
-        return $this->total + $this->peyk_share;
+        $type = settings('deliver_type');
+        $total = $this->total;
+        if ($type == 'peyk') {
+            $total += $this->peyk_share;
+        }
+        return $total;
     }
 
     public function update_changes_to_cart()
     {
-        $this->peyk_share = $this->count_cooks() * settings('peyk_share');
+        $settings = settings();
+        $this->peyk_share = $settings->deliver_type == 'peyk' ? ($this->count_cooks() * $settings->peyk_share) : 0;
         $this->total = TransactionItem::where('transaction_id', $this->id)->sum('payable');
         $this->save();
     }

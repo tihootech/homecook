@@ -64,7 +64,15 @@
 <div class="d-flex justify-content-between text-center">
 	<p>
 		هزینه ارسال <br>
-		<span class="peyk-share">{{nf($transaction->peyk_share)}}</span> تومان
+		@if (settings('deliver_type') == 'peyk')
+			<span class="peyk-share">{{nf($transaction->peyk_share)}}</span> تومان
+		@else
+			<span>
+				آشپز خرید های شما را توسط آژانس برای شما ارسال میکند.
+				<br>
+				 هزینه آژانس توسط شما پرداخت خواهد شد.
+			 </span>
+		@endif
 	</p>
 	<p id="sum">
 		مجموع <br>

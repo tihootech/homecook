@@ -26,7 +26,7 @@
                             <th> تاریخ سفارش </th>
                             <th> تاریخ تحویل </th>
                             @master
-                                <th> جزییات </th>
+                                <th colspan="2"> جزییات </th>
                             @endmaster
 						</tr>
 					</thead>
@@ -35,7 +35,13 @@
 							<tr>
 								<th> {{$index+1}} </th>
                                 @master
-                                    <th> <a href="{{$transaction->customer->dashboard_link()}}"> {{$transaction->customer->full_name()}} </a> </th>
+                                    <th>
+                                        @if ($transaction->customer)
+                                            <a href="{{$transaction->customer->dashboard_link()}}"> {{$transaction->customer->full_name()}} </a>
+                                        @else
+                                            <em> - </em>
+                                        @endif
+                                    </th>
                                 @endmaster
 								<td>
                                     <ul>
@@ -52,9 +58,21 @@
                                 @not_peyk
                                     <td> <span class="calibri">{{nf($transaction->sum)}}</span> تومان </td>
                                 @endnot_peyk
-                                <td> <span class="calibri">{{nf($transaction->peyk_share)}}</span> تومان </td>
+                                <td>
+                                    @if ($transaction->peyk_share)
+                                        <span class="calibri">{{nf($transaction->peyk_share)}}</span> تومان
+                                    @else
+                                        تحویل به آژانس
+                                    @endif
+                                </td>
                                 @master_or_peyk
-                                    <td> @include('dashboard.partials.yesno', ['boolean' => $transaction->peyk_ponied]) </td>
+                                    <td>
+                                        @if ($transaction->peyk_share)
+                                            @include('dashboard.partials.yesno', ['boolean' => $transaction->peyk_ponied])
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
                                 @endmaster_or_peyk
                                 <td>
                                     {{date_picker_date($transaction->created_at)}}
@@ -69,6 +87,15 @@
                                 @master
                                     <td>
                                         <a href="{{route('transaction.show', $transaction->id)}}" class="btn btn-outline-primary"> جزییات </a>
+                                    </td>
+                                    <td data-toggle="popover" data-trigger="hover" data-placement="top" data-content="حذف">
+                                        <form class="d-inline" action="{{route('transaction.destroy', $transaction->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:void" class="btn btn-outline-danger btn-sm delete">
+                                                <i class="fa fa-trash m-0"></i>
+                                            </a>
+                                        </form>
                                     </td>
                                 @endmaster
 							</tr>
