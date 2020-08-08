@@ -80,7 +80,7 @@
     -webkit-animation: start 0.2s;
 }
 .pdp-default  .selected{
-    background: #15a6eb;
+    background: #C49B63;
     color: #ffffff;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .pdp-default .nextArrow:hover, .pdp-default .prevArrow:hover{
-    color: #0073ea;
+    color: #C49B63;
 }
 
 .pdp-default .cell {
@@ -129,13 +129,13 @@
 
 /* Days of the week */
 .pdp-default .dows {
-    background: #0083FF;/*#006fe0;*/
+    background: #C49B63;
     color: #fff;
     margin-top: 10px !important;
 }
 .pdp-default .dow {
     font: bold 14px 'Yekan';
-    border: 1px solid #0083FF;
+    border: 1px solid #C49B63;
 }
 
 .pdp-default .days{
@@ -165,11 +165,11 @@
 
 .pdp-default .today{
     color: #fff;
-    background: #0073ea;
+    background: #C49B63;
 }
 .pdp-default .today:hover{
     color: #fff;
-    background: #0073ea;
+    background: #C49B63;
 }
 
 .pdp-default .disday, .pdp-default .disday:hover{
@@ -184,7 +184,7 @@
 }
 
 .pdp-default .pdp-footer{
-    background: #0083FF;
+    background: #C49B63;
     font: normal 12px 'Yekan';
     text-align: center;
     height: 17px;

@@ -28,6 +28,11 @@
 						<i class="material-icons">how_to_reg</i> همکاری
 					</a>
 				</li>
+				<li class="nav-item @if(rn() == 'competitions') active @endif">
+					<a href="{{route('competitions')}}" class="nav-link">
+						<i class="material-icons">redeem</i> مسابقات
+					</a>
+				</li>
 			</ul>
 		</div>
 		<div class="topbar order-sm-12 order-1">

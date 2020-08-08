@@ -13,6 +13,9 @@ use App\Slide;
 use App\Review;
 use App\City;
 use App\State;
+use App\Competition;
+use App\Competitive;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -147,6 +150,38 @@ class LandingController extends Controller
             abort(404);
         }
         return view('landing.view_transaction', compact('transaction', 'type', 'cook'));
+    }
+
+    public function competitions()
+    {
+        $compts = Competition::latest()->paginate(6);
+        return view('landing.competitions', compact('compts'));
+    }
+
+    public function signupInCompetition(Competition $compt, Request $request)
+    {
+        // validate data
+        $data = $request->validate([
+            'full_name' => 'required|string',
+            'mobile' => 'required|string|size:11',
+        ]);
+        $data['competition_id'] = $compt->id;
+
+        // check for duplicate
+        $found = Competitive::where('competition_id', $compt->id)->where('mobile', $request->mobile)->first();
+        if ($found) {
+            return back()->withError('شما قبلا در این مسابقه شرکت کرده اید.');
+        }
+
+        // check if time
+        $now = Carbon::today();
+        if ($now > $compt->date) {
+            return back()->withError('زمان شرکت در این مسابقه خاتمه یافته');
+        }
+
+        // store in db
+        Competitive::create($data);
+        return back()->withMessage('ثبت شما در مسابقه موفقیت آمیز بود.');
     }
 
     public function rnr()

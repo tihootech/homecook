@@ -18,6 +18,13 @@
 @master
 
 <li>
+	<a class="app-menu__item @if( rn() == 'compt' ) active @endif" href="{{route("compt.index")}}">
+		<i class="ml-2 material-icons">card_giftcard</i>
+		<span class="app-menu__label"> مسابقات </span>
+	</a>
+</li>
+
+<li>
 	<a class="app-menu__item @if( rn() == 'payments' ) active @endif" href="{{route("payments")}}">
 		<i class="ml-2 material-icons">attach_money</i>
 		<span class="app-menu__label"> امور مالی </span>

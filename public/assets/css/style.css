@@ -10099,7 +10099,7 @@ h5,
 .btn.btn-primary {
     background: #c49b63;
     border: 1px solid #c49b63;
-    color: #000;
+    color: #eee;
 }
 
 .btn.btn-primary:hover {
@@ -12441,4 +12441,23 @@ footer a:hover {
 	position: relative;
 	top: 3px;
 	margin-right: 2px;
+}
+
+
+.landing-card.card {
+	background: none;
+	border-color: #ccc;
+}
+
+.on-light-bg label {
+	color: #111 !important;
+}
+.on-light-bg .form-control {
+	border: 1px solid #111 !important;
+	border-radius: 5px !important;
+	color: #111 !important;
+	padding-right: 10px !important;
+}
+.on-light-bg .form-control:focus {
+	border-color: #c49b63 !important;
 }

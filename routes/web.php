@@ -76,17 +76,20 @@ Route::put('food/{food}/confirm', 'FoodController@confirm')->name('food.confirm'
 // other routes
 Route::get('landing/message', 'LandingController@message')->name('landing.message');
 Route::post('transaction/{transaction}/peyk', 'TransactionController@set_peyk')->name('transaction.set_peyk');
+Route::post('review/{review}/accept', 'ReviewController@accept')->name('review.accept');
+Route::get('transaction', 'TransactionController@index')->name('transaction.index');
+Route::get('transaction/{transaction}', 'TransactionController@show')->name('transaction.show');
+Route::delete('transaction/{transaction}', 'TransactionController@destroy')->name('transaction.destroy');
+Route::post('compt/{compt}/winners', 'CompetitionController@set_winners')->name('compt.winners');
 
 // peygiri
 Route::get('order/{type}/{tuid}/{cuid?}', 'LandingController@view_transaction')->name('view_transaction');
 
 // other resources
 Route::resource('review', 'ReviewController');
-Route::post('review/{review}/accept', 'ReviewController@accept')->name('review.accept');
 Route::resource('peyk', 'PeykController')->except('show');
-Route::get('transaction', 'TransactionController@index')->name('transaction.index');
-Route::get('transaction/{transaction}', 'TransactionController@show')->name('transaction.show');
-Route::delete('transaction/{transaction}', 'TransactionController@destroy')->name('transaction.destroy');
+Route::resource('compt', 'CompetitionController');
+
 
 // payments
 Route::get('payments', 'PaymentController@payments')->name('payments');
@@ -100,8 +103,10 @@ Route::put('comment/{comment}/confirm', 'CommentController@confirm')->name('comm
 Route::post('comment/confirm_all', 'CommentController@confirm_all')->name('confirm_all_comments');
 Route::resource('comment', 'CommentController')->except(['show', 'create']);
 
-// other
+// landing pages
 Route::get('قوانین-و-مقررات', 'LandingController@rnr')->name('rnr');
+Route::get('مسابقات', 'LandingController@competitions')->name('competitions');
+Route::post('competition/{compt}', 'LandingController@signupInCompetition')->name('competition.signup');
 
 // blogs
 Route::resource('blog', 'BlogController')->except('show');
