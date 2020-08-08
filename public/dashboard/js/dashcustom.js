@@ -1,4 +1,29 @@
 
+$(document).ready(function () {
+
+	$('.resend-sms').click(function(){
+		var target = $(this).parents('form') ;
+		swal({
+			title: "آیا مطمئن هستید؟",
+			text: "ارسال مجدد پیامک",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonText: "بله. ارسال شود.",
+			cancelButtonText: "لغو",
+			closeOnConfirm: false,
+			closeOnCancel: false
+		}, function(isConfirm) {
+			if (isConfirm) {
+				target.submit();
+			} else {
+				swal("عملیات لغو شد.", "پیامکی ارسال نشد", "error");
+			}
+		});
+	});
+
+});
+
+
 $(document).on('click', '.rating > i', function () {
 	$(this).parents('.rating').siblings('textarea[name=body]').slideDown();
 });

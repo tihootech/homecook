@@ -71,6 +71,14 @@ class TextMessageController extends Controller
 
     }
 
+    public function resend(TextMessage $sms)
+    {
+        $new_sms = $sms->replicate();
+        $new_sms->sent = 0;
+        $new_sms->save();
+        return back()->withMessage( __('RESEND_SMS') );
+    }
+
     private static function format($result)
     {
         if($result){

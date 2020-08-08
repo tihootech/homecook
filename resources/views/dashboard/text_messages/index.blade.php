@@ -49,6 +49,7 @@
 							<th> هزینه </th>
 							<th> وضعیت </th>
 							<th> متن </th>
+							<th> عملیات </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -74,6 +75,12 @@
                                     @else
                                         <em> ارسال نشده </em>
                                     @endif
+                                </td>
+                                <td>
+                                    <form class="d-inline" action="{{route('sms.resend', $sms)}}" method="post">
+                                        @csrf
+                                        <button type="button" class="btn btn-primary resend-sms btn-sm"> ارسال مجدد </button>
+                                    </form>
                                 </td>
 							</tr>
 				    	@endforeach

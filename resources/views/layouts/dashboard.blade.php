@@ -57,7 +57,7 @@
     <script src="{{asset("dashboard/js/pdp.min.js")}}"></script>
     <script src="{{asset("dashboard/js/stars.min.js")}}"></script>
     <script src="{{asset("dashboard/js/dashmain.js?v=1.1")}}"></script>
-    <script src="{{asset("dashboard/js/dashcustom.js?v=1.1")}}"></script>
+    <script src="{{asset("dashboard/js/dashcustom.js?v=1.2")}}"></script>
     <script src="{{asset("js/general.js")}}"></script>
     <script src="{{asset("dashboard/js/plugins/chart.js")}}"></script>
 

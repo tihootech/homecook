@@ -81,6 +81,7 @@ Route::get('transaction', 'TransactionController@index')->name('transaction.inde
 Route::get('transaction/{transaction}', 'TransactionController@show')->name('transaction.show');
 Route::delete('transaction/{transaction}', 'TransactionController@destroy')->name('transaction.destroy');
 Route::post('compt/{compt}/winners', 'CompetitionController@set_winners')->name('compt.winners');
+Route::post('text-messages/{sms}', 'TextMessageController@resend')->name('sms.resend');
 
 // peygiri
 Route::get('order/{type}/{tuid}/{cuid?}', 'LandingController@view_transaction')->name('view_transaction');

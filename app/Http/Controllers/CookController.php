@@ -129,6 +129,9 @@ class CookController extends Controller
 
     public function destroy(Cook $cook)
     {
+        $cook->nickname = $cook->nickname . "_bu";
+        $cook->mobile = $cook->mobile . "_bu";
+        $cook->save();
         $cook->delete();
         if ($cook->user) {
             $cook->user->delete();
