@@ -187,6 +187,12 @@
         </div>
 
         <div class="tile">
+            <h3> <i class="material-icons">fact_check</i> قوانین وبسایت </h3>
+            <hr>
+            <textarea name="rnr" rows="10" class="form-control rule my-3">{{str_replace('&&&', "\r\n", website('rnr'))}}</textarea>
+        </div>
+
+        <div class="tile">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2 m-auto">

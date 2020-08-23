@@ -80,6 +80,9 @@ class WebsiteController extends Controller
             $data['testimonial_image'] = upload($data['testimonial_image'], $website->testimonial_image);
         }
 
+		// rnr
+		$data['rnr'] = str_replace("\r\n", '&&&', $data['rnr']);
+
 		// action
 		$website->update($data);
 		return back()->withMessage(__('SUCCESS'));

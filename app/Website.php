@@ -22,4 +22,9 @@ class Website extends Model
         }
         return $output;
     }
+
+    public function rules()
+    {
+        return explode('&&&', $this->rnr);
+    }
 }
