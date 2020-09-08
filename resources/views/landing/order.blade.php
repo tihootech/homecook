@@ -35,6 +35,17 @@
 							بیشترین تخفیف
 						</a>
 					</div>
+					<hr class="hr-light">
+					<div class="row">
+						<form class="col-md-4 mx-auto">
+							<select class="select2" name="city" id="select-city-in-landing">
+								<option value=""> -- همه شهر ها -- </option>
+								@foreach ($cities as $city)
+									<option value="{{$city->id}}" @if($city->id == request('city')) selected @endif> {{$city->name}} </option>
+								@endforeach
+							</select>
+						</form>
+					</div>
 				</div>
 
 			</div>

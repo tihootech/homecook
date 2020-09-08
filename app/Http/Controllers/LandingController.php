@@ -71,12 +71,17 @@ class LandingController extends Controller
         $type = rn() == 'order_food' ? 'food' : 'product';
         $slides = Slide::wherePage(rn())->get();
         $cats = Cat::whereType($type)->get();
+        $cities = City::whereSelected(true)->get();
 
         $foods = Food::getList();
 
         $foods = $foods->whereConfirmed(1)->whereType($type);
+
         if ($request->t) {
             $foods = $foods->where('title', 'like', "%$request->t%");
+        }
+        if ($request->city) {
+            $foods = $foods->where('cooks.city_id', $request->city);
         }
         if ($request->c && is_array($request->c) && count($request->c)) {
             $foods = $foods->whereIn('cat_id', $request->c);
@@ -105,7 +110,7 @@ class LandingController extends Controller
 
         $foods = $foods->groupBy('foods.id')->paginate(9);
 
-        return view('landing.order', compact('foods', 'food_count', 'order', 'cats', 'slides'));
+        return view('landing.order', compact('foods', 'food_count', 'order', 'cats', 'slides', 'cities'));
     }
 
     public function blogs(Request $request)

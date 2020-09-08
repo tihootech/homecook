@@ -83,6 +83,11 @@ Route::delete('transaction/{transaction}', 'TransactionController@destroy')->nam
 Route::post('compt/{compt}/winners', 'CompetitionController@set_winners')->name('compt.winners');
 Route::post('text-messages/{sms}', 'TextMessageController@resend')->name('sms.resend');
 
+// manage cities
+Route::get('cities/manage', 'CityController@manage')->name('cities.manage');
+Route::post('cities/update', 'CityController@update')->name('cities.update');
+Route::put('cities/unselect/{city}', 'CityController@unselect')->name('cities.unselect');
+
 // peygiri
 Route::get('order/{type}/{tuid}/{cuid?}', 'LandingController@view_transaction')->name('view_transaction');
 

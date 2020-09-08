@@ -38,6 +38,13 @@
 	</a>
 </li>
 
+<li>
+	<a class="app-menu__item @if( rn() == 'cities.manage' ) active @endif" href="{{route("cities.manage")}}">
+		<i class="ml-2 material-icons">flag</i>
+		<span class="app-menu__label"> مدیریت شهر ها </span>
+	</a>
+</li>
+
 @php
 	$routes = ['peyk.index', 'peyk.create'];
 @endphp

@@ -10,6 +10,10 @@ $(document).ready(function () {
 		}
 	});
 
+	$('#select-city-in-landing').change(function () {
+		$(this).parents('form').submit();
+	});
+
 	$('[data-action=delete-from-cart]').click(function () {
 
 		var form = $(this).parents('form');
