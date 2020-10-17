@@ -1,9 +1,11 @@
-<li>
-	<a class="app-menu__item @if( rn() == 'transaction.index' ) active @endif" href="{{route("transaction.index")}}">
-		<i class="ml-2 material-icons">shopping_cart</i>
-		<span class="app-menu__label"> لیست سفارشات </span>
-	</a>
-</li>
+@if (user('type') != 'admin')
+	<li>
+		<a class="app-menu__item @if( rn() == 'transaction.index' ) active @endif" href="{{route("transaction.index")}}">
+			<i class="ml-2 material-icons">shopping_cart</i>
+			<span class="app-menu__label"> لیست سفارشات </span>
+		</a>
+	</li>
+@endif
 
 @if (master() || active_cook())
 	<li>
@@ -14,6 +16,36 @@
 	</li>
 @endif
 
+@admins
+
+@php
+	$routes = ['cook.fresh_requests', 'cook.index', 'cook.create'];
+@endphp
+<li class="treeview @if( in_array(rn(), $routes) ) is-expanded @endif">
+	<a class="app-menu__item" href="#" data-toggle="treeview">
+		<i class="ml-2 material-icons">people</i>
+		<span class="app-menu__label"> مدیریت همکاران </span>
+		<i class="treeview-indicator fa fa-angle-left"></i>
+	</a>
+	<ul class="treeview-menu">
+		<li>
+			<a class="treeview-item @if(rn() == $routes[0]) active @endif" href="{{route($routes[0])}}">
+				<i class="icon material-icons ml-2">dynamic_feed</i> درخواست های جدید
+			</a>
+		</li>
+		<li>
+			<a class="treeview-item @if(rn() == $routes[1]) active @endif" href="{{route($routes[1])}}">
+				<i class="icon material-icons ml-2">list</i> لیست همکاران
+			</a>
+		</li>
+		<li>
+			<a class="treeview-item @if(rn() == $routes[2]) active @endif" href="{{route($routes[2])}}">
+				<i class="icon material-icons ml-2">add</i> تعریف همکار
+			</a>
+		</li>
+	</ul>
+</li>
+@endadmins
 
 @master
 
@@ -63,34 +95,6 @@
 		<li>
 			<a class="treeview-item @if(rn() == $routes[1]) active @endif" href="{{route($routes[1])}}">
 				<i class="icon material-icons ml-2">add</i> تعریف پیک جدید
-			</a>
-		</li>
-	</ul>
-</li>
-
-@php
-	$routes = ['cook.fresh_requests', 'cook.index', 'cook.create'];
-@endphp
-<li class="treeview @if( in_array(rn(), $routes) ) is-expanded @endif">
-	<a class="app-menu__item" href="#" data-toggle="treeview">
-		<i class="ml-2 material-icons">people</i>
-		<span class="app-menu__label"> مدیریت همکاران </span>
-		<i class="treeview-indicator fa fa-angle-left"></i>
-	</a>
-	<ul class="treeview-menu">
-		<li>
-			<a class="treeview-item @if(rn() == $routes[0]) active @endif" href="{{route($routes[0])}}">
-				<i class="icon material-icons ml-2">dynamic_feed</i> درخواست های جدید
-			</a>
-		</li>
-		<li>
-			<a class="treeview-item @if(rn() == $routes[1]) active @endif" href="{{route($routes[1])}}">
-				<i class="icon material-icons ml-2">list</i> لیست همکاران
-			</a>
-		</li>
-		<li>
-			<a class="treeview-item @if(rn() == $routes[2]) active @endif" href="{{route($routes[2])}}">
-				<i class="icon material-icons ml-2">add</i> تعریف همکار
 			</a>
 		</li>
 	</ul>

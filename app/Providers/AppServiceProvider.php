@@ -26,6 +26,12 @@ class AppServiceProvider extends ServiceProvider
         \Blade::if('master', function () {
             return master();
         });
+        \Blade::if('admin', function () {
+            return user('type') == 'admin';
+        });
+        \Blade::if('admins', function () {
+            return user('type') == 'master' || user('type') == 'admin';
+        });
         \Blade::if('cook', function () {
             return cook();
         });

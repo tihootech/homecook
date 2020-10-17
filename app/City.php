@@ -9,9 +9,14 @@ class City extends Model
 
     public $timestamps = false;
     protected $guarded = ['id'];
-    
+
     public function state()
     {
         return $this->belongsTo(State::class);
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
     }
 }

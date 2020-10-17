@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->hasOne(class_name($this->type), 'user_id');
     }
 
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);

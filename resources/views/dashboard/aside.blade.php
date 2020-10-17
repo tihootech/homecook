@@ -11,6 +11,9 @@
                     @if (cook() && current_cook())
                         {{current_cook()->full_name()}}
                     @endif
+                    @if (only_admin() && user()->city)
+                        شهر : {{user()->city->name}}
+                    @endif
                 @endif
             </p>
         </div>

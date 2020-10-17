@@ -85,7 +85,7 @@ Route::post('text-messages/{sms}', 'TextMessageController@resend')->name('sms.re
 
 // manage cities
 Route::get('cities/manage', 'CityController@manage')->name('cities.manage');
-Route::post('cities/update', 'CityController@update')->name('cities.update');
+Route::post('cities/store', 'CityController@store')->name('cities.store');
 Route::put('cities/unselect/{city}', 'CityController@unselect')->name('cities.unselect');
 
 // peygiri

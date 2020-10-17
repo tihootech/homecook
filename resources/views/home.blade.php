@@ -261,4 +261,12 @@
 
     @endpeyk
 
+    @admin
+
+        <div class="alert alert-info">
+            قسمت حسابداری و گزارش فروش پس از اولین فروش فعال خواهد شد.
+        </div>
+
+    @endadmin
+
 @endsection

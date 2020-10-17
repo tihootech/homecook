@@ -14,7 +14,7 @@ class CookController extends Controller
     public function __construct()
 	{
 		$this->middleware('auth')->except(['store']);
-		$this->middleware('master')->except(['store', 'cook_edit', 'cook_update']);
+		$this->middleware('admins')->except(['store', 'cook_edit', 'cook_update']);
 	}
 
     public function index(Request $request)
@@ -36,6 +36,9 @@ class CookController extends Controller
         }
         if ($request->active) {
             $cooks = $cooks->whereActive(1);
+        }
+        if (only_admin()) {
+            $cooks = $cooks->where('city_id', user('city_id'));
         }
         $cooks = $cooks->latest()->paginate(20);
         return view('dashboard.cooks.index', compact('cooks'));
@@ -59,7 +62,10 @@ class CookController extends Controller
         $data = self::validation();
         $data['uid'] = rs(8);
         $cook = Cook::create($data);
-        if ($request->in_panel && master()) {
+        if (only_admin() && $data['city_id'] != user('city_id')) {
+            return back()->withError('شما به این شهر دسترسی ندارید.')->withInput();
+        }
+        if ($request->in_panel && admins()) {
             self::accept_process($cook);
             return redirect()->route('cook.index')->withMessage('همکار جدید در سیستم تعریف شد، و به حساب کاربری وی نیز فعال شد.');
         }else {
@@ -69,6 +75,7 @@ class CookController extends Controller
 
     public function edit(Cook $cook)
     {
+        aacheck($cook);
         $states = State::all();
         $cities = City::where('state_id', 22)->get();
         return view('dashboard.cooks.form', compact('cook', 'cities', 'states'));
@@ -85,6 +92,7 @@ class CookController extends Controller
 
     public function update(Cook $cook, Request $request)
     {
+        aacheck($cook);
         $data = self::validation($cook->id);
         $cook->update($data);
         return redirect()->route('cook.index')->withMessage(__('SUCCESS'));
@@ -104,12 +112,15 @@ class CookController extends Controller
 
     public function accept(Cook $cook)
     {
+        aacheck($cook);
         self::accept_process($cook);
         return back()->withMessage('همکار مورد نظر با موفقیت تایید شد و برای او یک حساب کاربری تایین شد و از طریق پیام کوتاه به او اطلاع رسانی شد.');
     }
 
     public function modify(Cook $cook, Request $request)
     {
+        aacheck($cook);
+
         // update cook instance
         $cook->modify($request->reason);
 
@@ -129,6 +140,7 @@ class CookController extends Controller
 
     public function destroy(Cook $cook)
     {
+        aacheck($cook);
         $cook->nickname = $cook->nickname . "_bu";
         $cook->mobile = $cook->mobile . "_bu";
         $cook->save();
@@ -141,12 +153,18 @@ class CookController extends Controller
 
     public function fresh_requests()
     {
-        $fresh_requests = Cook::whereFresh(1)->get();
+        $fresh_requests = Cook::whereFresh(1);
+        if (only_admin()) {
+            $fresh_requests = $fresh_requests->where('city_id', user('city_id'));
+        }
+        $fresh_requests = $fresh_requests->get();
         return view('dashboard.cooks.fresh_requests', compact('fresh_requests'));
     }
 
     public static function accept_process($cook)
     {
+        aacheck($cook);
+
         // update cook instance and accept it
         $cook->accept();
 
@@ -167,18 +185,24 @@ class CookController extends Controller
 
     public static function validation($id=0)
     {
+        $state_city_required_or_not = master() ? 'required' : 'nullable';
         $data = request()->validate([
             'first_name' => 'required|string|max:190',
             'last_name' => 'required|string|max:190',
             'nickname' => 'nullable|string|max:190|unique:cooks,nickname,'.$id,
             'telephone' => 'nullable|digits:11',
             'mobile' => 'required|digits:11|unique:cooks,mobile,'.$id,
-            'state_id' => 'required|exists:states,id',
-            'city_id' => 'required|exists:cities,id',
+            'state_id' => $state_city_required_or_not.'|exists:states,id',
+            'city_id' => $state_city_required_or_not.'|exists:cities,id',
             'hood' => 'required|string|max:190',
             'address' => 'required',
         ]);
-        if (master()) {
+        if (only_admin()) {
+            $city = City::findOrFail(user('city_id'));
+            $data['city_id'] = $city->id;
+            $data['state_id'] = $city->state_id;
+        }
+        if (admins()) {
             $data['active'] = request('active') ?? false;
         }
         return $data;

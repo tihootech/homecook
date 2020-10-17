@@ -12,7 +12,7 @@ class AccController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
-		$this->middleware('master')->except(['edit', 'update']);
+		$this->middleware('admins')->except(['edit', 'update']);
 	}
 
 	// public function list(Request $request)

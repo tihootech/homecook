@@ -25,6 +25,23 @@ function current_cook($p=null)
     }
 }
 
+function aacheck($cook)
+{
+    if (only_admin() && $cook->city_id != user('city_id')) {
+        abort(403);
+    }
+}
+
+function only_admin()
+{
+    return user('type') == 'admin';
+}
+
+function admins()
+{
+    return user('type') == 'admin' || user('type') == 'master';
+}
+
 function current_peyk($p=null)
 {
     if (peyk()) {

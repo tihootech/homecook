@@ -145,6 +145,7 @@ return [
         'hood'=> 'محله',
         'current_password'=> 'رمزعبور فعلی',
         'code'=> 'کد تایید',
+        'nickname'=> 'نام مستعار',
     ],
 
 ];
